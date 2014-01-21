@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
 	has_secure_password
+	before_save { self.email.downcase! }
 	
 	validates :first_name, presence: true, length: { maximum: 25 }
 	validates :last_name, presence: true, length: { maximum: 25 }
