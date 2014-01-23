@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Mypeeps::Application.config.secret_key_base = '0ea58294f1b7cb9df68d18ea1ba468377e906f4f78697c698e7a2407c88d8f9b0c56790b773b8f48fd66b9d2182b02d4731d88e24c9af51b51fc90bffcadab8a'
+Mypeeps::Application.config.secret_key_base = '4d380d06410ac9324296dbcf240cd26f04e6697fa35b57fa0c41d189d48f44ce404d921c1897292e04d2f6a159e2cf46a06f37fc9fc11c7300848f8d81352cac'

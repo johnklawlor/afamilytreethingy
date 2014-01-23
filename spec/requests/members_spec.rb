@@ -42,4 +42,35 @@ describe "Members" do
 			end
 		end
 	end
+	
+	describe "profile page" do
+		let(:member) { FactoryGirl.create(:member) }
+		before { visit member_path(member) }
+		
+		it { should have_selector('h1', text: "#{member.first_name} #{member.last_name}") }
+		it { should have_selector('title', text: "#{member.first_name}") }
+	end
+	
+	describe "members page" do
+		
+		let(:member) { FactoryGirl.create(:member) }
+		before(:all) { 30.times { FactoryGirl.create(:member) } }
+		after(:all) { Member.delete_all }
+	
+		before do
+			sign_in member
+			visit members_path
+		end
+		
+		it { should have_selector('title', text: "Who's who") }
+		it { should have_selector('h1', text: "Who's who") }
+		
+		describe "pagination" do
+			it "should list each member" do
+				Member.paginate(page: 1).each do |member|
+					page.should have_selector('li', text: "#{member.first_name} #{member.last_name}")
+				end
+			end
+		end
+	end
 end

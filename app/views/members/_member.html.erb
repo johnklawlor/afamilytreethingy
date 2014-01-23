@@ -1,0 +1,6 @@
+<li>
+	<%= link_to full_name(member.first_name, member.last_name), member %>
+	<% if current_member.admin? && !current_member(member) %>
+		<%= link_to "delete member", member, method: :delete, confirm: "Are you sure?" %>
+	<% end %>
+</li>

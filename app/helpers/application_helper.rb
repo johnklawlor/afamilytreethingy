@@ -7,4 +7,8 @@ module ApplicationHelper
 			"#{base_title} | #{page_title}"
 		end
 	end
+	
+	def full_name(first_name, last_name)
+		"#{first_name} #{last_name}"
+	end
 end

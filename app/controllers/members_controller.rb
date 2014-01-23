@@ -1,5 +1,9 @@
 class MembersController < ApplicationController
 	
+	def index
+		@members = Member.all.paginate(page: params[ :page])
+	end
+	
 	def show
 		@member = Member.find(params[ :id])
 	end

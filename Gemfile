@@ -1,22 +1,26 @@
 source 'https://rubygems.org'
 
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem "paperclip", "~> 3.0"
+
 
 group :test, :development do 
-  gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem 'guard-spork'
-  gem 'spork'
-  gem 'spork-rails'
+	gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'guard-spork'
+	gem 'spork'
+	gem 'spork-rails'    
 end 
 
 group :test do 
-  gem 'capybara', '1.1.2'
-  gem 'factory_girl_rails', '1.4.0'
-  gem 'cucumber-rails', '1.2.1', require: false
-  gem 'database_cleaner', '0.7.0'
-  gem 'launchy', "~> 2.4.2"
-  gem 'growl', '1.0.3'
+	gem 'capybara', '1.1.2'
+	gem 'factory_girl_rails', '1.4.0'
+	gem 'cucumber-rails', '1.2.1', require: false
+	gem 'database_cleaner', '0.7.0'
+	gem 'launchy', "~> 2.4.2"
+	gem 'growl', '1.0.3'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
