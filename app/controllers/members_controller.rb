@@ -13,12 +13,19 @@ class MembersController < ApplicationController
 	end
 	
 	def create
-		@member = Member.new(params.require(:member).permit(:first_name, :last_name, :email, :password, :password_confirmation))
+		@member = Member.new(member_params)
 		if @member.save
+			sign_in @member
 			flash[ :success] = "Welcome!"
 			redirect_to root_path
 		else
 			render 'new'
 		end
 	end
+	
+	private
+	
+		def member_params
+			params.require(:member).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image)
+		end
 end

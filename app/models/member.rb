@@ -1,5 +1,7 @@
 class Member < ActiveRecord::Base
 	has_secure_password
+	mount_uploader :image, ImageUploader
+	
 	before_save { self.email.downcase! }
 	before_create { create_token(:remember_token) }
 	
