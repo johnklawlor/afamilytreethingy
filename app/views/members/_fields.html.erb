@@ -26,5 +26,10 @@
 </p>
 
 <p>
+<%= image_tag(@member.image_url(:thumb)) if @member.image? %>
 <%= f.file_field :image %>
+<%= f.hidden_field :image_cache %>
+
+<%= f.label :remove_image, "Remove image" %>
+<%= f.check_box :remove_image %>
 </p>

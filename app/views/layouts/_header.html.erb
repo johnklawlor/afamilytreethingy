@@ -7,18 +7,19 @@
 		  <li> <%= link_to "Home", root_path %> </li>
 		  <li> <%= link_to "Help",    '#' %> </li>
 		  <% if signed_in? %>
-		  	<li> <%= link_to "Members", members_path %> </li>
 		  	<li id="fat-menu" class="dropdown">
 		  		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			  		Account <b class="caret"></b>
 			  	</a>
 			  	<ul class="dropdown-menu">
 			  		<li> <%= link_to "Profile", current_member %></li>
-			  		<li> <%= link_to "Settings", '#' %></li>
+			  		<li> <%= link_to "Settings", edit_member_path(current_member) %></li>
 			  		<li class="divider"></li>
 			  		<li> <%= link_to "Sign out", signout_path, method: "delete" %> </li>
 			  	</ul>
 			  </li>
+		  	<li> <%= link_to "Members", members_path %> </li>
+		  	<li> <%= link_to "Family Tree", tree_path(current_member), remote: true %> </li>
 			<% else %>
 				<li> <%= link_to "Sign in", signin_path %> </li>
 			<% end %>

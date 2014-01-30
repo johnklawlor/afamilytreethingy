@@ -6,6 +6,7 @@ Mypeeps::Application.routes.draw do
 	get '/signup', to: 'members#new'
 	get '/signin', to: 'sessions#new'
 	delete '/signout', to: 'sessions#destroy'
+	get '/tree/:id', to: 'members#tree', as: 'tree'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
