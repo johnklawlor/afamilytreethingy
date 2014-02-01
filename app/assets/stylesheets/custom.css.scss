@@ -57,7 +57,6 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
 }
 
 p {
@@ -142,6 +141,19 @@ input , textarea , select , .uneditable-input {
 	@extend .error;
 }
 
+.fields {
+	width: 50%;
+	margin-left: 25%;
+}
+
+#member_full_account {
+	width: inherit;
+}
+
+.check_box_label {
+	display: inline;
+}
+
 /* miscellaneous */
 
 .debug_dump {
@@ -155,15 +167,42 @@ input , textarea , select , .uneditable-input {
 /* members index */
 .members {
 	list-style: none;
+	margin: 0;
 	li {
-		
+		overflow: auto;
+		padding: 10px 0;
+		border-bottom: 1px solid $grayLight;
+		a {
+			vertical-align: bottom;
+		}
+		& :last-child {
+			border-bottom: 1px solid $grayLight;
+		}
 	}
 }
 
 /* tree */
 #tree {
-	width: 600px;
-	height: 400px;
+	width: 800px;
+	height: 600px;
 	margin: auto;
 	padding-top: 60px;
+}
+
+.edit {
+	font-size: 0.5em;
+	padding-top: 5px;
+}
+
+.tree_addition {
+	a {
+		border-radius: 5px;
+		background-color: $black-red;
+		margin-left: 15%;
+		font-size: 2em;
+		padding: 5px;
+	}
+	& :hover {
+		color: #ffffff;
+	}
 }

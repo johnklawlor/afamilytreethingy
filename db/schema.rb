@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140123173144) do
+ActiveRecord::Schema.define(version: 20140201171219) do
 
   create_table "members", force: true do |t|
     t.string   "first_name"
@@ -23,9 +23,24 @@ ActiveRecord::Schema.define(version: 20140123173144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"
+    t.integer  "spouse_id"
+    t.integer  "oldest_ancestor"
+    t.date     "birthdate"
+    t.boolean  "full_account"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true
   add_index "members", ["remember_token"], name: "index_members_on_remember_token"
+
+  create_table "relationships", force: true do |t|
+    t.integer  "parent_id"
+    t.integer  "child_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["child_id"], name: "index_relationships_on_child_id"
+  add_index "relationships", ["parent_id", "child_id"], name: "index_relationships_on_parent_id_and_child_id", unique: true
+  add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id"
 
 end

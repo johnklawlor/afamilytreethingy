@@ -1,7 +1,9 @@
+include MembersHelper
+
 class MembersController < ApplicationController
 	
 	def index
-		@members = Member.all.paginate(page: params[ :page])
+		@members = Member.all.order('birthdate').paginate(page: params[ :page])
 	end
 	
 	def show
@@ -10,14 +12,48 @@ class MembersController < ApplicationController
 
 	def new
 		@member = Member.new
+		@member.rel = params[ :rel]
+		@member.rel_id = params[ :rel_id]
 	end
 	
 	def create
 		@member = Member.new(member_params)
+		rel = params[:member][ :rel]
+		rel_id = params[:member][ :rel_id]
+		@member.oldest_ancestor = rel_id
+
+		if !@member.spouse_id.nil?
+			spouse = Member.find_by_id(@member.spouse_id)
+			spouse.spouse_id = @member.id
+			spouse.save
+		end
+		
 		if @member.save
-			sign_in @member
-			flash[ :success] = "Welcome!"
-			redirect_to root_path
+			if rel == 'parent'
+				@member.relationships.create!(child_id: rel_id)
+				update_ancestor( rel_id, @member.id)
+				redirect_to tree_path(@member)
+			elsif rel == 'child'
+				@member.reverse_relationships.create!(parent_id: rel_id)
+				if !(other_parent = Member.find_by_id(rel_id).spouse_id).nil?
+					@member.reverse_relationships.create!(parent_id: other_parent)
+				end
+				redirect_to tree_path(@member)
+			elsif rel == 'spouse'
+				@member.spouse_id = rel_id
+				@member.save
+				spouse = Member.find_by_id(rel_id)
+				spouse.spouse_id = @member.id
+				spouse.save
+				spouse.relationships.each do |r|
+					@member.relationships.create(child_id: r.child_id)
+				end
+				redirect_to tree_path(@member)
+			else
+				sign_in @member
+				flash[ :success] = "welcome!"
+				redirect_to root_path
+			end
 		else
 			render 'new'
 		end
@@ -37,30 +73,9 @@ class MembersController < ApplicationController
 		end
 	end
 	
-	def tree
-		@family= 
-		{
-			id: "1",
-			name: "Mom",
-			children: [{
-				id: "2",
-				name: "Daniel",
-				children: [{
-					id: "3",
-					name: "Kieran",
-					children: []}
-				]}
-			]}.to_json.html_safe
-
-		respond_to do |format|
-			format.js
-			format.html
-		end
-	end
-	
 	private
 	
 		def member_params
-			params.require(:member).permit(:first_name, :last_name, :email, :password, :password_confirmation, :image, :image_cache, :remove_image)
+			params.require(:member).permit(:first_name, :last_name, :email, :birthdate, :full_account, :spouse_id, :password, :password_confirmation, :image, :image_cache, :remove_image, :rel, :rel_id)
 		end
 end

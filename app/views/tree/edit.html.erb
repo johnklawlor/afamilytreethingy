@@ -1,0 +1,25 @@
+<% provide(:title, 'Edit the tree') %>
+<h1>Edit the tree</h1>
+
+<% if !@parents.empty? %>
+	<h2><%= @member.first_name %>'s parents</h2>
+	<ul class="members">
+		<%= render partial: "parent", collection: @parents, as: :parent %>
+	</ul>
+<% end %>
+
+<% if !@children.empty? %>
+	<h2><%= @member.first_name %>'s children</h2>
+	<ul class="members">
+		<%= render partial: "children", collection: @children, as: :child %>
+	</ul>
+<% end %>
+
+<br/>
+<div class="tree_addition">
+	<span><%= link_to "add a parent", new_member_path(rel: :parent, rel_id: @member.id) %></span
+
+	<span><%= link_to "add a child", new_member_path(rel: :child, rel_id: @member.id) %></span>
+
+	<span><%= link_to "add a spouse", new_member_path(rel: :spouse, rel_id: @member.id) %></span>
+</div>

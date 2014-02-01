@@ -1,7 +1,9 @@
+	
+	$("title").html("my peeps | the family tree")
 
 	$("div.content_container").html("");
 	$("div.content_container").append("<div id='tree'></div>");
-
+	
 	var labelType, useGradients, nativeTextSupport, animate;
 
 	(function() {
@@ -42,16 +44,19 @@
 			  enable:true,
 			  panning:true
 			},
+			
 			orientation: 'top',
+			siblingOffset: 40,
+			
 				//set node and edge styles
 				//set overridable=true for styling individual
 				//nodes or edges
 			Node: {
-				height: 60,
-				width: 120,
+				height: 100,
+				width: 230,
 				type: 'rectangle',
-				color: '#aaa',
-				overridable: true
+				color: '#ffffff',
+				overridable: false
 			},
 		
 			Edge: {
@@ -72,13 +77,15 @@
 				};
 				//set label styles
 				var style = label.style;
-				style.width = 120 + 'px';
-				style.height = 60 + 'px';            
+				style.width = 230 + 'px';
+				style.height = 100 + 'px';          
 				style.cursor = 'pointer';
 				style.color = '#333';
 				style.fontSize = '2em';
 				style.textAlign= 'center';
 				style.paddingTop = '3px';
+				style.lineHeight = '0.8';
+				style.fontFamily = 'Georgia';
 			},
 		
 			//This method is called right before plotting
