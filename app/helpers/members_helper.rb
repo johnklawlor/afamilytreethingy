@@ -7,7 +7,7 @@ module MembersHelper
 		id = add_member.birthdate
 		name=""
 		if add_member.has_spouse?
-			link = link_to(add_member.spouse.first_name, tree_path(id: add_member.spouse), remote: true )
+			link = link_to(add_member.spouse.first_name, tree_path(id: add_member.spouse) )
 			name = add_member.first_name + " and " + 
 			link + " " +
 			add_member.last_name

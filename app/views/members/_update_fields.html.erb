@@ -15,7 +15,7 @@
 <%= f.text_field :birthdate %>
 </p>
 
-<p id="member_email_field">
+<p>
 <%= f.label :email %>
 <%= f.text_field :email %>
 </p>
@@ -25,19 +25,11 @@
 <%= f.label :full_account, "I want to provide this member with a full account that allows them to add and update other members and member information.", class: "check_box_label" %>
 </p>
 
-<%= collection_select( :member, :spouse_id, Member.all, :id, :name, prompt: "spouse", include_blank: "none (spouse might not be listed because they were not added yet!)" ) unless params[ :rel] == 'spouse' || !signed_in? %>
-
-<%= f.hidden_field :rel %>
-<%= f.hidden_field :rel_id %>
-
-<!--
 <p>
-<%= f.label :password %>
-<%= f.password_field :password %>
-</p>
+<%= image_tag(@member.image_url(:thumb)) if @member.image? %>
+<%= f.file_field :image %>
+<%= f.hidden_field :image_cache %>
 
-<p>
-<%= f.label :password_confirmation, "Confirm Password" %>
-<%= f.password_field :password_confirmation %>
-</p>
--->
+<%= f.label :remove_image, "Remove image" %>
+<%= f.check_box :remove_image %>
+</p> 

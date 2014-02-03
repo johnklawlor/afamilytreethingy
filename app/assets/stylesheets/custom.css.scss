@@ -42,21 +42,29 @@ textarea {
 
 h1 , h2 , h3 , h4 , h5 , h6 {
   line-height: 1;
+  text-align: center;
 }
 
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
 }
 
 h2 {
-  font-size: 1.7em;
+  font-size: 2.0em;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
   font-weight: normal;
+}
+
+h3 {
+	font-size: 1.7em;
+	border-bottom: black solid 1px;
+}
+
+h4 {
+	font-size: 1.4em;
 }
 
 p {
@@ -132,7 +140,6 @@ input , textarea , select , .uneditable-input {
 	color: #f00;
 	ul {
 		list-style: none;
-		margin: 0 0 18px 0;
 	}
 }
 
@@ -154,6 +161,10 @@ input , textarea , select , .uneditable-input {
 	display: inline;
 }
 
+#member_email_field {
+	display: none;
+}
+
 /* miscellaneous */
 
 .debug_dump {
@@ -172,12 +183,10 @@ input , textarea , select , .uneditable-input {
 		overflow: auto;
 		padding: 10px 0;
 		border-bottom: 1px solid $grayLight;
-		a {
-			vertical-align: bottom;
-		}
-		& :last-child {
-			border-bottom: 1px solid $grayLight;
-		}
+	}
+	div {
+		display: inline-block;
+		vertical-align: bottom;
 	}
 }
 

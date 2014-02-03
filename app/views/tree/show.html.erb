@@ -1,0 +1,6 @@
+<% provide(:title, "the family tree") %>
+<%= javascript_include_tag "family_tree.js" %>
+
+<%= content_tag "div", id: "tree", data: {family: @family} do %>
+	Loading family tree...
+<% end %>

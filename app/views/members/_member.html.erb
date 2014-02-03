@@ -1,6 +1,10 @@
 <li>
-	<%= link_to full_name(member.first_name, member.last_name), member %>
-	<% if current_member.admin? && !current_member(member) %>
-		<%= link_to "delete member", member, method: :delete, confirm: "Are you sure?" %>
+	<%= image_tag(member.image_url(:thumb)) %>
+	<div>
+	<%= link_to full_name(member.first_name, member.last_name), member %> | <br/>
+	<%= link_to "edit #{member.first_name}'s tree", edit_tree_path(member) %>
+	<% if current_member.admin? && !current_member?(member) %>
+		| <%= link_to "delete member", member, method: :delete, confirm: "Are you sure?" %>
 	<% end %>
+	</div>
 </li>

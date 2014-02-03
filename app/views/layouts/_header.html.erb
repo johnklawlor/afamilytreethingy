@@ -19,7 +19,7 @@
 			  	</ul>
 			  </li>
 		  	<li> <%= link_to "Members", members_path %> </li>
-		  	<li> <%= link_to "Family Tree", tree_path(current_member), remote: true %> </li>
+		  	<li> <%= link_to "Family Tree", tree_path(current_member) %> </li>
 			<% else %>
 				<li> <%= link_to "Sign in", signin_path %> </li>
 			<% end %>

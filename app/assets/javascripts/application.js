@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require general
+//= require family_tree
+//= require members
 //= require turbolinks
 //= require jit.js
 //= require_tree .

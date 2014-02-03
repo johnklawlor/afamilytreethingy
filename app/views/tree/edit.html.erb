@@ -1,19 +1,23 @@
 <% provide(:title, 'Edit the tree') %>
 <h1>Edit the tree</h1>
 
-<% if !@parents.empty? %>
-	<h2><%= @member.first_name %>'s parents</h2>
-	<ul class="members">
-		<%= render partial: "parent", collection: @parents, as: :parent %>
-	</ul>
-<% end %>
+	<h3><%= @member.first_name %>'s parents</h3>
+	<% if @parents.empty? %>
+		<h4>No parents indicated.</h4>
+	<% else %>
+		<ul class="members">
+			<%= render partial: "members/member", collection: @parents, as: :member %>
+		</ul>
+	<% end %>
 
-<% if !@children.empty? %>
-	<h2><%= @member.first_name %>'s children</h2>
-	<ul class="members">
-		<%= render partial: "children", collection: @children, as: :child %>
-	</ul>
-<% end %>
+	<h3><%= @member.first_name %>'s children</h3>
+	<% if @children.empty? %>
+		<h4>No children indicated.</h4>
+	<% else %>
+		<ul class="members">
+			<%= render partial: "members/member", collection: @children, as: :member %>
+		</ul>
+	<% end %>
 
 <br/>
 <div class="tree_addition">

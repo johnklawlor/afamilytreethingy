@@ -1,0 +1,7 @@
+<% provide(:title, "add member") %>
+<h1>add member</h1>
+
+<h4>select an existing member</h4>
+<%= collection_select( :member, :spouse_id, Member.all.order('first_name'), :id, :name, prompt: "spouse", include_blank: "none (spouse might not be listed because they were not added yet!)" ) unless params[ :rel] == 'spouse' || !signed_in? %>
+
+<%= link_to "or click here to add a new member", new_member_path %>

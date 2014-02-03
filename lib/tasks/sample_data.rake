@@ -10,9 +10,11 @@ namespace :db do
 		john=Member.create!(first_name: "John", last_name: "Lawlor", email: "john@lawlor.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(1987,5,21), full_account: true)
 		daniel=Member.create!(first_name: "Daniel", last_name: "Lawlor", email: "daniel@lawlor.com", password: "foobar", password_confirmation: "foobar", spouse_id: 6, oldest_ancestor: lucy.id, birthdate: Date.new(1983,1,11), full_account: true)
 		michelle=Member.create!(first_name: "Michelle", last_name: "Lawlor", email: "Michelle@lawlor.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(1988,12,12), full_account: true)
-		kara=Member.create!(first_name: "Kara", last_name: "Lawlor", email: "kara@lawlor.com", password: "foobar", password_confirmation: "foobar", spouse_id: daniel.id, oldest_ancestor: lucy.id, birthdate: Date.new(1983,1,3), full_account: true)
+		kara=Member.create!(first_name: "Kara", last_name: "Lawlor", email: "kara@lawlor.com", password: "foobar", password_confirmation: "foobar", spouse_id: daniel.id, birthdate: Date.new(1983,1,3), full_account: true)
 		daniel.spouse_id = kara.id
 		daniel.save
+		kara.oldest_ancestor = kara.id
+		kara.save
 		kieran=Member.create!(first_name: "Kieran", last_name: "Lawlor", email: "kieran@lawlor.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(2013,05,26), full_account: true)
 
 
