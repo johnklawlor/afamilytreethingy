@@ -2,11 +2,7 @@
 <h1>add member</h1>
 
 <div class="fields">
-	<div class=".col-md-6 .col-xs-offset-3">
-		<%= form_for(@member) do |f| %>
-			<%= render 'fields', f: f %>
-			
-			<%= f.submit "create member", class: "btn btn-large btn-primary" %>
-		<% end %>
+	<div class="">
+		<%= render 'new_member_form' %>
 	</div>
 </div>

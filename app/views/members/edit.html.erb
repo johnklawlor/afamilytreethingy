@@ -1,12 +1,8 @@
 <% provide(:title, "Edit profile") %>
 <h1>Edit profile</h1>
 
-<div class="">
+<div class="fields">
 	<div class="">
-		<%= form_for(@member) do |f| %>
-			<%= render 'update_fields', f: f %>
-			
-			<%= f.submit "Save my changes", class: "btn btn-large btn-primary" %>
-		<% end %>
+		<%= render partial: 'update_member_form' , locals: { action: 'update' } %>
 	</div>
 </div>

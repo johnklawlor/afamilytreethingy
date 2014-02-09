@@ -61,6 +61,7 @@ h2 {
 h3 {
 	font-size: 1.7em;
 	border-bottom: black solid 1px;
+	text-align: left;
 }
 
 h4 {
@@ -125,14 +126,14 @@ footer {
 input , textarea , select , .uneditable-input {
   display: inline;
   border: 1px solid #bbb;
-  width: 100%;
+  width: 25%;
   padding: 10px;
   height: auto;
   margin-bottom: 15px;
   @include box_sizing;
 }
 
-.same-line {
+label {
 	display: inline;
 }
 
@@ -145,23 +146,19 @@ input , textarea , select , .uneditable-input {
 
 .field_with_errors {
 	@extend .control-group;
-	@extend .error;
+	@extend .alert;
 }
 
 .fields {
-	width: 50%;
-	margin-left: 25%;
-}
-
-#member_full_account {
-	width: inherit;
+	width: 100%;
+	padding: 10px;
 }
 
 .check_box_label {
-	display: inline;
+	width: inherit;
 }
 
-#member_email_field {
+#full_member_field {
 	display: none;
 }
 
@@ -203,15 +200,27 @@ input , textarea , select , .uneditable-input {
 	padding-top: 5px;
 }
 
-.tree_addition {
+.tree_addition_links {
 	a {
 		border-radius: 5px;
 		background-color: $black-red;
-		margin-left: 15%;
+		margin-left: 8%;
 		font-size: 2em;
 		padding: 5px;
 	}
 	& :hover {
 		color: #ffffff;
+	}
+}
+
+#edit_tree_page {
+	select {
+		width: 25%;
+		font-size: 24px;	
+	}
+	input[type="submit"] {
+		display: inline;
+		width: 10%;
+		vertical-align: top;
 	}
 }

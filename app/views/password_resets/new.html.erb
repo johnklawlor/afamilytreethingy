@@ -1,0 +1,13 @@
+<% provide(:title, "Reset password") %>
+<h1>Enter your email</h1>
+
+<div class= "fields">
+	<div class= "span offset3">
+		<%= form_tag password_resets_path, method: :post do %>
+			<%= label_tag :email %>
+			<%= text_field_tag :email, params[:email] %>
+				
+			<%= submit_tag "Reset Password", class: "btn btn-large btn-primary" %>
+		<% end %>
+	</div>
+</div>

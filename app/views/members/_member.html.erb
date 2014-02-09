@@ -1,10 +1,29 @@
+<% unless member.new_record? %>
 <li>
-	<%= image_tag(member.image_url(:thumb)) %>
+	<%= image_tag( member.image_url(:thumb)) %>
 	<div>
-	<%= link_to full_name(member.first_name, member.last_name), member %> | <br/>
+	<%= link_to full_name(member.first_name, member.last_name), member %> <br/>
 	<%= link_to "edit #{member.first_name}'s tree", edit_tree_path(member) %>
+	<% unless member.account? %>
+		| <%= link_to "edit #{member.first_name}'s profile", edit_member_path(member) %>
+	<% end %>
+	
+	<% if params[ :controller] == 'tree' %>
+
+		<% if member.children.include?(@member) %>
+		| <%= link_to "remove parent", relationship_path( member.relationships.find_by_child_id(@member.id), member: { id: @member.id }), method: :delete %>
+		<% end %>
+		<% if @member.spouse == member %>
+		| <%= link_to "remove spouse", spouse_relationship_path( @member.spouse_relationships.find_by_spouse_id( member.id ) ), method: :delete %>
+		<% end %>
+		<% if member.parents.include?(@member) %>
+		| <%= link_to "remove child", relationship_path( @member.relationships.find_by_child_id(member.id), member: { id: @member.id }) , method: :delete %>
+		<% end %>
+	<% end %>
+	
 	<% if current_member.admin? && !current_member?(member) %>
 		| <%= link_to "delete member", member, method: :delete, confirm: "Are you sure?" %>
 	<% end %>
 	</div>
 </li>
+<% end %>

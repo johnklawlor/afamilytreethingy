@@ -1,0 +1,10 @@
+<%= form_for @member, method: :patch do |f| %>
+	
+	<%= f.fields_for :spouses, @member.spouses.new do |rel| %>
+		<%= render partial: 'members/spouse_relationship_fields', locals: { name: 'spouse', f: rel } %>
+		
+	<% end %>
+	<p><%= link_to_add_fields( "add spouse", f, :spouses, :relationship, name: 'spouse' ) %></p>
+	
+	<%= f.submit "add spouse", class: "btn btn-large btn-primary" %>
+<% end %>

@@ -5296,11 +5296,15 @@ a.thumbnail.active {
   color: #333333;
 }
 
+.alert-error {
+	@extend .alert-danger
+}
+
 .alert {
   margin-top: 15px;
   border: 1px solid transparent;
   border-radius: 4px;
-  padding-top: 10px
+  padding-left: 5px;
 }
 
 .alert h4 {
@@ -5358,6 +5362,10 @@ a.thumbnail.active {
 
 .alert-info .alert-link {
   color: #245269;
+}
+
+.alert-notice {
+	@extend .alert-info
 }
 
 .alert-warning {

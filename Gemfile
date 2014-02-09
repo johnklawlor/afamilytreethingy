@@ -1,18 +1,20 @@
 source 'https://rubygems.org'
 
-gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem "paperclip", "~> 3.0"
 gem 'carrierwave'
 gem 'rmagick', '2.13.2'
+gem 'state_machine'
 
 group :test, :development do 
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'guard-spork'
 	gem 'spork'
-	gem 'spork-rails'    
+	gem 'spork-rails'
+	gem 'annotate'  
 end 
 
 group :test do 
