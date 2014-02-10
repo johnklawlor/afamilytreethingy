@@ -9,9 +9,9 @@ class Member < ActiveRecord::Base
 	has_many :spouses, through: :spouse_relationships, source: :spouse
 	has_many :spouse_relationships, foreign_key: "member_id", dependent: :destroy
 	
-	accepts_nested_attributes_for :children
-	accepts_nested_attributes_for :parents
-	accepts_nested_attributes_for :spouses
+	accepts_nested_attributes_for :parents, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
+	accepts_nested_attributes_for :spouses, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
+	accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	
 	attr_reader :password
 	

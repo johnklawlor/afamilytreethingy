@@ -1,7 +1,7 @@
 <%= form_for @member, method: :patch do |f| %>
 	
 	<%= f.fields_for :children, @member.children.new do |rel| %>
-		<%= render partial: 'members/relationship_fields', locals: { f: rel, name: 'child' } %>
+
 	<% end %>
 	<p><%= link_to_add_fields( "add child", f, :children, :relationship, name: 'child' ) %></p>
 	

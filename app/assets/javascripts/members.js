@@ -2,6 +2,14 @@ var ready;
 
 ready = function() {
 
+	$("form").on( "click", ".add_fields", function(event) {
+		console.log( "yes, son")
+		var time = new Date().getTime()
+		var regexp = new RegExp($(this).data('id'), 'g')
+		$(this).parent().before( $(this).data("fields").replace( regexp, time) )
+		event.preventDefault()
+	})
+
 }
 
 $(document).ready(ready);
@@ -11,12 +19,6 @@ function remove_fields(link) {
 	$(link).prev("input:hidden").val("1");
 	$(link).closest(".relationship_fields").hide('slow');
 	$(link).parent().next("input:submit").hide('slow');
-}
-
-function add_fields( link, association, content) {
-	var new_id = new Date().getTime();
-	var regexp = new RegExp("new_" + association, "g")
-	$(link).parent().before(content.replace(regexp, new_id)).show();
 }
 
 function showFullForm(checkbox) {
