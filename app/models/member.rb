@@ -14,12 +14,14 @@ class Member < ActiveRecord::Base
 	accepts_nested_attributes_for :spouses, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	
-	attr_reader :password
+	attr_accessor :password
 	
+	before_save :encrypt_password
 	before_save :nil_or_downcase
-	before_create [ :encrypt_password, :nil_or_downcase]
+	before_create :nil_or_downcase
 	after_create :set_oldest_ancestor
 	before_create { create_token(:remember_token) }
+
 	before_destroy [ :set_ancestor_for_children, :destroy_spouse_id_of_spouse ]
 	
 	state_machine initial: :inactive do
@@ -166,39 +168,20 @@ class Member < ActiveRecord::Base
 	
 	def authenticate(password)
 		member = Member.find_by_email(self.email)
-		if member && member.password_hash == BCrypt::Engine.hash_secret(password, member.password_salt)
+		member && member.password_hash == BCrypt::Engine.hash_secret(password, member.password_salt) ?
 			member
-		else
-			nil
-		end
+			: nil
 	end
 
 	def encrypt_password
 		if password.present?
 			self.password_salt = BCrypt::Engine.generate_salt
-			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+			self.password_hash = BCrypt::Engine.hash_secret( password, password_salt)
 		end
 	end
 
-  # accessor
-	def password=(unencrypted_password)
-		unless unencrypted_password.blank?
-			@password = unencrypted_password
-		end
-	end
-
-  # accessor
-	def password_confirmation=(unencrypted_password)
-		@password_confirmation = unencrypted_password
-	end
-	
 	private		
 		def create_token(column)
 			self[column] = Member.encrypt(Member.new_token)
-		end
-		
-		def should_validate_password?
-			self.active? && self.password_reset_token.nil?
-		end
-		
+		end		
 end
