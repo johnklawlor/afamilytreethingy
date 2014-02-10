@@ -3,11 +3,6 @@
 
 <%= image_tag(@member.image_url(:medium)) %>
 
-<h3><%= @member.first_name %>'s children</h3>
-<% if @member.children.empty? %>
-	<h4>No children indicated.</h4>
-<% else %>
-	<ul class="members">
-		<%= render partial: "members/member", collection: @member.children, as: :member %>
-	</ul>
+<% if current_member?(@member) %>
+	<% render 'image_upload' %>
 <% end %>

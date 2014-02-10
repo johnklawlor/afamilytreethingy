@@ -7,6 +7,7 @@ gem "paperclip", "~> 3.0"
 gem 'carrierwave'
 gem 'rmagick', '2.13.2'
 gem 'state_machine'
+gem 'jquery-fileupload-rails'
 
 group :test, :development do 
 	gem 'rspec-rails'

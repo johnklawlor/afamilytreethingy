@@ -8,6 +8,7 @@ class Member < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "child_id", class_name: Relationship, dependent: :destroy
 	has_many :spouses, through: :spouse_relationships, source: :spouse
 	has_many :spouse_relationships, foreign_key: "member_id", dependent: :destroy
+	has_many :images
 	
 	accepts_nested_attributes_for :parents, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	accepts_nested_attributes_for :spouses, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
