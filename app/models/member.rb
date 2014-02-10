@@ -16,8 +16,8 @@ class Member < ActiveRecord::Base
 	
 	attr_reader :password
 	
-	before_save [ :encrypt_password, :nil_or_downcase ]
-	before_create :nil_or_downcase
+	before_save :nil_or_downcase
+	before_create [ :encrypt_password, :nil_or_downcase]
 	after_create :set_oldest_ancestor
 	before_create { create_token(:remember_token) }
 	before_destroy [ :set_ancestor_for_children, :destroy_spouse_id_of_spouse ]

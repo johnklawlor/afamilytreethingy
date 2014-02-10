@@ -3,6 +3,5 @@
 
 <%= image_tag(@member.image_url(:medium)) %>
 
-<% if current_member?(@member) %>
-	<% render 'image_upload' %>
-<% end %>
+
+	<%= render 'image_upload' %>

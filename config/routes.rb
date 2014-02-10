@@ -1,8 +1,4 @@
 Mypeeps::Application.routes.draw do
-	get "spouse_relationships/create"
-	get "spouse_relationships/destroy"
-	get "relationships/create"
-	get "relationships/destroy"
 
 	root to: "static_pages#home"
 
@@ -12,6 +8,7 @@ Mypeeps::Application.routes.draw do
 	resources :spouse_relationships, only: [ :create, :destroy]
 	resources :tree, only: [ :show, :edit, :update]
 	resources :password_resets, only: [ :new, :create, :edit, :update]
+	resources :images, only: [ :new, :create, :destroy]
 	
 	get '/signup', to: 'members#new'
 	get '/signin', to: 'sessions#new'

@@ -1,4 +1,4 @@
-class Images < ActiveRecord::Base
+class Image < ActiveRecord::Base
 	mount_uploader :image_id, ImageUploader
 	
 	belongs_to :member

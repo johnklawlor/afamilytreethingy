@@ -30,10 +30,12 @@ namespace :db do
 		michelle.reverse_relationships.create!(parent_id: lucy.id)
 		michelle.reverse_relationships.create!(parent_id: jack.id)
 
-		kieran.reverse_relationships.create(parent_id: kara.id)
-		kieran.reverse_relationships.create(parent_id: daniel.id)
+		kieran.reverse_relationships.create!(parent_id: kara.id)
+		kieran.reverse_relationships.create!(parent_id: daniel.id)
 		
-		lucy.create_spouse_relationship!(jack)
-		kara.create_spouse_relationship!(daniel)
+		lucy.spouse_relationships.create!(spouse_id: jack.id)
+		jack.spouse_relationships.create!(spouse_id: lucy.id)
+		kara.spouse_relationships.create!(spouse_id: daniel.id)
+		daniel.spouse_relationships.create!(spouse_id: kara.id)
 	end
 end
