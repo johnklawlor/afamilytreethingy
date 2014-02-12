@@ -3,7 +3,7 @@ class MemberMailer < ActionMailer::Base
 	
 	def reset_password(member)
 		@member = member
-		mail( to: member.email, subject: "Welcome to mypeeps!" )
+		mail( to: member.email, subject: "mypeeps password reset" )
 	end
 	
 end

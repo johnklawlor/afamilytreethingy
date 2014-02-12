@@ -1,6 +1,8 @@
 <%= form_for(@member) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 
+<div class="row">
+<div class="col-lg-4">
 	<%= f.label :first_name %>
 	<%= f.text_field :first_name %>
 
@@ -9,8 +11,9 @@
 
 	<%= f.label :birthdate %>
 	<%= f.text_field :birthdate, placeholder: "YYYY-MM-DD, e.g. May 1st, 2013 is 2013-05-01" %>
+</div>
 
-	<div id="full_member_field">
+<div class="col-lg-4">
 	<%= f.label :email %>
 	<%= f.text_field :email %>
 
@@ -19,21 +22,17 @@
 
 	<%= f.label :password_confirmation, "Confirm Password" %>
 	<%= f.password_field :password_confirmation %>
-	</div>
+</div>
 
-	<p>
-	<%= f.check_box :full_account, class: "check_box_label", onclick:"showFullForm(this)" %>
-	<%= f.label :full_account, "I want to provide this member with a full account that allows them to add and update other members and member information." %>
-	</p>
-	
-	<p>
+<div class="col-lg-4">	
 	<%= image_tag(@member.image_url(:thumb)) if @member.image? %>
+	<%= f.label :image, "Upload or change your profile picture" %>
 	<%= f.file_field :image %>
 	<%= f.hidden_field :image_cache %>
 
-	<%= f.label :remove_image, "Remove image" %>
 	<%= f.check_box :remove_image %>
-	</p> 
-	
-	<%= f.submit "update my profile", class: "btn btn-large btn-primary" %>
+	<%= f.label :remove_image, "Remove image" %>
+
+</div></div>
+	<%= f.submit "update my profile", class: "btn btn-primary" %>
 <% end %>

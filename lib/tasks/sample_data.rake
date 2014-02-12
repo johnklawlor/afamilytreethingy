@@ -22,6 +22,12 @@ namespace :db do
 		kieran=Member.create!(first_name: "Kieran", last_name: "Lawlor", email: "kieran@lawlor.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(2013,05,26), full_account: true, state: 1)
 		kieran.oldest_ancestor = lucy.id
 		kieran.save
+		john=Member.create!(first_name: "John", last_name: "Lawlor", email: "john.k.lawlor@gmail.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(1987,5,21), full_account: true)
+john.oldest_ancestor = lucy.id
+john.save
+
+		john.reverse_relationships.create!(parent_id: lucy.id)
+		john.reverse_relationships.create!(parent_id: jack.id)
 
 
 		daniel.reverse_relationships.create!(parent_id: lucy.id)

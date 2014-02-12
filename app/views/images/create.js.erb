@@ -1,0 +1,6 @@
+<% if @images.new_record? %>
+	alert("Failed to upload painting: <%= j @images.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+	$("#images").prepend("<%= j( render( @images) )%>");
+	console.log( "<%= j params.inspect.html_safe %>" );
+<% end %>

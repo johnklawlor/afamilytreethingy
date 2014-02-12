@@ -26,16 +26,19 @@ class SpouseRelationship < ActiveRecord::Base
 	
 	def set_spouse_id
 		member = Member.find_by_id( member_id)
-		member.spouse_id = spouse_id
+		spouse = Member.find_by_id( spouse_id)
+		member.spouse_id = spouse.id
 		member.save
+		spouse.spouse_id = member.id
+		spouse.save(validate: false)
 	end
 	
 	def inverse_exists?
-		SpouseRelationship.where(member_id: self.spouse_id, spouse_id: member_id).any?
+		SpouseRelationship.where(member_id: spouse_id, spouse_id: member_id).any?
 	end
 	
 	def create_inverse_spouse_relationship
-		SpouseRelationship.create( member_id: self.spouse_id, spouse_id: self.member_id)
+		SpouseRelationship.create( member_id: spouse_id, spouse_id: self.member_id)
 	end
 	
 	def not_own_spouse

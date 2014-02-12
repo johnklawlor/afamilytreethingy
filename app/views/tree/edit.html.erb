@@ -1,77 +1,58 @@
 <%= render 'shared/error_messages', object: @member %>
 
 <% provide(:title, 'Edit the tree') %>
-<h1>Edit the tree</h1>
+<h1>Edit <%= @member.first_name + "'s tree" %></h1>
 
-<div id="edit_tree_page">
+<h3><%= @member.first_name %>'s parents</h3>
+<% if @member.parents.empty? %>
+	<h4>No parents indicated.</h4>
+<% else %>
+	<ul class="members">
+		<%= render partial: "members/member", collection: @member.parents, as: :member %>
+	</ul><br/>
+<% end %>
 
-	<h3><%= @member.first_name %>'s parents</h3>
-	<% if @member.parents.empty? %>
-		<h4>No parents indicated.</h4>
-	<% else %>
-		<ul class="members">
-			<%= render partial: "members/member", collection: @member.parents, as: :member %>
-		</ul>
-	<% end %>
-	<div class="fields">
-	<%= form_for( @member.relationships.new(child_id: @member.id) ) do |f| %>
-	
-		<%= f.hidden_field :child_id %>
-		<%= collection_select( :relationship, :parent_id, Member.not(@member.id), :id, :name, { prompt: "add a parent from the current family members"}, { class: "member_select" }) %>
-	
-		<%= f.submit "add parent", class: "btn btn-large btn-primary" %>
-	
-	<% end %>
-	
-	<%= render 'members/parent_member_form' %>
-	
+
+<div class="row">
+	<div class="col-lg-4">
+	<%= render partial: 'members/parent_select_form', object: @member, as: :member, locals: { who: :parent } %>
 	</div>
+</div>
 
-	<h3><%= @member.first_name %>'s spouse</h3>
-	<% if @member.spouse_id.nil? %>
-		<h4>No spouse indicated.</h4>
-	<% else %>
-		<ul class="members">
-			<%= render partial: "members/member", object: @member.spouse, as: :member %>
-		</ul>
-	<% end %>
-	<div class="fields">
-	<%= form_for( @member.spouse_relationships.new( member_id: @member.id ) ) do |f| %>
-		<%= render 'shared/error_messages', object: f.object %>
-		
-		<%= f.hidden_field :member_id %>	
-		<%= collection_select( :spouse_relationship, :spouse_id, Member.not(@member.id), :id, :name, { prompt: "add a spouse from the current family members"}, { class: "member_select" }) %>
-	
-		<%= f.submit "add spouse", class: "btn btn-large btn-primary" %>
-	
-	<% end %>
+<%= render 'members/parent_member_form' %>
 
+<h3><%= @member.first_name %>'s spouse</h3>
+<% if @member.spouse_id.nil? %>
+	<h4>No spouse indicated.</h4>
+<% else %>
+	<ul class="members">
+		<%= render partial: "members/member", object: @member.spouse, as: :member %>
+	</ul><br/>
+<% end %>
+
+<div class="row">
+	<div class="col-lg-4">
+		<%= render partial: 'members/spouse_select_form', object: @member, as: :member %>
+	</div>
+</div>
 	<%= render 'members/spouse_member_form' %>
 
-	</div>
 
-	<h3><%= @member.first_name %>'s children</h3>
-	<% if @member.children.empty? %>
-		<h4>No children indicated.</h4>
-	<% else %>
-		<ul class="members">
-			<%= render partial: "members/member", collection: @member.children, as: :member %>
-		</ul>
-	<% end %>
-	<div class="fields">
-	<%= form_for( @member.relationships.new(parent_id: @member.id) ) do |f| %>
-	
-	<%= f.hidden_field :parent_id %>
-	<%= collection_select( :relationship, :child_id, Member.not(@member.id), :id, :name, { prompt: "add a child from the current family members"}, { class: "member_select" }) %>
-	
-	<%= f.submit "add child", class: "btn btn-large btn-primary" %>
-	
-	<% end %>
-	
-	<%= render 'members/child_member_form' %>
+<h3><%= @member.first_name %>'s children</h3>
+<% if @member.children.empty? %>
+	<h4>No children indicated.</h4>
+<% else %>
+	<ul class="members">
+		<%= render partial: "members/member", collection: @member.children, as: :member %>
+	</ul><br/>
+<% end %>
 
+<div class="row">
+	<div class="col-lg-4">
+		<%= render partial: 'members/child_select_form', object: @member, as: :member %>
 	</div>
+</div>
+	
+<%= render 'members/child_member_form' %>
 
 <br/>
-
-</div>

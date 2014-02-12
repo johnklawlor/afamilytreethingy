@@ -10,6 +10,10 @@ ready = function() {
 		event.preventDefault()
 	})
 
+	if( $('#member_full_account').prop( 'checked' ) ) {
+		$("#full_member_field").show('slow')
+	}
+		
 }
 
 $(document).ready(ready);
@@ -23,10 +27,10 @@ function remove_fields(link) {
 
 function showFullForm(checkbox) {
 	if( $(checkbox).prop( 'checked' ) ) {
-		$(checkbox).parent().prevAll("#full_member_field").show('slow')
+		$(checkbox).parent().nextAll("#full_member_field").show('slow')
 	}
 	
 	if( !$(checkbox).prop( 'checked' ) ) {
-		$(checkbox).parent().prevAll("#full_member_field").hide('slow')
+		$(checkbox).parent().nextAll("#full_member_field").hide('slow')
 	}	
 }

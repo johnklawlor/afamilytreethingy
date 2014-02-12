@@ -1,6 +1,13 @@
 <%= form_for @member.images.new do |f| %>
-	<%= f.label :image, "Upload images:" %>
+	<%= f.label :image, "Drag and drop your images, or choose files below." %>
 	<%= f.file_field :image, multiple: true, name: "image[image]" %>
 	<%= f.hidden_field :member_id, value: current_member.id %>
-	<%= f.submit "upload my images", class: "btn btn-large btn-primary" %>
+	<%= f.submit "upload my images", class: "btn btn-lg btn-primary", id: 'image_upload_submit', disabled: true %>
 <% end %>
+
+<script id="template-upload" type="text/x-tmpl">
+<div class="upload">
+	{%=o.name%}
+	<div class="progress"><div class="bar" style="width: 0%"></div></div>
+</div>
+</script>

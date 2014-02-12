@@ -39,7 +39,9 @@ class MembersController < ApplicationController
 	def update
 		@member = Member.find_by_id(params[:id])
 		
-		if params[ :commit] == 'add child' || 'add parent'	 || 'add spouse'
+		if params[ :commit] == 'add child' || 
+		params[ :commit] == 'add parent' ||
+		params[ :commit] == 'add spouse'
 			if @member.update_attributes(member_params)
 				flash[ :success] = "Member added to your tree!"
 				redirect_to edit_tree_path( @member)

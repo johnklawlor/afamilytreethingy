@@ -1,32 +1,38 @@
-<div class="relationship_fields">
-<h3>add a new <%= name.to_s %></h3>
+<div class="row">
+	<div class="col-lg-4">
+		<h3>add a new <%= name.to_s %></h3>
 
-<%= f.label :first_name %>
-<%= f.text_field :first_name %>
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name %>
 
-<%= f.label :last_name %>
-<%= f.text_field :last_name %>
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name %>
 
-<%= f.label :birthdate %>
-<%= f.text_field :birthdate, placeholder: "YYYY-MM-DD, e.g. May 1st, 2013 is 2013-05-01" %>
+		<%= f.label :birthdate %>
+		<%= f.text_field :birthdate, placeholder: "YYYY-MM-DD, e.g. May 1st, 2013 is 2013-05-01" %>
+	</div>
+	
+	<div class="col-lg-4">
+		<%= f.check_box :full_account, class: "check_box_label", onclick:"showFullForm(this)" %>
+		<%= f.label :full_account, "I want to provide this member with a full account that allows them to add and update other members and member information." %>
 
-<div id="full_member_field">
-<%= f.label :email %>
-<%= f.text_field :email %>
+	</div>
+	
+	<div class="col-lg-4">
+		<div id="full_member_field">
+		<%= f.label :email %>
+		<%= f.text_field :email %>
 
-<%= f.label :password %>
-<%= f.password_field :password %>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
 
-<%= f.label :password_confirmation, "Confirm Password" %>
-<%= f.password_field :password_confirmation %>
-</div>
+		<%= f.label :password_confirmation, "Confirm Password" %>
+		<%= f.password_field :password_confirmation %>
+		</div>
+	</div>
+	
+	<%= f.hidden_field :spouse_id, value: @member.id %>
 
-<p>
-<%= f.check_box :full_account, class: "check_box_label", onclick:"showFullForm(this)" %>
-<%= f.label :full_account, "I want to provide this member with a full account that allows them to add and update other members and member information." %>
-</p>
-
-<%= f.hidden_field :spouse_id, value: @member.id %>
-
-<%= link_to_remove_fields "don't add a new #{name}", f %>
+	<%= link_to_remove_fields "don't add a new #{name}", f %>
+	</div>
 </div>

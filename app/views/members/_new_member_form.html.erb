@@ -1,25 +1,29 @@
-<%= form_for(@member) do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-3">
+		<%= form_for(@member) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
 
-	<%= f.label :first_name %>
-	<%= f.text_field :first_name %>
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name %>
 
-	<%= f.label :last_name %>
-	<%= f.text_field :last_name %>
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name %>
 
-	<%= f.label :birthdate %>
-	<%= f.text_field :birthdate, placeholder: "YYYY-MM-DD, e.g. May 1st, 2013 is 2013-05-01" %>
+		<%= f.label :birthdate %>
+		<%= f.text_field :birthdate, placeholder: "YYYY-MM-DD, e.g. May 1st, 2013 is 2013-05-01" %>
 
-	<%= f.label :email %>
-	<%= f.text_field :email %>
+		<%= f.label :email %>
+		<%= f.text_field :email %>
 
-	<%= f.label :password %>
-	<%= f.password_field :password %>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
 
-	<%= f.label :password_confirmation, "Confirm Password" %>
-	<%= f.password_field :password_confirmation %>
+		<%= f.label :password_confirmation, "Confirm Password" %>
+		<%= f.password_field :password_confirmation %>
 	
-	<%= f.hidden_field :full_account, value: 'true' %>
+		<%= f.hidden_field :full_account, value: 'true' %>
 	
-	<%= f.submit "sign me up!", class: "btn btn-large btn-primary" %>
-<% end %>
+		<%= f.submit "sign me up!", class: "btn btn-primary" %>
+	<% end %>
+	</div>
+</div>

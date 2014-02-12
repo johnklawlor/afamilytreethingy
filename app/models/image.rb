@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-	mount_uploader :image_id, ImageUploader
+	mount_uploader :image, ImageUploader
 	
 	belongs_to :member
 end

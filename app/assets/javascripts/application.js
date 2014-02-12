@@ -14,7 +14,10 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require family_tree
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require members
 //= require turbolinks
 //= require jit.js
+//= require_tree ../../../vendor/assets/javascripts
 //= require_tree .

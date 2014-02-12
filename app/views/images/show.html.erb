@@ -1,0 +1,15 @@
+<div class="show_image center">
+	<div class="image_block">
+		<%= image_tag @image.image_url %>
+		<div class="over_image">
+			<div id="image_comments" class="comments">
+				here's some stuff on top of the image. i have to remember to make this div small enough that i am able to test the perfect scrollbar functionality.
+				do div's recognize and print line breaks? i gues we're about to find out! here we go!!
+				wait, hold on. that wasn't enough. they're asking us to do it again. i know everyone has had a long day, and they're really tired, but i can guarantee everyone free candy at the end of the day. well, night. well, morning. shit. we're all screwed.
+			</div>
+		</div>
+		
+		<br/>
+		<%= link_to "delete image", image_path(@image), method: :delete, class: "white" if current_member?( Member.find_by_id(@image.member_id)) %>
+	</div>
+</div>

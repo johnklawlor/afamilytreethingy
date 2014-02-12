@@ -16,7 +16,7 @@ class Member < ActiveRecord::Base
 	
 	attr_accessor :password
 	
-	before_save :encrypt_password
+	before_create :encrypt_password
 	before_save :nil_or_downcase
 	before_create :nil_or_downcase
 	after_create :set_oldest_ancestor

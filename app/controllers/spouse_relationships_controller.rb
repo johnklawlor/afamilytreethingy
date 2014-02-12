@@ -1,8 +1,8 @@
 class SpouseRelationshipsController < ApplicationController
 	def create
 		@member = Member.find_by_id(params[ :spouse_relationship][ :member_id])
-		spouse = params[ :spouse_relationship][ :spouse_id]
-		@member_relationship = SpouseRelationship.new(member_id: @member.id, spouse_id: spouse)
+		spouse_id = params[ :spouse_relationship][ :spouse_id]
+		@member_relationship = SpouseRelationship.new(member_id: @member.id, spouse_id: spouse_id)
 		
 		if @member_relationship.save
 			redirect_to edit_tree_path(@member)

@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 75px;
 }
 
 section {
@@ -36,6 +36,10 @@ textarea {
 	h1 {
 		margin-bottom: 10px;
 	}
+}
+
+.content_container {
+	min-height: 600px;
 }
 
 /* typography */
@@ -81,6 +85,17 @@ header {
 		float: left;
 		margin: 5px;
 	}
+	a {
+		margin-top: 20px;
+		color: #7ad07a;
+		font-family: 'Georgia';
+		letter-spacing: -0.5px;
+		font-size: 20px;
+		font-weight: bold;
+		&:hover{
+			color: aliceblue;
+		}
+	}
 }
 
 /* footer */
@@ -92,7 +107,7 @@ footer {
 	color: $grayLight;
 	a {
 		color: #555;
-		& :hover {
+		&:hover {
 			color: #222;
 		}
 	}
@@ -124,13 +139,25 @@ footer {
 /* forms */
 
 input , textarea , select , .uneditable-input {
-  display: inline;
+  display: block;
   border: 1px solid #bbb;
-  width: 25%;
+  width: 100%;
   padding: 10px;
   height: auto;
   margin-bottom: 15px;
   @include box_sizing;
+  &[type='checkbox'] {
+  	display: inline;
+  	width: 15px;
+  }
+  &[type='submit']{
+  	width: initial;
+  }
+}
+
+.member_select{
+	display: inline;
+	width: 60%
 }
 
 label {
@@ -152,10 +179,6 @@ label {
 .fields {
 	width: 100%;
 	padding: 10px;
-}
-
-.check_box_label {
-	width: inherit;
 }
 
 #full_member_field {
@@ -223,4 +246,80 @@ label {
 		width: 10%;
 		vertical-align: top;
 	}
+}
+
+/* show member page */
+#member_info{
+	display: inline-block;
+	float: left;
+	width: 22.5%;
+	min-height: 600px;
+	h1 {
+		text-align: left;
+	}
+}
+
+#hidden_image_upload_field{
+	display: none;
+}
+
+#images{
+	display: inline-block;
+	width: 55%;
+	img {
+		display: inline-block;
+		padding: 5px 0px 0px 0px;
+	}
+}
+
+#wall{
+	display: inline-block;
+	float: right;
+	width: 27.5%;
+}
+
+.image_block{
+	display: inline-block;
+	position: relative;
+}
+
+/* progress bar */
+.upload {
+	border-top: solid 1px #CCC;
+	width: 90%;
+	padding-top: 10px;
+	margin-top: 10px;
+
+	.progress {
+		margin-top: 8px;
+		border: solid 1px #555;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		.bar {
+			height: 20px;
+			background: #3EC144;
+		}
+	}
+}
+
+/* images */
+.over_image{
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	color: #ffffff;
+	text-shadow: 2px 2px 2px #aaaaaa;
+}
+
+.white{
+	color: #fff;
+}
+
+.comments {
+	position: relative;
+	text-align: left;
+	width: 250px;
+	height: 80px;
+	overflow-y: hidden;
 }
