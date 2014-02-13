@@ -1,4 +1,6 @@
 class ImagesController < ApplicationController
+	before_filter :signed_in_filter
+
 	def new
 	end
 
@@ -16,7 +18,7 @@ class ImagesController < ApplicationController
 	def destroy
 		@image = Image.find_by_id( params[ :id])
 		@image.destroy
-		redirect_to current_member
+		redirect_to member_path(current_member)
 	end
 	
 	private

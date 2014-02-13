@@ -8,19 +8,19 @@ class Member < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "child_id", class_name: Relationship, dependent: :destroy
 	has_many :spouses, through: :spouse_relationships, source: :spouse
 	has_many :spouse_relationships, foreign_key: "member_id", dependent: :destroy
-	has_many :images
+	has_many :images, dependent: :destroy
 	
 	accepts_nested_attributes_for :parents, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	accepts_nested_attributes_for :spouses, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	
-	attr_accessor :password
+	attr_accessor :password, :crop_x, :crop_y, :crop_w, :crop_h
 	
-	before_create :encrypt_password
-	before_save :nil_or_downcase
-	before_create :nil_or_downcase
-	after_create :set_oldest_ancestor
+	before_create [ :encrypt_password, :nil_or_downcase]
 	before_create { create_token(:remember_token) }
+	before_save :nil_or_downcase
+	after_create :set_oldest_ancestor
+	after_update :crop_profile_image
 
 	before_destroy [ :set_ancestor_for_children, :destroy_spouse_id_of_spouse ]
 	
@@ -59,6 +59,10 @@ class Member < ActiveRecord::Base
 	validates :password_confirmation, presence: true, if: [ :account?, :inactive?]
 	validates_confirmation_of :password, if: [ :account?, :inactive? ]
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, if: :account?
+	
+	def crop_profile_image
+		image.recreate_versions! if crop_x.present?
+	end
 	
 	def set_oldest_ancestor
 		self.oldest_ancestor = self.id if self.oldest_ancestor.nil?

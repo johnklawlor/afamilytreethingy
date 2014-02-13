@@ -1,0 +1,6 @@
+$('#profile_image').fadeOut('slow', function() { 
+	$(this).remove()
+	$('#profile_image_holder').css('display', 'none')
+	$('#profile_image_holder').prepend(" <%= j image_tag( @member.image_url(:medium), id: 'profile_image') %>")
+	$('#profile_image_holder').fadeIn()
+})

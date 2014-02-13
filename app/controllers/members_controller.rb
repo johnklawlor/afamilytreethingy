@@ -23,7 +23,11 @@ class MembersController < ApplicationController
 			if @member.full_account?
 				@member.activate_member
 				sign_in @member
-				redirect_to tree_path(@member)
+				if params[ :member][ :image].present?
+					render :crop
+				else
+					redirect_to tree_path(@member)
+				end
 			else
 				redirect_to member_path(@member)
 			end
@@ -50,10 +54,17 @@ class MembersController < ApplicationController
 			end
 		else
 			if @member.update_attributes(member_params)
-				flash[ :success] = "Your profile was updated successfully."
-				redirect_to @member
+				if params[ :member][ :image].present?
+					respond_to do |format|
+						format.js { render 'members/crop' }
+						format.html { render 'crop' }
+					end
+				else
+					flash[ :success] = "Your profile was updated successfully."
+					redirect_to @member
+				end
 			else
-				render 'edit'
+				render :edit
 			end
 		end
 	end
@@ -73,7 +84,7 @@ class MembersController < ApplicationController
 	private
 	
 		def member_params
-			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
+			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, :crop_x, :crop_y, :crop_w, :crop_h, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
 		end
 		
 		def admin_member

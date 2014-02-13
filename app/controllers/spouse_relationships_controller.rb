@@ -1,4 +1,6 @@
 class SpouseRelationshipsController < ApplicationController
+	before_filter :signed_in_filter
+
 	def create
 		@member = Member.find_by_id(params[ :spouse_relationship][ :member_id])
 		spouse_id = params[ :spouse_relationship][ :spouse_id]

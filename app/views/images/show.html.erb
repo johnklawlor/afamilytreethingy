@@ -2,10 +2,9 @@
 	<div class="image_block">
 		<%= image_tag @image.image_url %>
 		<div class="over_image">
+			<%= render partial: "comments/comment_form", object: @image %>
 			<div id="image_comments" class="comments">
-				here's some stuff on top of the image. i have to remember to make this div small enough that i am able to test the perfect scrollbar functionality.
-				do div's recognize and print line breaks? i gues we're about to find out! here we go!!
-				wait, hold on. that wasn't enough. they're asking us to do it again. i know everyone has had a long day, and they're really tired, but i can guarantee everyone free candy at the end of the day. well, night. well, morning. shit. we're all screwed.
+				<%= render @image.comments.order('created_at DESC') %>
 			</div>
 		</div>
 		

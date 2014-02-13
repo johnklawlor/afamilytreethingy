@@ -105,6 +105,7 @@ footer {
 	padding-top: 5px;
 	border-top: 1px solid #eaeaea;
 	color: $grayLight;
+	clear: both;
 	a {
 		color: #555;
 		&:hover {
@@ -259,7 +260,7 @@ label {
 	}
 }
 
-#hidden_image_upload_field{
+.hide{
 	display: none;
 }
 
@@ -307,9 +308,14 @@ label {
 	display: inline-block;
 	position: absolute;
 	top: 5px;
-	left: 5px;
-	color: #ffffff;
-	text-shadow: 2px 2px 2px #aaaaaa;
+	left: 0px;
+	color: #fff;
+	text-shadow: 2px 2px 2px #000;
+}
+
+a.over_image:hover{
+	text-shadow: 1px 1px 1px #000;
+	text-decoration: none;
 }
 
 .white{
@@ -322,4 +328,37 @@ label {
 	width: 250px;
 	height: 80px;
 	overflow-y: hidden;
+	margin-left: 7px;
+}
+
+#comment_content{
+	padding: 0;
+	margin: 0;
+	height: 20px;
+	width: 200px;
+	display: inline;
+	background-color: transparent;
+	text-shadow: 2px 2px 2px #333;
+	color: #fff;
+}
+
+.crop_form {
+	display: inline-block;
+	text-align: center;
+	padding-left: 10px;
+	input{
+		margin-top: 10px;
+	}
+}
+
+#image_crop{
+	display: inline-block;
+	float: left;
+}
+
+#image_crop_preview{
+	width:100px;
+	height:100px; 
+	overflow:hidden;
+	float: left;
 }

@@ -2,17 +2,23 @@
 	<% provide(:title, @member.first_name) %>
 	<h1><%= @member.first_name + " " + @member.last_name %></h1>
 
-	<%= image_tag(@member.image_url(:medium)) %>
-
+	<div id="profile_image_section">
+		<div id="profile_image_holder">
+			<%= image_tag(@member.image_url(:medium), id: 'profile_image') %>
+		</div>
+		<%= render 'hidden_profile_image_upload' %>
+	</div>
+	
 	<% if current_member?(@member) %>
-		<%= render 'image_upload' %>
-		<%= render 'hidden_image_upload' %>
+		<%= render 'images/image_upload' %>
 	<% end %>
 </div>
 
 <div id="images">
 
 	<%= render partial: 'images/image', collection: @member.images.order('created_at DESC') %>
+	
+	<%= render 'images/hidden_image_upload' %>
 
 </div>
 

@@ -1,9 +1,8 @@
 var ready;
 
 ready = function() {
-
+	
 	$("form").on( "click", ".add_fields", function(event) {
-		console.log( "yes, son")
 		var time = new Date().getTime()
 		var regexp = new RegExp($(this).data('id'), 'g')
 		$(this).parent().before( $(this).data("fields").replace( regexp, time) )

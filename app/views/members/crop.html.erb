@@ -1,0 +1,22 @@
+
+	<h1>Crop Avatar</h1>
+
+	<div id="image_crop">
+		<%= image_tag @member.image_url, id: 'cropbox' %>
+	</div>
+
+	<div class="crop_form">
+		<div id="image_crop_preview">
+		  <%= image_tag @member.image.url, :id => "preview" %>
+		</div>
+
+		<%= form_for @member do |f| %>
+
+			<% %w[x y w h].each do |attribute| %>
+				<%= f.hidden_field "crop_#{attribute}" %> <br>
+			<% end %>
+
+			<%= f.submit "Crop", class: 'btn btn-sm btn-primary' %>
+
+		<% end %>
+	</div>

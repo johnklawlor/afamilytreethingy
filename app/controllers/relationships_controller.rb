@@ -1,4 +1,6 @@
 class RelationshipsController < ApplicationController
+	before_filter :signed_in_filter
+
 	def create
 
 		@member = Member.find_by_id(params[ :relationship][ :child_id])
