@@ -16,7 +16,7 @@ class Member < ActiveRecord::Base
 	
 	attr_accessor :password, :crop_x, :crop_y, :crop_w, :crop_h
 	
-	before_create [ :encrypt_password, :nil_or_downcase]
+	before_create :encrypt_password, :nil_or_downcase
 	before_create { create_token(:remember_token) }
 	before_save :nil_or_downcase
 	after_create :set_oldest_ancestor

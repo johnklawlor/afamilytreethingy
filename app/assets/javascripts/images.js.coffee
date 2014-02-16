@@ -2,14 +2,26 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
+	overImageVisible = false
+	
+	$('body').on 'mouseenter', '.image_block', ->
+		if $('#profile_image').attr('alt') != "Medium default"
+			if overImageVisible == true
+				overImage = $(this).children('.over_image')
+				overImage.stop(true)
+				overImage.css( 'opacity', 1 )
+				overImageVisible = false
+			$(this).children('.over_image').fadeIn()
+			overImageVisible = true
+
+	$('body').on 'mouseleave', '.image_block', ->
+		$(this).children('.over_image').delay(1000).fadeOut(1000, ->
+			overImageVisible = false
+		)
+
 	$('#image_comments').perfectScrollbar({
 		wheelSpeed: 10
 	})
-	
-	$('.image_block').mouseenter ->
-		$(this).children('.over_image').fadeIn()
-	$('.image_block').mouseleave ->
-		$(this).children('.over_image').delay(1000).fadeOut()
 
 	if ( $('.show_image').length != 0)
 		$('body').css('background-color', '#111')

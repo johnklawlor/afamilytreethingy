@@ -3,8 +3,8 @@
 
 	<% if current_member?(@member) %>
 		<div class="over_image">
-			<%= link_to "crop image", crop_member_path(member) if @member.image? %><br/>
-			<%= link_to "remove image", edit_member_path( member, member: { image: nil }), method: :patch %>
+			<%= link_to "crop image", crop_member_path(member) %><br/>
+			<%= link_to "remove image", member_path( @member, member: { remove_image: true }), method: :patch %>
 		</div>
 	<% end %>
 </div>

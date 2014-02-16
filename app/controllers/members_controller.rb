@@ -61,7 +61,7 @@ class MembersController < ApplicationController
 					end
 				else
 					flash[ :success] = "Your profile was updated successfully."
-					redirect_to @member
+					redirect_to member_path(@member)
 				end
 			else
 				render :edit
@@ -71,7 +71,7 @@ class MembersController < ApplicationController
 	
 	def crop
 		@member = Member.find_by_id( params[ :id])
-		if @member.image
+		if @member.image?
 			render :crop
 		else
 			redirect_to member_path(@member)
