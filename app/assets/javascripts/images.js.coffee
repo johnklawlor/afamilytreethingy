@@ -5,6 +5,11 @@ ready = ->
 	$('#image_comments').perfectScrollbar({
 		wheelSpeed: 10
 	})
+	
+	$('.image_block').mouseenter ->
+		$(this).children('.over_image').fadeIn()
+	$('.image_block').mouseleave ->
+		$(this).children('.over_image').delay(1000).fadeOut()
 
 	if ( $('.show_image').length != 0)
 		$('body').css('background-color', '#111')
@@ -80,7 +85,6 @@ ready = ->
 							$('.upload').delay(5000).fadeOut('slow')
 		
 	$(document).bind 'drop dragover', (e) ->
-		e.preventDefault()
 
 
 $(document).ready(ready)

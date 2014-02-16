@@ -4,13 +4,13 @@
 
 	<div id="profile_image_section">
 		<div id="profile_image_holder">
-			<%= image_tag(@member.image_url(:medium), id: 'profile_image') %>
+			<%= render partial: 'member_profile_image', object: @member, as: :member %>
 		</div>
-		<%= render 'hidden_profile_image_upload' %>
+		<%= render 'hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
 	</div>
 	
 	<% if current_member?(@member) %>
-		<%= render 'images/image_upload' %>
+		<%= render 'images/image_upload' if signed_in? && current_member?(current_member) %>
 	<% end %>
 </div>
 
@@ -18,7 +18,7 @@
 
 	<%= render partial: 'images/image', collection: @member.images.order('created_at DESC') %>
 	
-	<%= render 'images/hidden_image_upload' %>
+	<%= render 'images/hidden_image_upload' if signed_in? && current_member?(current_member) %>
 
 </div>
 

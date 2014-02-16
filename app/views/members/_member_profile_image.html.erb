@@ -1,0 +1,10 @@
+<div class="image_block">
+	<%= image_tag(member.image_url(:medium), id: 'profile_image') %>
+
+	<% if current_member?(@member) %>
+		<div class="over_image">
+			<%= link_to "crop image", crop_member_path(member) if @member.image? %><br/>
+			<%= link_to "remove image", edit_member_path( member, member: { image: nil }), method: :patch %>
+		</div>
+	<% end %>
+</div>

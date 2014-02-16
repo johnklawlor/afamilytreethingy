@@ -1,4 +1,4 @@
-jQuery ->
+ready = ->
 	new AvatarCropper()
 
 class AvatarCropper
@@ -22,3 +22,6 @@ class AvatarCropper
 			height: Math.round(100/coords.h * $('#cropbox').height()) + 'px'
 			marginLeft: '-' + Math.round(100/coords.w * coords.x) + 'px'
 			marginTop: '-' + Math.round(100/coords.h * coords.y) + 'px'
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

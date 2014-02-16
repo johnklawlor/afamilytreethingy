@@ -2,7 +2,9 @@ Mypeeps::Application.routes.draw do
 
 	root to: "static_pages#home"
 
-	resources :members
+	resources :members do
+		get 'crop', on: :member
+	end
 	resources :sessions, only: [ :new, :create, :destroy]
 	resources :relationships, only: [ :create, :destroy]
 	resources :spouse_relationships, only: [ :create, :destroy]

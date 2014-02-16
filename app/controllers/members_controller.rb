@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
 	before_filter :admin_member, only: :destroy
-	before_filter :signed_in_filter, only: [ :index, :edit, :update, :destroy ]
+	before_filter :signed_in_filter, only: [ :index, :edit, :update, :destroy, :crop ]
 	before_filter :correct_member, only: [ :edit, :update]
 	
 	def index
@@ -66,6 +66,15 @@ class MembersController < ApplicationController
 			else
 				render :edit
 			end
+		end
+	end
+	
+	def crop
+		@member = Member.find_by_id( params[ :id])
+		if @member.image
+			render :crop
+		else
+			redirect_to member_path(@member)
 		end
 	end
 	

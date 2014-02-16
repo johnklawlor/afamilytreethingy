@@ -232,7 +232,7 @@ label {
 		font-size: 2em;
 		padding: 5px;
 	}
-	& :hover {
+	&:hover {
 		color: #ffffff;
 	}
 }
@@ -267,6 +267,7 @@ label {
 #images{
 	display: inline-block;
 	width: 55%;
+	min-height: 400px;
 	img {
 		display: inline-block;
 		padding: 5px 0px 0px 0px;
@@ -282,6 +283,27 @@ label {
 .image_block{
 	display: inline-block;
 	position: relative;
+}
+
+.crop_form {
+	display: inline-block;
+	text-align: center;
+	padding-left: 10px;
+	input{
+		margin-top: 10px;
+	}
+}
+
+#image_crop{
+	display: inline-block;
+	float: left;
+}
+
+#image_crop_preview{
+	width:100px;
+	height:100px; 
+	overflow:hidden;
+	float: left;
 }
 
 /* progress bar */
@@ -304,18 +326,21 @@ label {
 }
 
 /* images */
-.over_image{
+.over_image {
 	display: inline-block;
 	position: absolute;
 	top: 5px;
 	left: 0px;
-	color: #fff;
-	text-shadow: 2px 2px 2px #000;
-}
-
-a.over_image:hover{
-	text-shadow: 1px 1px 1px #000;
-	text-decoration: none;
+	display: none;
+	a{
+		color: #fff;
+		text-shadow: 2px 2px 2px #000;
+		&:hover {
+			font-weight: bold;
+			text-shadow: 1px 1px 1px #000;
+			text-decoration: none;
+		}
+	}
 }
 
 .white{
@@ -331,7 +356,7 @@ a.over_image:hover{
 	margin-left: 7px;
 }
 
-#comment_content{
+#comment_content, #image_comments li{
 	padding: 0;
 	margin: 0;
 	height: 20px;
@@ -340,25 +365,4 @@ a.over_image:hover{
 	background-color: transparent;
 	text-shadow: 2px 2px 2px #333;
 	color: #fff;
-}
-
-.crop_form {
-	display: inline-block;
-	text-align: center;
-	padding-left: 10px;
-	input{
-		margin-top: 10px;
-	}
-}
-
-#image_crop{
-	display: inline-block;
-	float: left;
-}
-
-#image_crop_preview{
-	width:100px;
-	height:100px; 
-	overflow:hidden;
-	float: left;
 }
