@@ -29,7 +29,7 @@ ready = ->
 						$('#image_upload_submit').click( ->
 							event.preventDefault()
 							data.context = $(tmpl("template-upload", file))
-							$(this).append(data.context)
+							$('#new_image').append(data.context)
 							data.submit()
 							$('#image_upload_submit').attr('disabled', true) )
 					else
@@ -52,7 +52,7 @@ ready = ->
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
 						data.context = $(tmpl("template-upload", file))
-						$(this).append(data.context)
+						$('#new_image').append(data.context)
 						data.submit()
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
@@ -73,14 +73,13 @@ ready = ->
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
 						data.context = $(tmpl("template-upload", file))
-						$(this).append(data.context)
+						$('#new_image').append(data.context)
 						data.submit()
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
 				progress: (e, data) ->
 					if data.context
 						progress = parseInt(data.loaded / data.total * 100, 10)
-						console.log( data.context.find('.bar') )
 						data.context.find('.bar').css('width', progress + '%')
 						if progress == 100
 							$('.upload').delay(5000).fadeOut('slow')
