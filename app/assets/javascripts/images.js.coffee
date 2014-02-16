@@ -62,7 +62,7 @@ ready = ->
 						data.context.find('.bar').css('width', progress + '%')
 						if progress == 100
 							$('.upload').delay(5000).fadeOut('slow')
-		else
+		else if this.id == 'hidden_new_image'
 			$(this).fileupload
 				dropZone: $(this).parent()
 				formData: { 'member_id' : $('#image_member_id').val() }
@@ -80,11 +80,13 @@ ready = ->
 				progress: (e, data) ->
 					if data.context
 						progress = parseInt(data.loaded / data.total * 100, 10)
+						console.log( data.context.find('.bar') )
 						data.context.find('.bar').css('width', progress + '%')
 						if progress == 100
 							$('.upload').delay(5000).fadeOut('slow')
 		
 	$(document).bind 'drop dragover', (e) ->
+		e.preventDefault()
 
 
 $(document).ready(ready)
