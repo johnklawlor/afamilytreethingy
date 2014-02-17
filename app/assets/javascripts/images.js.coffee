@@ -2,9 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
+
 	overImageVisible = false
 	
-	$('body').on 'mouseenter', '.image_block', ->
+	$('body').on 'mouseover', '.image_block', ->
 		if $('#profile_image').attr('alt') != "Medium default"
 			if overImageVisible == true
 				overImage = $(this).children('.over_image')
@@ -40,18 +41,16 @@ ready = ->
 					if types.test(file.type) || types.test(file.name)
 						$('#image_upload_submit').click( ->
 							event.preventDefault()
-							data.context = $(tmpl("template-upload", file))
-							$('#new_image').append(data.context)
+							$('#progress_bar_section').show()
 							data.submit()
 							$('#image_upload_submit').attr('disabled', true) )
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
 				progress: (e, data) ->
-					if data.context
-						progress = parseInt(data.loaded / data.total * 100, 10)
-						data.context.find('.bar').css('width', progress + '%')
-						if progress == 100
-							$('.upload').delay(5000).fadeOut('slow')
+					progress = parseInt(data.loaded / data.total * 100, 10)
+					$('#bar').css('width', progress + '%')
+					if progress == 100
+						$('.upload').delay(5000).fadeOut('slow')
 		else if this.id == 'hidden_profile_image'
 			$(this).fileupload
 				type: "PATCH"
@@ -63,17 +62,15 @@ ready = ->
 					types = /(\.|\/)(gif|jpe?g|png)$/i
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
-						data.context = $(tmpl("template-upload", file))
-						$('#new_image').append(data.context)
+						$('#progress_bar_section').show()
 						data.submit()
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
-				progress: (e, data) ->
-					if data.context
-						progress = parseInt(data.loaded / data.total * 100, 10)
-						data.context.find('.bar').css('width', progress + '%')
-						if progress == 100
-							$('.upload').delay(5000).fadeOut('slow')
+				progressall: (e, data) ->
+					progress = parseInt(data.loaded / data.total * 100, 10)
+					$('#bar').css('width', progress + '%')
+					if progress == 100
+						$('.upload').delay(5000).fadeOut('slow')
 		else if this.id == 'hidden_new_image'
 			$(this).fileupload
 				dropZone: $(this).parent()
@@ -84,17 +81,17 @@ ready = ->
 					types = /(\.|\/)(gif|jpe?g|png)$/i
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
-						data.context = $(tmpl("template-upload", file))
-						$('#new_image').append(data.context)
+						$('#progress_bar_section').fadeTo(200, 0.8)
 						data.submit()
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
-				progress: (e, data) ->
-					if data.context
-						progress = parseInt(data.loaded / data.total * 100, 10)
-						data.context.find('.bar').css('width', progress + '%')
-						if progress == 100
-							$('.upload').delay(5000).fadeOut('slow')
+				progressall: (e, data) ->
+					progress = parseInt(data.loaded / data.total * 100, 10)
+					$('#bar').css('width', progress + '%')
+					if progress == 100
+						$('#progress_bar_section').append("<span id='upload_complete'>Upload complete!</span>")
+						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
+							$('#upload_complete').remove())
 		
 	$(document).bind 'drop dragover', (e) ->
 		e.preventDefault()

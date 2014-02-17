@@ -253,15 +253,21 @@ label {
 #member_info{
 	display: inline-block;
 	float: left;
-	width: 22.5%;
-	min-height: 600px;
-	h1 {
-		text-align: left;
+	text-align: center;
+	width: 180px;
+	min-height: 300px;
+	background-color: #dfd4d4;
+	border-radius: 10px;
+	padding: 5px;
+	
+	p {
+		font-size: 30px;
+		font-family: Georgia;
 	}
 }
 
 #profile_image_holder{
-	min-height: 200px;
+	min-height: 160px;
 }
 
 .hide{
@@ -270,7 +276,8 @@ label {
 
 #images{
 	display: inline-block;
-	width: 55%;
+	float: right;
+	width: 500px;
 	min-height: 400px;
 	img {
 		display: inline-block;
@@ -278,15 +285,37 @@ label {
 	}
 }
 
-#wall{
-	display: inline-block;
-	float: right;
-	width: 27.5%;
-}
-
 .image_block{
 	display: inline-block;
 	position: relative;
+}
+
+#image_upload_section{
+	position: relative;
+	border-radius: 3px;
+	background-color: #dfd4d4;
+	padding: 3px;
+	width: 98%;
+	input{
+		height: 22px;
+		padding: 0;
+		&[type='submit']{
+			height: initial;
+		}
+	}
+}
+
+#new_image input{
+	width: 75%;
+	display: inline;
+	&[type="submit"]{
+		width: initial;
+	}
+}
+
+#wall{
+	display: inline-block;
+	width: 27.5%;
 }
 
 .crop_form {
@@ -311,19 +340,23 @@ label {
 }
 
 /* progress bar */
-.upload {
+#progress_bar_section {
+	position: absolute;
+	left: 0px;
+	background-color: #dfd4d4;
+	z-index: 10;
 	border-top: solid 1px #CCC;
-	width: 90%;
-	padding-top: 10px;
-	margin-top: 10px;
+	width: 100%;
+	display: none;
+	height: 30px;
 
-	.progress {
-		margin-top: 8px;
+	#progress {
 		border: solid 1px #555;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
-		.bar {
-			height: 20px;
+		height: 6px;
+		#bar {
+			height: 4px;
 			background: #3EC144;
 			width: 0%;
 		}

@@ -18,7 +18,10 @@ class ImagesController < ApplicationController
 	def destroy
 		@image = Image.find_by_id( params[ :id])
 		@image.destroy
-		redirect_to member_path(current_member)
+		respond_to do |format|
+			format.js
+			format.html { redirect_to member_path(current_member) }
+		end
 	end
 	
 	private

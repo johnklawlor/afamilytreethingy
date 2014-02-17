@@ -2,13 +2,10 @@
 	<%= f.label :image, "Drag and drop your images, or choose files below." %>
 	<%= f.file_field :image, multiple: true, name: "image[image]" %>
 	<%= f.hidden_field :member_id %>
-	<%= f.submit 'upload images', id: 'image_upload_submit', class: 'btn btn-sm btn-primary' %>
-<% end %>
-
-<script id="template-upload" type="text/x-tmpl">
-	<div class="upload">
-		{%=o.name%}
-		<div class="progress"><div class="bar">
+	<%= f.submit 'upload images', id: 'image_upload_submit', class: 'btn btn-xs btn-primary' %>
+	
+	<div id="progress_bar_section">
+		<div id="progress"><div id="bar">
 		</div></div>
 	</div>
-</script>
+<% end %>

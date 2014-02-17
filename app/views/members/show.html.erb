@@ -1,6 +1,5 @@
 <div id="member_info">
 	<% provide(:title, @member.first_name) %>
-	<h1><%= @member.first_name + " " + @member.last_name %></h1>
 
 	<div id="profile_image_section">
 		<div id="profile_image_holder">
@@ -8,20 +7,25 @@
 		</div>
 		<%= render 'hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
 	</div>
+
+	<p id="name_header"><%= @member.first_name + " " + @member.last_name %></p>
 	
-	<% if current_member?(@member) %>
-		<%= render 'images/image_upload' if signed_in? && current_member?(current_member) %>
-	<% end %>
-</div>
-
-<div id="images">
-
-	<%= render partial: 'images/image', collection: @member.images.order('created_at DESC') %>
-	
-	<%= render 'images/hidden_image_upload' if signed_in? && current_member?(current_member) %>
-
 </div>
 
 <div id="wall">
+
+</div>
+
+<div id="images">
+	
+	<div id="image_upload_section">
+		<% if current_member?(@member) %>
+			<%= render 'images/image_upload' if signed_in? && current_member?(current_member) %>
+		<% end %>
+	</div>
+	
+	<%= render partial: 'images/image', collection: @member.images.order('created_at DESC') %>
+	
+	<%= render 'images/hidden_image_upload' if signed_in? && current_member?(current_member) %>
 
 </div>

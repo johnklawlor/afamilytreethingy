@@ -1,5 +1,5 @@
 <% if @images.new_record? %>
 	alert("Failed to upload image: <%= j @images.errors.full_messages.join(', ').html_safe %>");
 <% else %>
-	$("#images").prepend("<%= j( render( @images) )%>");
+	$("#image_upload_section").after("<%= j( render( @images) )%>");
 <% end %>

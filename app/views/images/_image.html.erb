@@ -1,7 +1,7 @@
 
-<div class="image_block">
+<div class="image_block" id="<%= image.id %>">
 	<%= link_to image_tag(image.image_url(:medium), class: "img-rounded"), image_path(image) if image.image? %><br/>
 	<div class="over_image">
-		<%= link_to "delete image", image_path(image), method: :delete if current_member?(@member) %>
+		<%= link_to "delete image", image_path(image), method: :delete, remote: true if current_member?(@member) %>
 	</div>
 </div>
