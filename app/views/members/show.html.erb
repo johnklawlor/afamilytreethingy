@@ -1,18 +1,26 @@
-<div id="member_info">
-	<% provide(:title, @member.first_name) %>
-
-	<div id="profile_image_section">
-		<div id="profile_image_holder">
-			<%= render partial: 'member_profile_image', object: @member, as: :member %>
-		</div>
-		<%= render 'hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
-	</div>
-
-	<p id="name_header"><%= @member.first_name + " " + @member.last_name %></p>
-	
-</div>
-
 <div id="wall">
+	<div id="member_info">
+		<% provide(:title, @member.first_name) %>
+
+		<div id="profile_image_section">
+			<div id="profile_image_holder">
+				<%= render partial: 'member_profile_image', object: @member, as: :member %>
+			</div>
+			<%= render 'hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
+		</div>
+
+		<p id="name_header"><%= @member.first_name + " " + @member.last_name %></p>
+	</div>
+	
+	<span>
+		<div class="post_form">
+			<%= render 'posts/post_form' %>
+		</div>
+	
+		<ul id="posts">
+			<%= render partial: 'posts/post', collection: @member.posts.order('created_at DESC') %>
+		</ul>
+	</span>
 
 </div>
 

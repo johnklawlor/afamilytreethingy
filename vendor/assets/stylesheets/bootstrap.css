@@ -5300,7 +5300,7 @@ a.thumbnail.active {
 }
 
 .alert {
-  margin-top: 15px;
+  margin-bottom: 5px;
   border: 1px solid transparent;
   border-radius: 4px;
   padding-left: 5px;

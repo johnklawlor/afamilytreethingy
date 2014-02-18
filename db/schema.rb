@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212204013) do
+ActiveRecord::Schema.define(version: 20140217212405) do
 
   create_table "comments", force: true do |t|
     t.integer  "image_id"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20140212204013) do
   add_index "members", ["email"], name: "index_members_on_email", unique: true
   add_index "members", ["remember_token"], name: "index_members_on_remember_token"
   add_index "members", ["state"], name: "index_members_on_state"
+
+  create_table "posts", force: true do |t|
+    t.integer  "member_id"
+    t.text     "content"
+    t.integer  "from_member"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", force: true do |t|
     t.integer  "parent_id"

@@ -12,6 +12,7 @@ Mypeeps::Application.routes.draw do
 	resources :password_resets, only: [ :new, :create, :edit, :update]
 	resources :images, only: [ :show, :new, :create, :destroy]
 	resources :comments, only: [ :create, :destroy]
+	resources :posts, only: [ :create, :edit, :update, :destroy]
 	
 	get '/signup', to: 'members#new'
 	get '/signin', to: 'sessions#new'

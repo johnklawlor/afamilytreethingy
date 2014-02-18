@@ -46,11 +46,13 @@ ready = ->
 							$('#image_upload_submit').attr('disabled', true) )
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
-				progress: (e, data) ->
+				progressall: (e, data) ->
 					progress = parseInt(data.loaded / data.total * 100, 10)
 					$('#bar').css('width', progress + '%')
 					if progress == 100
-						$('.upload').delay(5000).fadeOut('slow')
+						$('#progress_bar_section').append("<span id='upload_complete'>Upload complete!</span>")
+						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
+							$('#upload_complete').remove())
 		else if this.id == 'hidden_profile_image'
 			$(this).fileupload
 				type: "PATCH"
@@ -70,7 +72,9 @@ ready = ->
 					progress = parseInt(data.loaded / data.total * 100, 10)
 					$('#bar').css('width', progress + '%')
 					if progress == 100
-						$('.upload').delay(5000).fadeOut('slow')
+						$('#progress_bar_section').append("<span id='upload_complete'>Upload complete!</span>")
+						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
+							$('#upload_complete').remove())
 		else if this.id == 'hidden_new_image'
 			$(this).fileupload
 				dropZone: $(this).parent()

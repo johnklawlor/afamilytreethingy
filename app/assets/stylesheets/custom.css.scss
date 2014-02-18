@@ -4,8 +4,9 @@
 
 $grayMediumLight: #eaeaea;
 $grayLight: #999;
-$black-red: #462e2d;
+$black-red: #184661;
 $white: #ffffff;
+$someColor: #7eaeca;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -72,22 +73,20 @@ h4 {
 	font-size: 1.4em;
 }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
 /* header */
 
 header {
 	background-color: $black-red;
 	img {
 		float: left;
-		margin: 5px;
+		margin: 0px;
+	}
+	li{
+		line-height: 0;
 	}
 	a {
 		margin-top: 20px;
-		color: #7ad07a;
+		color: $someColor;
 		font-family: 'Georgia';
 		letter-spacing: -0.5px;
 		font-size: 20px;
@@ -145,7 +144,6 @@ input , textarea , select , .uneditable-input {
   width: 100%;
   padding: 10px;
   height: auto;
-  margin-bottom: 15px;
   @include box_sizing;
   &[type='checkbox'] {
   	display: inline;
@@ -250,19 +248,52 @@ label {
 }
 
 /* show member page */
+
+#wall{
+	display: inline-block;
+	width: 49%;
+	li{
+		list-style-type: none;
+		min-height: 75px;
+		margin: 5px 0;
+		img{
+			float: left;
+			margin-right: 2px;
+		}
+	}
+	input {
+		display: inline;
+		width: 90%;
+		padding: 1px;
+		&[type='submit']{
+			width: initial;
+		}
+	}
+}
+
+.post_form{
+	display: inline-block;
+	width: 64%;
+	border-radius: 3px;
+	background-color: $someColor;
+	padding: 3px;
+}
+
 #member_info{
 	display: inline-block;
 	float: left;
 	text-align: center;
 	width: 180px;
 	min-height: 300px;
-	background-color: #dfd4d4;
+	background-color: $someColor;
 	border-radius: 10px;
 	padding: 5px;
+	margin-right: 5px;
 	
 	p {
 		font-size: 30px;
 		font-family: Georgia;
+		line-height: 1em;
 	}
 }
 
@@ -277,7 +308,7 @@ label {
 #images{
 	display: inline-block;
 	float: right;
-	width: 500px;
+	width: 50%;
 	min-height: 400px;
 	img {
 		display: inline-block;
@@ -293,9 +324,9 @@ label {
 #image_upload_section{
 	position: relative;
 	border-radius: 3px;
-	background-color: #dfd4d4;
-	padding: 3px;
+	background-color: $someColor;
 	width: 98%;
+	padding: 3px;
 	input{
 		height: 22px;
 		padding: 0;
@@ -311,11 +342,6 @@ label {
 	&[type="submit"]{
 		width: initial;
 	}
-}
-
-#wall{
-	display: inline-block;
-	width: 27.5%;
 }
 
 .crop_form {
@@ -343,12 +369,14 @@ label {
 #progress_bar_section {
 	position: absolute;
 	left: 0px;
-	background-color: #dfd4d4;
+	background-color: $someColor;
 	z-index: 10;
 	border-top: solid 1px #CCC;
 	width: 100%;
 	display: none;
 	height: 30px;
+	margin-top: 5px;
+	padding: 3px;
 
 	#progress {
 		border: solid 1px #555;
@@ -370,6 +398,7 @@ label {
 	top: 5px;
 	left: 0px;
 	display: none;
+	text-align: left;
 	a{
 		color: #fff;
 		text-shadow: 2px 2px 2px #000;
