@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
 gem 'pg'
 gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate'
