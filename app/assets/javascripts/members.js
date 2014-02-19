@@ -12,7 +12,11 @@ ready = function() {
 	if( $('#member_full_account').prop( 'checked' ) ) {
 		$("#full_member_field").show('slow')
 	}
-		
+
+	$('.add_fields').click( function() {
+		$(this).parents('form').insertAfter( $(this).parents('div.row') )
+		$(this).parent().next('input').fadeIn()
+	})
 }
 
 $(document).ready(ready);
@@ -21,7 +25,9 @@ $(document).on('page:load', ready);
 function remove_fields(link) {
 	$(link).prev("input:hidden").val("1");
 	$(link).closest(".relationship_fields").hide('slow');
-	$(link).parent().next("input:submit").hide('slow');
+	$(link).closest(".relationship_fields").nextAll("input:submit").hide('slow');
+	form=$(link).parents('form')
+	form.appendTo( form.prev());
 }
 
 function showFullForm(checkbox) {

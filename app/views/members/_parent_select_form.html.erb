@@ -1,8 +1,8 @@
-<%= form_for( member.relationships.new(child_id: member.id) ) do |f| %>
+<%= form_for( member.relationships.new(child_id: member.id), html: { class: 'f-hz' } ) do |f| %>
 
 	<%= f.hidden_field :child_id %>
 	<%= collection_select( :relationship, :parent_id, Member.not(member.id), :id, :name, { prompt: "add a parent from the current family members"}, { class: "member_select" }) %>
 
-	<%= f.submit "add parent", class: "btn btn-sm btn-primary" %>
+	<%= f.submit "add parent", class: "btn btn-sm btn-primary btn-hz" %>
 
 <% end %>

@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-6 col-lg-offset-3">
-		<%= form_for(@member) do |f| %>
+		<%= form_for(@member, html: { class: 'f-vt'}) do |f| %>
 		<%= render 'shared/error_messages', object: f.object %>
 
 		<%= f.label :first_name %>
@@ -23,7 +23,7 @@
 	
 		<%= f.hidden_field :full_account, value: 'true' %>
 	
-		<%= f.submit "sign me up!", class: "btn btn-primary" %>
+		<%= f.submit "sign me up!", class: "btn btn-primary btn-vt" %>
 	<% end %>
 	</div>
 </div>

@@ -1,6 +1,6 @@
-<%= form_for( @member.posts.new( from_member: current_member.id ), remote: true) do |f| %>
+<%= form_for( @member.posts.new( from_member: current_member.id ), html: { class: 'f-hz'}, remote: true) do |f| %>
 	<%= f.text_field :content, placeholder: "write to #{@member.first_name.downcase}" %>
 	<%= f.hidden_field :from_member %>
 	<%= f.hidden_field :member_id %>
-	<%= f.submit 'post', class: 'btn btn-primary btn-xs' %>
+	<%= f.submit 'post', class: 'btn btn-primary btn-xs btn-hz' %>
 <% end %>

@@ -14,12 +14,13 @@
 
 
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-lg-7">
 	<%= render partial: 'members/parent_select_form', object: @member, as: :member, locals: { who: :parent } %>
 	</div>
+	
+	<%= render 'members/parent_member_form' %>
 </div>
 
-<%= render 'members/parent_member_form' %>
 
 <h3><%= @member.first_name %>'s spouse</h3>
 <% if @member.spouse_id.nil? %>
@@ -31,11 +32,13 @@
 <% end %>
 
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-lg-7">
 		<%= render partial: 'members/spouse_select_form', object: @member, as: :member %>
 	</div>
-</div>
+
 	<%= render 'members/spouse_member_form' %>
+</div>
+
 
 
 <h3><%= @member.first_name %>'s children</h3>
@@ -48,11 +51,11 @@
 <% end %>
 
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-lg-7">
 		<%= render partial: 'members/child_select_form', object: @member, as: :member %>
 	</div>
+
+	<%= render 'members/child_member_form' %>
 </div>
-	
-<%= render 'members/child_member_form' %>
 
 <br/>

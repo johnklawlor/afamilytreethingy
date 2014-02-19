@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row relationship_fields">
 	<div class="col-lg-4">
 		<%= f.label :first_name %>
 		<%= f.text_field :first_name %>
@@ -12,9 +12,9 @@
 		
 	<div class="col-lg-4">
 		<%= f.check_box :full_account, onclick:"showFullForm(this)" %>
-		<%= f.label :full_account, "I want to provide this member with a full account that allows them to add and update other members and member information." %>
+		<%= f.label :full_account, "I want to provide this member with a full account that allows them to add and update other members and member information." %><br/>
 
-		<%= link_to_remove_fields "don't add a new #{name}", f %>
+		<%= link_to_remove_fields "nevermind, i don't want to add a new #{name}", f %>
 	</div>
 
 	<div id="full_member_field">

@@ -1,9 +1,9 @@
-<%= form_for @member, method: :patch do |f| %>
+<%= form_for @member, method: :patch, html: { class: 'f-vt' } do |f| %>
 	
 	<%= f.fields_for :parents, @member.parents.new do |rel| %>
 
 	<% end %>
-	<p><%= link_to_add_fields( "add parent", f, :parents, :relationship, name: 'parent' ) %></p>
+	<p><%= link_to_add_fields( "add a new member as a parent", f, :parents, :relationship, name: 'parent' ) %></p>
 	
-	<%= f.submit "add parent", class: "btn btn-primary" %>
+	<%= f.submit "add parent", class: "btn btn-primary btn-vt add_member" %>
 <% end %>

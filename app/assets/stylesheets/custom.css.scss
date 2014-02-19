@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  padding-top: 75px;
+  padding-top: 60px;
 }
 
 section {
@@ -138,20 +138,47 @@ footer {
 
 /* forms */
 
-input , textarea , select , .uneditable-input {
-  display: block;
-  border: 1px solid #bbb;
-  width: 100%;
-  padding: 10px;
-  height: auto;
-  @include box_sizing;
-  &[type='checkbox'] {
-  	display: inline;
-  	width: 15px;
-  }
-  &[type='submit']{
+.f-vt{
+	input, textarea, select, .uneditable-input {
+		display: block;
+		border: 1px solid #bbb;
+		width: 100%;
+		padding: 10px;
+		height: auto;
+		margin-bottom: 5px;
+		@include box_sizing;
+		&[type='checkbox'] {
+			display: inline;
+			width: 15px;
+		}
+	}
+}
+
+.f-hz{
+	select{
+		display: inline;
+		border: 1px solid #bbb;
+		width: 80%;
+		font-size: 22px;
+	}
+	input[type='file'], input[type='text']{
+		border: 1px solid #000000;
+		display: inline;
+		width: 88%;
+		padding: 1px;
+		&[type='submit']{
+			border: none;
+		}
+	}
+}
+
+input.btn-vt{
   	width: initial;
-  }
+  	margin-top: 5px;
+}
+
+input.btn-hz{
+	width: initial;
 }
 
 .member_select{
@@ -247,6 +274,24 @@ label {
 	}
 }
 
+.add_fields{
+	font-size: 24px;
+}
+
+.remove_fields{
+	font-size: 17px;
+	color: #ff5300;
+	&:hover{
+		color: #ff5300;
+		text-decoration: none;
+		text-shadow: 1px 1px 1px black;
+	}
+}
+
+input.add_member{
+	display: none;
+}
+
 /* show member page */
 
 #wall{
@@ -261,14 +306,7 @@ label {
 			margin-right: 2px;
 		}
 	}
-	input {
-		display: inline;
-		width: 90%;
-		padding: 1px;
-		&[type='submit']{
-			width: initial;
-		}
-	}
+
 }
 
 .post_form{
@@ -327,21 +365,6 @@ label {
 	background-color: $someColor;
 	width: 98%;
 	padding: 3px;
-	input{
-		height: 22px;
-		padding: 0;
-		&[type='submit']{
-			height: initial;
-		}
-	}
-}
-
-#new_image input{
-	width: 75%;
-	display: inline;
-	&[type="submit"]{
-		width: initial;
-	}
 }
 
 .crop_form {
@@ -399,6 +422,7 @@ label {
 	left: 0px;
 	display: none;
 	text-align: left;
+	padding-left: 3px;
 	a{
 		color: #fff;
 		text-shadow: 2px 2px 2px #000;
@@ -420,7 +444,6 @@ label {
 	width: 250px;
 	height: 80px;
 	overflow-y: hidden;
-	margin-left: 7px;
 }
 
 #comment_content, #image_comments li{
