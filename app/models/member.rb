@@ -23,7 +23,7 @@ class Member < ActiveRecord::Base
 	after_create :set_oldest_ancestor, :activate_member
 	after_update :crop_profile_image
 
-	before_destroy [ :set_ancestor_for_children, :destroy_spouse_id_of_spouse ]
+	before_destroy :set_ancestor_for_children, :destroy_spouse_id_of_spouse, :delete_posts_from_member, :delete_comments_from_member
 	
 	state_machine initial: :inactive do
 		state :inactive, value: 0
@@ -60,6 +60,27 @@ class Member < ActiveRecord::Base
 	validates :password_confirmation, presence: true, if: [ :account?, :inactive?]
 	validates_confirmation_of :password, if: [ :account?, :inactive? ]
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, if: :account?
+	
+	def delete_comments_from_member
+		Comment.where( member_id: self.id).each do |comment|
+			comment.destroy
+		end
+	end
+	
+	def delete_posts_from_member
+		Post.where( from_member: self.id).each do |post|
+			post.destroy
+		end
+	end
+	
+	def can_delete_comment?(comment)
+		image = Image.find_by_id(comment.image_id)
+		(comment.member_id == self.id || image.member_id == self.id)
+	end
+	
+	def can_delete?(post)
+		(post.member_id == self.id || post.from_member == self.id)
+	end
 	
 	def crop_profile_image
 		image.recreate_versions! if crop_x.present?

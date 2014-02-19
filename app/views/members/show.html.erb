@@ -26,11 +26,11 @@
 
 <div id="images">
 	
-	<div id="image_upload_section">
-		<% if current_member?(@member) %>
+	<% if current_member?(@member) %>
+		<div id="image_upload_section">
 			<%= render 'images/image_upload' if signed_in? && current_member?(current_member) %>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
 	
 	<%= render partial: 'images/image', collection: @member.images.order('created_at DESC') %>
 	

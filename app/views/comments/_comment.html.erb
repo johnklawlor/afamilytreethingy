@@ -1,6 +1,6 @@
 <li id=<%= comment.id %>>
 	<%= "#{comment.member_name.downcase}: #{comment.content} -" + time_ago_in_words(comment.created_at).to_s + " ago" %>
-	<% if current_member.id == comment.member_id %>
+	<% if current_member.can_delete_comment?(comment) %>
 		| <%= link_to "delete", comment_path(comment), method: :delete, remote: true %>
 	<% end %>
 	<br/>
