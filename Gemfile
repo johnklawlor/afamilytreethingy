@@ -10,12 +10,13 @@ gem 'state_machine'
 gem 'jquery-fileupload-rails'
 
 group :test, :development do 
+	gem 'dotenv-rails'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'guard-spork'
 	gem 'spork'
 	gem 'spork-rails'
-	gem 'annotate'  
+	gem 'annotate'
 end 
 
 group :test do 

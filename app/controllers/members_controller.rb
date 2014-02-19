@@ -21,7 +21,6 @@ class MembersController < ApplicationController
 
 		if @member.save
 			if @member.full_account?
-				@member.activate_member
 				sign_in @member
 				if params[ :member][ :image].present?
 					render :crop
