@@ -21,6 +21,7 @@ module Mypeeps
     # config.i18n.default_locale = :de
 	config.action_view.field_error_proc = Proc.new do |html_tag, instance| 
 			"#{html_tag}".html_safe 
-		end	
+		end
+	
 	end
 end

@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require family_tree
+//= require family_tree.js
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require members
