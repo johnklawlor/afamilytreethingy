@@ -10,6 +10,10 @@ gem 'state_machine'
 gem 'jquery-fileupload-rails'
 gem 'dotenv-rails'
 
+group :production do
+	gem 'rails_12factor'
+end
+
 group :test, :development do 
 	gem 'rspec-rails'
 	gem 'guard-rspec'
