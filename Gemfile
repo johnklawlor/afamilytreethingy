@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 gem 'pg'
 gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem "paperclip", "~> 3.0"
 gem 'carrierwave'
 gem 'rmagick', '2.13.2'
 gem 'state_machine'
