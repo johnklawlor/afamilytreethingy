@@ -8,9 +8,9 @@ gem 'carrierwave'
 gem 'rmagick', '2.13.2'
 gem 'state_machine'
 gem 'jquery-fileupload-rails'
+gem 'dotenv-rails'
 
 group :test, :development do 
-	gem 'dotenv-rails'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'guard-spork'
