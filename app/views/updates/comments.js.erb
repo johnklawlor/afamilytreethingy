@@ -1,0 +1,5 @@
+<% unless @new_comments.nil? %>
+	<% @new_comments.each do |comment| %>
+		$('#image_comments').prepend ( "<%= j render partial: 'comments/comment', object: comment %>" )
+	<% end %>
+<% end %>
