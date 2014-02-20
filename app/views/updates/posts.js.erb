@@ -1,0 +1,5 @@
+<% unless @new_posts.nil? %>
+	<% @new_posts.each do |post| %>
+		$("#posts").prepend ( "<%= j render partial: 'posts/post', object: post %>" )
+	<% end %>
+<% end %>

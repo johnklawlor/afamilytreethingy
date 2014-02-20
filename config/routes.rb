@@ -1,5 +1,6 @@
 Mypeeps::Application.routes.draw do
 
+	get "updates/posts"
 	root to: "static_pages#home"
 
 	resources :members do

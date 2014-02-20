@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217212405) do
+ActiveRecord::Schema.define(version: 20140220204113) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
     t.integer  "image_id"
@@ -49,9 +52,9 @@ ActiveRecord::Schema.define(version: 20140217212405) do
     t.string   "password_salt"
   end
 
-  add_index "members", ["email"], name: "index_members_on_email", unique: true
-  add_index "members", ["remember_token"], name: "index_members_on_remember_token"
-  add_index "members", ["state"], name: "index_members_on_state"
+  add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
+  add_index "members", ["remember_token"], name: "index_members_on_remember_token", using: :btree
+  add_index "members", ["state"], name: "index_members_on_state", using: :btree
 
   create_table "posts", force: true do |t|
     t.integer  "member_id"
@@ -68,13 +71,22 @@ ActiveRecord::Schema.define(version: 20140217212405) do
     t.datetime "updated_at"
   end
 
-  add_index "relationships", ["child_id"], name: "index_relationships_on_child_id"
-  add_index "relationships", ["parent_id", "child_id"], name: "index_relationships_on_parent_id_and_child_id", unique: true
-  add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id"
+  add_index "relationships", ["child_id"], name: "index_relationships_on_child_id", using: :btree
+  add_index "relationships", ["parent_id", "child_id"], name: "index_relationships_on_parent_id_and_child_id", unique: true, using: :btree
+  add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id", using: :btree
 
   create_table "spouse_relationships", force: true do |t|
     t.integer  "member_id"
     t.integer  "spouse_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "updates", force: true do |t|
+    t.integer  "updatable_id"
+    t.string   "updatable_type"
+    t.string   "what"
+    t.integer  "what_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

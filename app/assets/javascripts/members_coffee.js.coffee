@@ -1,4 +1,5 @@
 ready = ->
+
 	new AvatarCropper()
 
 class AvatarCropper

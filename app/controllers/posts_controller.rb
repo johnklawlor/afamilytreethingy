@@ -1,4 +1,26 @@
 class PostsController < ApplicationController
+#	include ActionController::Live
+
+=begin
+	def events
+		response.headers["Content-Type"] = "text/event-stream"
+		start = Post.last.created_at
+		10.times do
+			Post.uncached do
+				Post.where('created_at > ?', start).each do |post|
+					response.stream.write "data: #{render_to_string partial: 'posts/post.html.erb', object: post}\n\n"
+					start = post.created_at
+				end
+			end
+			sleep 2		
+		end
+		rescue IOError
+			logger.info "Stream closed"
+		ensure
+			response.stream.close
+	end
+=end
+
 	def create
 		@post = Post.new( post_params)
 		if @post.save

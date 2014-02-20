@@ -1,8 +1,9 @@
 class MembersController < ApplicationController
+
 	before_filter :admin_member, only: :destroy
 	before_filter :signed_in_filter, only: [ :index, :edit, :update, :destroy, :crop ]
 	before_filter :correct_member, only: [ :edit, :update]
-	
+		
 	def index
 		@members = Member.all.order('last_name', 'first_name').paginate(page: params[ :page])
 	end
