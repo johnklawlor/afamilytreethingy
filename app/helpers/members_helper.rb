@@ -1,12 +1,13 @@
 module MembersHelper
     include ActionView::Helpers::TextHelper
     include ActionView::Helpers::UrlHelper
+    include ActionView::Helpers::AssetTagHelper
 
 	def build_tree(add_member, oldest_ancestor_id)
 		children = []
 		id = add_member.birthdate
 		
-		# add link to switch to member's other parent's tree
+		# add link to switch to member's other divorced parent's tree
 		if add_member.parents.count==2 && !(add_member.parents.first.spouse == add_member.parents.last)
 			if add_member.parents.first.oldest_ancestor == oldest_ancestor_id
 				oldest_ancestor = add_member.parents.last.oldest_ancestor
@@ -15,7 +16,11 @@ module MembersHelper
 			end
 			name = "#{ link_to( add_member.first_name, tree_path(oldest_ancestor) ) }"
 		else
-			name = add_member.first_name
+			name = "<div class='image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
+			if add_member.has_spouse?
+				name += "#{ image_tag( add_member.spouse.image_url( :medium), class: 'img-rounded tree_image') }"
+			end
+			name += "<div class='over_image btm'>#{add_member.first_name}"
 		end
 		
 		# add link to switch to member's spouse's tree, if any
@@ -30,17 +35,24 @@ module MembersHelper
 				edit
 				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) } or
 				#{ link_to "#{add_member.spouse.first_name}'s ", edit_tree_path(add_member.spouse) }
-				tree
-			</div>"
+				tree<br/>
+				view
+				#{ link_to "#{add_member.first_name}'s", member_path(add_member) } or
+				#{ link_to "#{add_member.spouse.first_name}'s", member_path(add_member.spouse) }
+				profile
+			</div></div></div>"
 		else
-			name += "<br/>" + add_member.last_name
+			name += " " + add_member.last_name
 			# add link to edit member's tree
 			edit = 
 			"<div class=edit>
 				edit 
 				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) }
-				 tree
-			</div>"
+				 tree<br/>
+				 view
+				#{ link_to "#{add_member.first_name}'s", member_path(add_member) }
+				 profile
+			</div></div></div>"
 		end
 		
 		name += edit

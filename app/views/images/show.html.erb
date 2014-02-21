@@ -1,7 +1,7 @@
 <div class="show_image center">
 	<div class="image_block">
 		<%= image_tag @image.image_url, id: 'actual_image', data: { image: @image.id } %>
-		<div class="over_image">
+		<div class="over_image tp">
 			<%= render partial: "comments/comment_form", object: @image %>
 			<div id="image_comments" class="comments">
 				<%= render @image.comments.order('created_at DESC') %>

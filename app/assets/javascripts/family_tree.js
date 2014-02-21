@@ -1,6 +1,10 @@
 var ready;
 ready = function() {
 
+	$('div.node > img').on('dragstart', function(event) {
+		event.preventDefault(); 
+	});
+
 	$("#tree").html("");
 
 	var labelType, useGradients, nativeTextSupport, animate;
@@ -23,10 +27,7 @@ ready = function() {
 	function init(){
 		//init data
 		var json = $("#tree").data("family");
-		
-		console.log(json);
-							
-		//end
+
 		//init Spacetree
 		//Create a new ST instance
 		var st = new $jit.ST({
@@ -43,18 +44,29 @@ ready = function() {
 			  enable:true,
 			  panning:true
 			},
+
+			Events: {
+				enable: true,
+				onDragStart: function(node, eventInfo, e){
+					e.preventDefault();
+				},
+				onRightClick: function(node, eventInfo, e){
+					console.log (node.id);
+					st.onClick( node.id, { Move: {offsetY:150} });
+				}
+			},
 			
 			orientation: 'top',
-			siblingOffset: 40,
+			siblingOffset: 20,
 			
 				//set node and edge styles
 				//set overridable=true for styling individual
 				//nodes or edges
 			Node: {
-				height: 100,
-				width: 230,
+				height: 160,
+				width: 340,
 				type: 'rectangle',
-				color: '#ffffff',
+				color: 'transparent',
 				overridable: false
 			},
 		
@@ -71,15 +83,13 @@ ready = function() {
 				label.innerHTML = node.name;
 				label.onclick = function(){
 
-					  st.onClick(node.id);
-
 				};
 				//set label styles
 				var style = label.style;
-				style.width = 230 + 'px';
+				style.width = 340 + 'px';
 				style.height = 100 + 'px';          
 				style.cursor = 'pointer';
-				style.color = '#333';
+				style.color = '#000';
 				style.fontSize = '2em';
 				style.textAlign= 'center';
 				style.paddingTop = '3px';
@@ -119,7 +129,7 @@ ready = function() {
 			//override the Edge global style properties.
 			onBeforePlotLine: function(adj){
 				if (adj.nodeFrom.selected && adj.nodeTo.selected) {
-					adj.data.$color = "#eed";
+					adj.data.$color = "#000";
 					adj.data.$lineWidth = 3;
 				}
 				else {
@@ -133,16 +143,15 @@ ready = function() {
 			//compute node positions and layout
 		st.compute();
 			//optional: make a translation of the tree
-		st.geom.translate(new $jit.Complex(-200, 0), "current");
+		st.geom.translate(new $jit.Complex(-400, -150), "current");
 			//emulate a click on the root node.
-		st.onClick(st.root);
+		st.onClick(st.root, { Move: {offsetY: 150} });
 			//end
 
 	}
 	
 	if ($("#tree").length) {
 		init();
-		console.log( "data-family: ", $("#tree").data("family") )
 	}
 };
 
