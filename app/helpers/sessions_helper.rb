@@ -43,4 +43,21 @@ module SessionsHelper
 		redirect_to(session[:return_to] || default)
 		session.delete(:return_to)
 	end
+	
+	def admin_member
+		if current_member.admin?
+			return true
+		else
+			redirect_to(root_path)
+		end
+	end
+	
+	def correct_member
+		member = Member.find( params[ :id])
+		
+		unless member.immediate_family_of?(current_member) || current_member?(member) || current_member.admin?
+			flash[ :error] = "You do not have permissions to edit or update this member."
+			redirect_to member_path(current_member)
+		end
+	end
 end

@@ -195,7 +195,9 @@ class Member < ActiveRecord::Base
 	
 	def authenticate(password)
 		member = Member.find_by_email(self.email)
-		member && member.password_hash == BCrypt::Engine.hash_secret(password, member.password_salt) ?
+		member && 
+		member.password_hash? &&
+		member.password_hash == BCrypt::Engine.hash_secret(password, member.password_salt) ?
 			member
 			: nil
 	end

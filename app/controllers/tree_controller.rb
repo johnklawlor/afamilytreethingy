@@ -1,5 +1,6 @@
 class TreeController < ApplicationController
 	before_filter :signed_in_filter
+	before_filter :correct_member, only: [ :edit]
 
 	def show
 		member = Member.find_by_id(params[ :id])

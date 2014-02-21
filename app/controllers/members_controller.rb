@@ -96,20 +96,4 @@ class MembersController < ApplicationController
 			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, :crop_x, :crop_y, :crop_w, :crop_h, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
 		end
 		
-		def admin_member
-			if current_member.admin?
-				return true
-			else
-				redirect_to(root_path)
-			end
-		end
-		
-		def correct_member
-			member = Member.find( params[ :id])
-			
-			unless member.immediate_family_of?(current_member) || current_member?(member) || admin_member
-				flash[ :error] = "You do not have permissions to edit or update this member."
-				redirect_to(root_path)
-			end
-		end
 end
