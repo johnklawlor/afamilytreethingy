@@ -9,7 +9,7 @@ ready = ->
 		$.ajax
 			type: "GET",
 			url: '/updates/posts'
-	, 5000)
+	, 10000)
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

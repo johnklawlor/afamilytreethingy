@@ -4,7 +4,7 @@
 	<div>
 	<%= link_to full_name(member.first_name, member.last_name), member %> <br/>
 	<%= link_to "edit #{member.first_name}'s tree", edit_tree_path(member) %>
-	<% unless member.account? %>
+	<% if !member.account? && current_member.descendant_or_spouse_of_descendant?(member)%>
 		| <%= link_to "edit #{member.first_name}'s profile", edit_member_path(member) %>
 	<% end %>
 	

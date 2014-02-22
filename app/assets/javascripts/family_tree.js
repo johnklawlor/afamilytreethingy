@@ -147,6 +147,7 @@ ready = function() {
 			//emulate a click on the root node.
 		st.onClick(st.root, { Move: {offsetY: 150} });
 			//end
+		console.log(json);
 
 	}
 	

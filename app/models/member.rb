@@ -193,6 +193,103 @@ class Member < ActiveRecord::Base
 		d
 	end
 	
+	def descendants_and_their_spouses
+		d=[]
+		self.children.each do |child|
+			d << child
+			if child.has_spouse?
+				d << child.spouse
+			end
+			if child.has_children?
+				d.concat( child.descendants_and_their_spouses )
+			end
+		end
+		d	
+	end
+
+	def ancestors(degrees)
+		a=[]
+		self.parents.each do |parent|
+			if parent.has_parents?
+				a.concat( parent.ancestors )
+			end
+		end
+		a
+	end
+	
+	def siblings
+		unless self.has_parents?
+			return nil
+		end
+		self.parents.first.children.where.not(id: self.id)
+	end
+	
+	def family(do_not_add)
+		family=[]
+		if self.has_parents?
+			if self.parents.count == 2
+				if self.parents.first.has_spouse?
+					 if self.parents.first.spouse != self.parents.last
+					 	spouse = self.parents.first.spouse
+						family << spouse
+						family.concat( spouse.descendants_and_their_spouses)
+					end
+				end
+				if self.parents.last.has_spouse?
+					if self.parents.last.spouse != self.parents.first
+					 	spouse = self.parents.last.spouse
+						family << spouse
+						family.concat( spouse.descendants_and_their_spouses)					
+					end
+				end
+				family.concat( add_new_descendants( self, do_not_add))
+				family.concat( self.parents.first.family(self))
+				family.concat( self.parents.last.family(self))
+			else
+				if self.parents.first.has_spouse?
+					spouse = self.parents.first.spouse
+					family << spouse
+					family.concat( spouse.descendants_and_their_spouses)
+				end
+				family.concat( add_new_descendants( self, do_not_add))			
+				family.concat( self.parents.first.family(self))
+			end
+		else
+			family.concat( add_new_descendants( self, do_not_add) )
+		end
+
+		family << self.spouse if do_not_add.nil? && self.has_spouse?		
+		family << self
+	end
+	
+	def add_new_descendants( member, do_not_add)
+		family = []
+		if do_not_add.nil?
+			final_d = member.descendants_and_their_spouses
+			family = final_d
+		elsif do_not_add.parents.first == member
+			d = member.descendants_and_their_spouses
+			d.delete(do_not_add)
+			d.delete( do_not_add.spouse) if do_not_add.has_spouse?
+			final_d = d - do_not_add.descendants_and_their_spouses
+			family = final_d
+		end
+		family
+	end
+	
+	def descendant_or_spouse_of_descendant?(member)
+		member.descendants.each do |descendant|
+			if descendant == self
+				return true
+			elsif descendant.has_spouse?
+				if descendant.spouse == self
+					return true
+				end
+			end
+		end
+		return false
+	end
+	
 	def authenticate(password)
 		member = Member.find_by_email(self.email)
 		member && 
