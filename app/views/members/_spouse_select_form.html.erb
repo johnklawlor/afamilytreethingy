@@ -2,7 +2,7 @@
 	<%= render 'shared/error_messages', object: f.object %>
 	
 	<%= f.hidden_field :member_id %>	
-	<%= collection_select( :spouse_relationship, :spouse_id, Member.not(member.id), :id, :name, { prompt: "add a spouse from the current family members"}, { class: "member_select" }) %>
+	<%= collection_select( :spouse_relationship, :spouse_id, Member.not(member), :id, :name, { prompt: "add a spouse from the current family members"}, { class: "member_select" }) %>
 
 	<%= f.submit "add spouse", class: "btn btn-sm btn-primary btn-hz" %>
 

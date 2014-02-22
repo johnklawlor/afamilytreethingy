@@ -111,8 +111,8 @@ class Member < ActiveRecord::Base
 		end
 	end
 	
-	def self.not(member_id)
-		Member.where.not(id: member_id).order('last_name', 'first_name')
+	def self.not(member)
+		Member.where.not(id: [member] + member.children + member.parents + member.spouses).order('last_name', 'first_name')
 	end
 	
 	def nil_or_downcase
