@@ -3,6 +3,7 @@ class MembersController < ApplicationController
 	before_filter :admin_member, only: :destroy
 	before_filter :signed_in_filter, only: [ :index, :edit, :update, :destroy, :crop ]
 	before_filter :correct_member, only: [ :edit, :update]
+	before_filter :within_family, only: :show
 		
 	def index
 		@members = Member.all.order('last_name', 'first_name').paginate(page: params[ :page])
@@ -10,6 +11,9 @@ class MembersController < ApplicationController
 	
 	def show
 		@member = Member.find_by_id(params[ :id])
+		@member.updates.all.each do |update|
+			update.destroy
+		end
 	end
 
 	def new

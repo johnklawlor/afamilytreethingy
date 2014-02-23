@@ -64,4 +64,14 @@ module SessionsHelper
 			redirect_to member_path(current_member)
 		end
 	end
+	
+	def within_family
+		member = Member.find( params[ :id])
+		
+		unless current_member?(member) ||
+					current_member.family_of?(member)
+			flash[ :error] = "You do not have permissions to view this member's profile or tree."
+			redirect_to member_path(current_member)
+		end
+	end
 end

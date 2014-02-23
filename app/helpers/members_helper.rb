@@ -6,7 +6,11 @@ module MembersHelper
 	def build_tree(add_member, oldest_ancestor_id)
 		children = []
 		id = add_member.birthdate
-		
+
+		name = "<div class='image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
+		if add_member.has_spouse?
+			name += "#{ image_tag( add_member.spouse.image_url( :medium), class: 'img-rounded tree_image') }"
+		end
 		# add link to switch to member's other divorced parent's tree
 		if add_member.parents.count==2 && !(add_member.parents.first.spouse == add_member.parents.last)
 			if add_member.parents.first.oldest_ancestor == oldest_ancestor_id
@@ -14,12 +18,8 @@ module MembersHelper
 			else
 				oldest_ancestor = add_member.parents.first.oldest_ancestor
 			end
-			name = "#{ link_to( add_member.first_name, tree_path(oldest_ancestor) ) }"
+			name += "<div class='over_image btm'>#{ link_to( add_member.first_name, tree_path(oldest_ancestor) ) }"
 		else
-			name = "<div class='image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
-			if add_member.has_spouse?
-				name += "#{ image_tag( add_member.spouse.image_url( :medium), class: 'img-rounded tree_image') }"
-			end
 			name += "<div class='over_image btm'>#{add_member.first_name}"
 		end
 		
@@ -77,6 +77,15 @@ module MembersHelper
 				d.save
 			end
 		end
+	end
+	
+	def add(spouses)
+		new_spouses=[]
+		spouses.each do |spouse|
+			new_spouses << spouse
+			new_spouses.concat( spouse.descendants_and_their_spouses)
+		end
+		new_spouses
 	end
 	
 end
