@@ -10,7 +10,7 @@ class Member < ActiveRecord::Base
 	has_many :spouse_relationships, foreign_key: "member_id", dependent: :destroy
 	has_many :images, dependent: :destroy
 	has_many :posts, dependent: :destroy
-	has_many :updates, as: :updatable, dependent: :destroy
+	has_many :updates, dependent: :destroy
 	
 	accepts_nested_attributes_for :parents, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }
 	accepts_nested_attributes_for :spouses, reject_if: proc { |attributes| attributes['first_name'].blank? && attributes['first_name'].blank? }

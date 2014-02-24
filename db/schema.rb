@@ -83,11 +83,13 @@ ActiveRecord::Schema.define(version: 20140220204113) do
   end
 
   create_table "updates", force: true do |t|
-    t.integer  "updatable_id"
-    t.string   "updatable_type"
+    t.integer  "member_id"
     t.string   "what"
     t.integer  "what_id"
-    t.boolean  "viewed",         default: false
+    t.boolean  "viewed",            default: false
+    t.integer  "from_member"
+    t.string   "commented_on_type"
+    t.integer  "commented_on_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

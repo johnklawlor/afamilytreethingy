@@ -17,7 +17,7 @@ class UpdatesController < ApplicationController
 		image = Image.find_by_id( params[ :image_id])
 		if signed_in?
 			@new_comments = []
-			image.updates.where( what: 'comment', viewed: false).each do |update|
+			current_member.updates.where( what: 'comment', viewed: false).each do |update|
 				@new_comments << Comment.find_by_id( update.what_id)
 				update.toggle!(:viewed)
 			end
@@ -29,8 +29,8 @@ class UpdatesController < ApplicationController
 	end
 	
 	def updates
-		@updates = Update.where( updatable_id: current_member.images.pluck(:id) << current_member.id )
-		
+		@updates = current_member.updates
+				
 		respond_to do |format|
 			format.js
 			format.html

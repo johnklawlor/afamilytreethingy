@@ -1,5 +1,5 @@
 <% if @updates.empty? %>
 	$('#name_header').attr( 'data-updates', "<ul><li> No notifications. </li></ul>")
 <% else %>
-	$('#name_header').attr( 'data-updates', "<%= j render @updates %>")
+	$('#name_header').attr( 'data-updates', "<ul><%= j render @updates %></ul>")
 <% end %>

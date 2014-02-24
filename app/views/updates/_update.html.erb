@@ -1,14 +1,14 @@
-<ul>
-	<li>
-	<% if update.what == 'post' %>
-		<% member = Member.find( update.updatable_id) %>
-		<%= image_tag member.image_url(:thumb) %>
-		<%= " #{member.name.downcase} wrote on your profile page!" %>
-	<% elsif update.what == 'comment' %>
-		<% comment = Comment.find( update.what_id) %>
-		<% member = Member.find( comment.member_id) %>
-		<%= image_tag member.image_url(:thumb) %>
-		<%= " #{member.name.downcase} commented on one of your images!" %>
-	<% end %>
-	</li><br/>
-</ul>
+<li>
+	<div class="update_block">
+		<% if update.what == 'post' %>
+			<% member = Member.find( update.updatable_id) %>
+			<%= image_tag member.image_url(:thumb) %>
+			<%= " #{member.name.downcase} wrote on your profile page!" %>
+		<% elsif update.what == 'comment' %>
+			<% comment = Comment.find( update.what_id) %>
+			<% member = Member.find( comment.member_id) %>
+			<%= image_tag member.image_url(:thumb) %>
+			<%= " #{member.name.downcase} commented on one of your images!" %>
+		<% end %>
+	</div>
+</li>

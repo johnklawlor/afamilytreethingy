@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 	before_filter :signed_in_filter
-	before_filter :correct_member, only: :destroy
+	before_filter :can_delete?, only: :destroy
 
 	def create
 		@comment = Comment.new( image_params)
@@ -25,13 +25,10 @@ class CommentsController < ApplicationController
 			params.require(:comment).permit(:image_id, :member_id, :member_name, :content)
 		end
 		
-		def correct_member
+		def can_delete?
 			comment = Comment.find_by_id( params[ :id])
-			member = Member.find_by_id( comment.member_id)
-			
-			unless current_member?( member) || current_member.admin?
-				flash[ :error] = "You do not have permissions to delete this comment."
-				redirect_to image_path( comment.image_id)
+			unless current_member.can_delete_comment?(comment) || current_member.admin?
+				redirect_to :back, status: 303, error: "You do not have permissions to delete this comment."
 			end
 		end
 end
