@@ -13,11 +13,10 @@ class CommentsController < ApplicationController
 
 	def destroy
 		@comment_to_delete = Comment.find_by_id( params[ :id])
-		image = @comment_to_delete.image_id
 		@comment_to_delete.destroy
 		respond_to do |format|
 			format.js
-			format.html { redirect_to image_path(image) }
+			format.html { redirect_to image_path( @comment_to_delete.image_id) }
 		end
 	end
 	

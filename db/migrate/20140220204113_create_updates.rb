@@ -4,6 +4,7 @@ class CreateUpdates < ActiveRecord::Migration
 			t.references :updatable, polymorphic: true
 			t.string :what
 			t.integer :what_id
+			t.boolean :viewed, default: false
 
 			t.timestamps
 		end

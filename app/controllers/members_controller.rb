@@ -11,9 +11,7 @@ class MembersController < ApplicationController
 	
 	def show
 		@member = Member.find_by_id(params[ :id])
-		@member.updates.all.each do |update|
-			update.destroy
-		end
+
 	end
 
 	def new

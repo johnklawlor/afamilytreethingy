@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20140220204113) do
     t.string   "updatable_type"
     t.string   "what"
     t.integer  "what_id"
+    t.boolean  "viewed",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

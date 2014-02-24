@@ -4,6 +4,6 @@ class Comment < ActiveRecord::Base
 	
 	def create_update
 		image = Image.find_by_id( self.image_id)
-		image.updates.create( what: 'comment', what_id: self.id)
+		image.updates.create!( what: 'comment', what_id: self.id)
 	end
 end

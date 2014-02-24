@@ -471,3 +471,20 @@ label {
 input.add_member{
 	display: none;
 }
+
+.qtip-content{
+	ul{
+		list-style-type: none;
+		padding: 1px;
+		margin: 1px;
+	}
+	li{
+		font-size: 24px;
+		line-height: 0.9;
+	}
+	img{
+		border-radius: 10px;
+		float: left;
+		margin: 0 5px 0 0;
+	}
+}

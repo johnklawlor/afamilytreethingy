@@ -1,6 +1,22 @@
 ready = ->
 
 	new AvatarCropper()
+	
+	$('#name_header').qtip
+		content:
+			text: (e, api) ->
+				return $.ajax
+					url: '/updates/updates'
+				.then (content) ->
+					updates = $('#name_header').attr('data-updates')
+					console.log( updates )
+					return updates
+				, (xhr, status, error) ->
+					api.set( 'content.text', status + ': ' + error)
+				return 'Loading...'
+		show: 'click',
+		hide: 'click',
+		style: { classes: 'qtip-light qtip-rounded' }
 
 class AvatarCropper
 	constructor: ->
