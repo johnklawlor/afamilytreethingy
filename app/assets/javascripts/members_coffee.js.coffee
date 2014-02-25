@@ -2,13 +2,29 @@ ready = ->
 
 	new AvatarCropper()
 	
-	$('#name_header').qtip
+	updates_count = $('div#updates_count')
+	my_profile_link = $('#my_profile_link')
+
+	updates_count.mouseenter ->
+		$(this).css( 'z-index', 20)
+		$(this).css( 'cursor', 'pointer')
+	updates_count.mouseout ->
+		$(this).css( 'z-index', 0)
+	
+	my_profile_link.mouseenter ->
+		updates_count.fadeTo 500, 0.5, ->
+			mouseenterComplete = true
+	my_profile_link.mouseout ->
+			updates_count.stop(true)
+			updates_count.css( 'opacity', 1)
+
+	updates_count.qtip
 		content:
 			text: (e, api) ->
 				return $.ajax
 					url: '/updates/updates'
 				.then (content) ->
-					updates = $('#name_header').attr('data-updates')
+					updates = updates_count.attr('data-updates')
 					console.log( updates )
 					return updates
 				, (xhr, status, error) ->

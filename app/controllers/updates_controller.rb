@@ -6,6 +6,7 @@ class UpdatesController < ApplicationController
 				@new_posts << Post.find_by_id( update.what_id)
 				update.toggle!(:viewed)
 			end
+			@updates_count = current_member.updates.where(viewed: false).count
 		
 			respond_to do |format|
 				format.js
@@ -17,7 +18,7 @@ class UpdatesController < ApplicationController
 		image = Image.find_by_id( params[ :image_id])
 		if signed_in?
 			@new_comments = []
-			current_member.updates.where( what: 'comment', viewed: false).each do |update|
+			current_member.updates.where( commented_on_type: 'image', commented_on_id: image, what: 'comment', viewed: false).each do |update|
 				@new_comments << Comment.find_by_id( update.what_id)
 				unless update.viewed
 					update.viewed = true
@@ -33,7 +34,7 @@ class UpdatesController < ApplicationController
 	
 	def updates
 		@updates = current_member.updates.order('created_at DESC')
-				
+
 		respond_to do |format|
 			format.js
 			format.html

@@ -1,15 +1,19 @@
-<% distinct_updates = current_member.updates.where(commented_on_type: 'image').select(:commented_on_id).distinct.pluck(:commented_on_id) %>
-<% distinct_updates.each do |du| %>
+<% distinct_updates = current_member.updates.order('created_at DESC').where(commented_on_type: 'image').group_by(&:commented_on_id) %>
+<% distinct_updates.each do |image_id, distinct_group_of_updates| %>
 	<li>
-	<div class="update_block">
-	<% names = [] %>
-	<% current_member.updates.where(commented_on_id: du).each_with_index do |update, index| %>
-	<% member = Member.find_by_id( update.from_member) %>
-	<% if index == 0 %>
-		<%= image_tag member.image_url(:thumb) %>
-	<% end %>
-	<% names << member.first_name.downcase %>
-	<% end %>
-	<%= names.to_sentence %>
-	wrote something on your wall</div></li>
+		<div class="update_block">
+		<% names = [] %>
+		<% image = 0 %>
+		<% distinct_group_of_updates.each_with_index do |update, index| %>
+			<% member = Member.find_by_id( update.from_member) %>
+			<% if index == 0 %>
+				<%= image_tag member.image_url(:thumb) %>
+				<% image = update.commented_on_id %>
+			<% end %>
+			<% names << member.first_name.downcase %>
+		<% end %>
+		<%= names.to_sentence %>
+		<%= link_to "commented", image_path( current_member.images.find_by_id( image)) %> on one of your images
+		</div>
+	</li>
 <% end %>

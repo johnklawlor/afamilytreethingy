@@ -13,6 +13,10 @@ class ImagesController < ApplicationController
 	
 	def show
 		@image = Image.find_by_id( params[ :id])
+		current_member.updates.where(commented_on_type: 'image', commented_on_id: @image.id, viewed: false).each do |update|
+			update.viewed = true
+			update.save
+		end
 	end
 
 	def destroy

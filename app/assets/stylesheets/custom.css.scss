@@ -88,6 +88,7 @@ header {
 		line-height: 0;
 	}
 	a {
+		z-index: 10;
 		margin-top: 20px;
 		color: $someColor;
 		font-family: 'Georgia';
@@ -243,7 +244,10 @@ label {
 
 #wall{
 	display: inline-block;
-	width: 49%;
+	width: 33%;
+	ul{
+		padding-left: 3px;
+	}
 	li{
 		list-style-type: none;
 		min-height: 75px;
@@ -258,7 +262,7 @@ label {
 
 .post_form{
 	display: inline-block;
-	width: 64%;
+	width: 100%;
 	border-radius: 3px;
 	background-color: $someColor;
 	padding: 3px;
@@ -492,8 +496,9 @@ input.add_member{
 		margin: 1px;
 	}
 	li{
-		font-size: 22px;
+		font-size: 20px;
 		line-height: 0.9;
+		display: inline-block;
 	}
 	img{
 		border-radius: 10px;
@@ -502,7 +507,24 @@ input.add_member{
 	}
 }
 
-div.update_block{
+div.update_block {
 	display: inline-block;
 	margin-bottom: 3px;
+}
+
+div#updates_count{
+	position: absolute;
+	color: #fff;
+	background-color: #FF3424;
+	right: -2px;
+	bottom: 8px;
+	width: 30px;
+	height: 25px;
+	text-align: center;
+	display: inline-block;
+	font-size: 22px;
+	padding: 12px 0 0 0;
+	margin: 0;
+	border-radius: 7px;
+	font-family: geosanslight;
 }

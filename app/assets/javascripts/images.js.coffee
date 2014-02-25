@@ -3,18 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
 
-	image = $("#actual_image")
-	if image.length
-		image_id = image.attr('data-image')
-		setInterval( ->
-			if $("#actual_image").length == 0
-				return false
-			$.ajax
-				type: "GET",
-				data: { 'image_id': image_id }
-				url: '/updates/comments'
-		, 5000)
-
 	overImageVisible = false
 	
 	$('body').on 'mouseover', '.image_block', ->

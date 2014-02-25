@@ -1,13 +1,18 @@
 <header class="navbar navbar-fixed-top"> 
   <div class="navbar-inner"> 
 	<div class="container"> 
-	<%= image_tag("fist-bump.jpeg", alt: "fist bump", class: "small-image", id: 'my_profile') %>
+	<%= link_to image_tag("fist-bump.jpeg", alt: "fist bump", class: "small-image", id: 'my_profile'), member_path(current_member) %>
 	  <nav> 
 		<ul class="nav pull-right"> 
 		  <% if signed_in? %>
 				<li> <%= link_to "Sign out", signout_path, method: "delete" %> </li>
 				<li> <%= link_to "Edit My Profile", edit_member_path(current_member) %></li>
-				<li> <%= link_to "My Profile", current_member %></li>
+				<li>
+					<%= link_to "My Profile", current_member, id: 'my_profile_link' %>
+					<div id="updates_count">
+						+<%= current_member.updates.where(viewed: false).count if signed_in? %>
+					</div>
+				</li>
 				<li> <%= link_to "Members", members_path %> </li>
 				<li> <%= link_to "Family Tree", tree_path(current_member) %> </li>
 			<% else %>
