@@ -15,11 +15,13 @@ class Comment < ActiveRecord::Base
 				end
 				member.updates.create!( what: 'comment', what_id: self.id, from_member: self.member_id, commented_on_type: 'image', commented_on_id: image.id) unless member.id == self.member_id
 			end
-		else
-			if image.member_id != self.member_id
-				member = Member.find_by_id( image.member_id)
-				member.updates.create!( what: 'comment', what_id: self.id, from_member: self.member_id, commented_on_type: 'image', commented_on_id: image.id)
+		end
+		if image.member_id != self.member_id
+			member = Member.find_by_id( image.member_id)
+			Update.where(member_id: member.id, commented_on_type: 'image', commented_on_id: image.id, from_member: self.member_id).each do |u|
+				u.destroy
 			end
+			member.updates.create!( what: 'comment', what_id: self.id, from_member: self.member_id, commented_on_type: 'image', commented_on_id: image.id)
 		end
 	end
 	

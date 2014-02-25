@@ -1,14 +1,15 @@
-<li>
+<% distinct_updates = current_member.updates.where(commented_on_type: 'image').select(:commented_on_id).distinct.pluck(:commented_on_id) %>
+<% distinct_updates.each do |du| %>
+	<li>
 	<div class="update_block">
-		<% if update.what == 'post' %>
-			<% member = Member.find( update.updatable_id) %>
-			<%= image_tag member.image_url(:thumb) %>
-			<%= " #{member.name.downcase} wrote on your profile page!" %>
-		<% elsif update.what == 'comment' %>
-			<% comment = Comment.find( update.what_id) %>
-			<% member = Member.find( comment.member_id) %>
-			<%= image_tag member.image_url(:thumb) %>
-			<%= " #{member.name.downcase} commented on one of your images!" %>
-		<% end %>
-	</div>
-</li>
+	<% names = [] %>
+	<% current_member.updates.where(commented_on_id: du).each_with_index do |update, index| %>
+	<% member = Member.find_by_id( update.from_member) %>
+	<% if index == 0 %>
+		<%= image_tag member.image_url(:thumb) %>
+	<% end %>
+	<% names << member.first_name.downcase %>
+	<% end %>
+	<%= names.to_sentence %>
+	wrote something on your wall</div></li>
+<% end %>

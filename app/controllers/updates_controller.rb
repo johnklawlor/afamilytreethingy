@@ -19,7 +19,10 @@ class UpdatesController < ApplicationController
 			@new_comments = []
 			current_member.updates.where( what: 'comment', viewed: false).each do |update|
 				@new_comments << Comment.find_by_id( update.what_id)
-				update.toggle!(:viewed)
+				unless update.viewed
+					update.viewed = true
+					update.save
+				end
 			end
 		
 			respond_to do |format|
@@ -29,7 +32,7 @@ class UpdatesController < ApplicationController
 	end
 	
 	def updates
-		@updates = current_member.updates
+		@updates = current_member.updates.order('created_at DESC')
 				
 		respond_to do |format|
 			format.js
