@@ -11,7 +11,7 @@
 				<%= image_tag member.image_url(:thumb) %>
 				<% if update.commented_on_type == 'image' %>
 					<% link = update.commented_on_id %>
-				<% elsif update.commented_on_type == 'post' %>
+				<% elsif update.commented_on_type == 'wall' %>
 					<% link = update.what_id %>
 				<% end %>
 			<% end %>

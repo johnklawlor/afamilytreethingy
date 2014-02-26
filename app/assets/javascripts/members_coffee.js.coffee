@@ -1,4 +1,23 @@
 ready = ->
+	scroll_if_anchor = (href) ->
+		if typeof(href) != "string"
+			href = $(this).attr("href");
+			href = href.substr(href.indexOf('#'));
+		
+		if !href then return false
+
+		fromTop = 55;
+
+		if href.charAt(0) == "#"
+			$target = $(href);
+			if $target.length
+				$('html, body').animate({ scrollTop: $target.offset().top - fromTop });
+				if history && "pushState" in history
+					history.pushState({}, document.title, window.location.pathname + href);
+					return false;
+
+	scroll_if_anchor(window.location.hash)
+	$("body").on("click", "a", scroll_if_anchor)
 
 	new AvatarCropper()
 	

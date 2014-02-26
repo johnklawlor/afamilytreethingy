@@ -5,6 +5,8 @@
 <% end %>
 <% if @updates_count == 0 %>
 	$("div#updates_count").html("Up")
+	$("div#updates_count").attr( 'class', 'no_updates')
 <% else %>
 	$("div#updates_count").html("+<%= j @updates_count.to_s %>")
+	$("div#updates_count").attr( 'class', 'some_updates')
 <% end %>
