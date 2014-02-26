@@ -9,9 +9,16 @@
 				<li> <%= link_to "Edit My Profile", edit_member_path(current_member) %></li>
 				<li>
 					<%= link_to "My Profile", current_member, id: 'my_profile_link' %>
-					<div id="updates_count">
-						+<%= current_member.updates.where(viewed: false).count if signed_in? %>
-					</div>
+					<% updates = current_member.updates.where(counted: false).count %>
+					<% if updates == 0 %> 
+						<div id="updates_count" class='no_updates'>
+							Up
+						</div>
+					<% else %>
+						<div id="updates_count" class='some_updates'>
+							+<%= updates %>
+						</div>
+					<% end %>
 				</li>
 				<li> <%= link_to "Members", members_path %> </li>
 				<li> <%= link_to "Family Tree", tree_path(current_member) %> </li>

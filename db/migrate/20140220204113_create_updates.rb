@@ -5,6 +5,7 @@ class CreateUpdates < ActiveRecord::Migration
 			t.string :what
 			t.integer :what_id
 			t.boolean :viewed, default: false
+			t.boolean :counted, default: false
 			t.integer :from_member
 			t.string :commented_on_type
 			t.integer :commented_on_id

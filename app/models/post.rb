@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
 	
 	def create_update
 		to_member = Member.find_by_id( self.member_id)
-		to_member.updates.create( what: 'post', what_id: self.id, from_member: self.from_member)
+		to_member.updates.create( what: 'post', what_id: self.id, commented_on_type: 'wall', commented_on_id: self.id, from_member: self.from_member)
 	end
 	
 	def delete_update

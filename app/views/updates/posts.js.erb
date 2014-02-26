@@ -3,6 +3,8 @@
 		$("#posts").prepend ( "<%= j render partial: 'posts/post', object: post %>" )
 	<% end %>
 <% end %>
-<% unless @updates_count == 0 %>
+<% if @updates_count == 0 %>
+	$("div#updates_count").html("Up")
+<% else %>
 	$("div#updates_count").html("+<%= j @updates_count.to_s %>")
 <% end %>

@@ -10,7 +10,7 @@ ready = ->
 		, 5000)
 		console.log(myInterval)
 
-	$(document).on 'page:load', ->
+	$(document).on 'page:change', ->
 		clearInterval(myInterval)
 		
 $(document).ready(ready)

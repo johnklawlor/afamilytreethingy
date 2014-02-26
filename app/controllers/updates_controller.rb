@@ -4,9 +4,10 @@ class UpdatesController < ApplicationController
 			@new_posts = []
 			current_member.updates.where( what: 'post', viewed: false).each do |update|
 				@new_posts << Post.find_by_id( update.what_id)
-				update.toggle!(:viewed)
+				update.viewed = true
+				update.save
 			end
-			@updates_count = current_member.updates.where(viewed: false).count
+			@updates_count = current_member.updates.where(counted: false).count
 		
 			respond_to do |format|
 				format.js

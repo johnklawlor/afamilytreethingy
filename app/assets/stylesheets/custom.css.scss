@@ -514,17 +514,27 @@ div.update_block {
 
 div#updates_count{
 	position: absolute;
-	color: #fff;
-	background-color: #FF3424;
-	right: -2px;
-	bottom: 8px;
+	right: -3px;
+	bottom: 10px;
 	width: 30px;
 	height: 25px;
 	text-align: center;
 	display: inline-block;
-	font-size: 22px;
 	padding: 12px 0 0 0;
 	margin: 0;
 	border-radius: 7px;
 	font-family: geosanslight;
+	font-size: 22px;
+}
+
+div.some_updates{
+	color: #fff;
+	background-color: #FF3424;
+	letter-spacing: -2px;
+}
+
+div.no_updates{
+	color: #000;
+	background-color: $body;
+	letter-spacing: 0px;
 }
