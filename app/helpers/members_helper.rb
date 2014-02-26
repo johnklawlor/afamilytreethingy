@@ -18,9 +18,9 @@ module MembersHelper
 			else
 				oldest_ancestor = add_member.parents.first.oldest_ancestor
 			end
-			name += "<div class='over_image btm'>#{ link_to( add_member.first_name, tree_path(oldest_ancestor) ) }"
+			name += "<div class='over_image btm extend'><span class='member_name_in_tree'>#{ link_to( add_member.first_name, tree_path(oldest_ancestor) ) }"
 		else
-			name += "<div class='over_image btm'>#{add_member.first_name}"
+			name += "<div class='over_image btm extend'><span class='member_name_in_tree'>#{add_member.first_name}"
 		end
 		
 		# add link to switch to member's spouse's tree, if any
@@ -31,7 +31,7 @@ module MembersHelper
 			add_member.last_name
 			# add link to edit member's and spouse's tree
 			edit =
-			"<div class=edit>
+			"</span><div class=edit>
 				edit
 				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) } or
 				#{ link_to "#{add_member.spouse.first_name}'s ", edit_tree_path(add_member.spouse) }
@@ -45,7 +45,7 @@ module MembersHelper
 			name += " " + add_member.last_name
 			# add link to edit member's tree
 			edit = 
-			"<div class=edit>
+			"</span><div class=edit>
 				edit 
 				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) }
 				 tree<br/>
