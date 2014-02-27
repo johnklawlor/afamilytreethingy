@@ -19,7 +19,7 @@ namespace :db do
 		kara=Member.create!(first_name: "Kara", last_name: "Lawlor", email: "kara@lawlor.com", password: "foobar", password_confirmation: "foobar", spouse_id: daniel.id, birthdate: Date.new(1983,1,3), full_account: true, state: 1)
 		kara.oldest_ancestor = kara.id
 		kara.save
-		kieran=Member.create!(first_name: "Kieran", last_name: "Lawlor", email: "kieran@lawlor.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(2013,05,26), full_account: true, state: 1)
+		kieran=Member.create!(first_name: "Kieran", last_name: "Lawlor", oldest_ancestor: lucy.id, birthdate: Date.new(2013,05,26), full_account: false, state: 1)
 		kieran.oldest_ancestor = lucy.id
 		kieran.save
 		john=Member.create!(first_name: "John", last_name: "Lawlor", email: "john.k.lawlor@gmail.com", password: "foobar", password_confirmation: "foobar", oldest_ancestor: lucy.id, birthdate: Date.new(1987,5,21), full_account: true, state: 1)

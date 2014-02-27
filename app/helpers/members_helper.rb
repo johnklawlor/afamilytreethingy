@@ -5,7 +5,7 @@ module MembersHelper
 
 	def build_tree(add_member, oldest_ancestor_id)
 		children = []
-		id = add_member.birthdate
+		id = add_member.birthdate.to_time.to_i + rand(1000000)
 
 		name = "<div class='image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
 		if add_member.has_spouse?
@@ -31,7 +31,7 @@ module MembersHelper
 			add_member.last_name
 			# add link to edit member's and spouse's tree
 			edit =
-			"</span><div class=edit>
+			"</span><div class='edit'>
 				edit
 				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) } or
 				#{ link_to "#{add_member.spouse.first_name}'s ", edit_tree_path(add_member.spouse) }
@@ -45,7 +45,7 @@ module MembersHelper
 			name += " " + add_member.last_name
 			# add link to edit member's tree
 			edit = 
-			"</span><div class=edit>
+			"</span><div class='edit'>
 				edit 
 				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) }
 				 tree<br/>

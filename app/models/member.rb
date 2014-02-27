@@ -165,7 +165,7 @@ class Member < ActiveRecord::Base
 		!self.parents.empty?
 	end
 	
-	def immediate_family_of?(member)
+	def parent_or_child_of?(member)
 		if self.has_children?
 			return true if self.children.include?(member)
 		end
@@ -232,8 +232,21 @@ class Member < ActiveRecord::Base
 	
 	def family_of?(member)
 		member.ancestors(6).each do |a|
-			if self.ancestors(6).include?(a)
-				return true
+			return true if self.ancestors(6).include?(a)
+		end
+		if self.has_spouse?
+			self.spouse.ancestors(6).each do |a|
+				return true if member.ancestors(6).include?(a)
+			end
+		end
+		if member.has_spouse?
+			member.spouse.ancestors(6).each do |a|
+				return true if self.ancestors(6).include?(a)
+			end
+			if self.has_spouse?
+				member.spouse.ancestors(6).each do |a|
+					return true if self.spouse.ancestors(6).include?(a)
+				end
 			end
 		end
 		false

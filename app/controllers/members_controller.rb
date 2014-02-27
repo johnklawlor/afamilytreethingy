@@ -1,8 +1,9 @@
 class MembersController < ApplicationController
 
 	before_filter :admin_member, only: :destroy
-	before_filter :signed_in_filter, only: [ :index, :edit, :update, :destroy, :crop ]
-	before_filter :correct_member, only: [ :edit, :update]
+	before_filter :signed_in_filter, only: [ :index, :show, :edit, :update, :destroy, :crop ]
+	before_filter :correct_member, only: :edit
+	before_filter :correct_member_update, only: :update
 	before_filter :within_family, only: :show
 		
 	def index
@@ -48,16 +49,14 @@ class MembersController < ApplicationController
 	def update
 		@member = Member.find_by_id(params[:id])
 		
-		if params[ :commit] == 'add child' || 
-		params[ :commit] == 'add parent' ||
-		params[ :commit] == 'add spouse'
-			if @member.update_attributes(member_params)
+		if params[ :commit] == ( 'add child' || 'add parent' || 'add spouse')
+			if @member.update_attributes(add_member_params)
 				flash[ :success] = "Member added to your tree!"
 				redirect_to edit_tree_path( @member)
 			else
 				render 'tree/edit'
 			end
-		else
+		elsif params[ :commit] == 'update my profile'
 			if @member.update_attributes(member_params)
 				if params[ :member][ :image].present?
 					respond_to do |format|
@@ -71,6 +70,8 @@ class MembersController < ApplicationController
 			else
 				render :edit
 			end
+		else
+			redirect_to root_path, flash: { error: "We don't know what you're trying to do, so we sent you here."} 
 		end
 	end
 	
@@ -98,7 +99,44 @@ class MembersController < ApplicationController
 	private
 	
 		def member_params
-			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, :crop_x, :crop_y, :crop_w, :crop_h, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
+			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, :crop_x, :crop_y, :crop_w, :crop_h, :allows_editing, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
 		end
 		
+		def add_member_params
+			params.require(:member).permit( children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
+		end
+		
+		def correct_member
+			member = Member.find( params[ :id])
+		
+			unless current_member?(member) ||
+						(member.parent_or_child_of?(current_member) &&
+							!member.full_account?) ||
+						current_member.admin?
+				redirect_to member_path(current_member), flash: { error: "You do not have permissions to edit or update this member."}
+			end
+		end
+		
+		def correct_member_update
+			member = Member.find_by_id( params[ :id])
+
+			if current_member?(member)
+				return
+			end
+
+			if params[ :commit] == ('add child' || 'add parent' || 'add spouse')
+				unless member.allows_editing
+					redirect_to member_path( current_member), flash: { error: "This member does not allow other members to edit their tree."}
+				end
+				
+				unless current_member.family_of?(member)
+					redirect_to member_path( current_member), flash: { error: "You do not have permissions to edit or update this member."}
+				end
+			elsif params[ :commit] == 'update my profile'
+				unless current_member?(member) || ( !member.full_account && current_member.parent_or_child_of?(member) )
+					redirect_to member_path( current_member), flash: { error: "You do not have permissions to edit or update this member."}
+				end
+			else redirect_to root_path, flash: { error: "We don't know what you're trying to do, so we sent you here." }
+			end
+		end
 end

@@ -1,14 +1,18 @@
 <header class="navbar navbar-fixed-top"> 
   <div class="navbar-inner"> 
-	<div class="container"> 
-	<%= link_to image_tag("fist-bump.jpeg", alt: "fist bump", class: "small-image", id: 'my_profile'), member_path(current_member) %>
+	<div class="container">
+	<% if signed_in? %>
+		<%= link_to image_tag("fist-bump.jpeg", alt: "fist bump", class: "small-image", id: 'my_profile'), member_path(current_member) %>
+	<% else %>
+		<%= link_to image_tag("fist-bump.jpeg", alt: "fist bump", class: "small-image", id: 'my_profile'), root_path %>	
+	<% end %>
 	  <nav> 
 		<ul class="nav pull-right"> 
 		  <% if signed_in? %>
-				<li> <%= link_to "Sign out", signout_path, method: "delete" %> </li>
-				<li> <%= link_to "Edit My Profile", edit_member_path(current_member) %></li>
+				<li> <%= link_to "sign out", signout_path, method: "delete" %> </li>
+				<li> <%= link_to "edit my profile", edit_member_path(current_member) %></li>
 				<li>
-					<%= link_to "My Profile", current_member, id: 'my_profile_link' %>
+					<%= link_to "my profile", current_member, id: 'my_profile_link' %>
 					<% updates = current_member.updates.where(counted: false).count %>
 					<% if updates == 0 %> 
 						<div id="updates_count" class='no_updates'>
@@ -20,11 +24,11 @@
 						</div>
 					<% end %>
 				</li>
-				<li> <%= link_to "Members", members_path %> </li>
-				<li> <%= link_to "Family Tree", tree_path(current_member) %> </li>
+				<li> <%= link_to "members", members_path %> </li>
+				<li> <%= link_to "family tree", tree_path(current_member) %> </li>
 			<% else %>
-				<li> <%= link_to "Sign in", signin_path %> </li>
-				<li> <%= link_to "Sign up!", signup_path %> </li>
+				<li> <%= link_to "sign in", signin_path %> </li>
+				<li> <%= link_to "sign up!", signup_path %> </li>
 			<% end %>
 		</ul> 
 	  </nav> 

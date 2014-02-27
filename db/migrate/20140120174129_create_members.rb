@@ -7,6 +7,7 @@ class CreateMembers < ActiveRecord::Migration
 			t.string :password_digest
 			t.string :remember_token
 			t.boolean :admin, default: false
+			t.boolean :allows_editing, default: true
 			
 			t.timestamps
 		end

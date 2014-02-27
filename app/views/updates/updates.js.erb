@@ -1,7 +1,7 @@
 updates_count = $('div#updates_count')
 
 <% if @updates.empty? %>
-	updates_count.attr( 'data-updates', "<ul><li> No notifications. </li></ul>")
+	updates_count.attr( 'data-updates', "<ul><li> No updates for you! </li></ul>")
 <% else %>
 	updates_count.attr( 'data-updates', "<ul><%= j render partial: 'update', object: @updates %></ul>")
 <% end %>

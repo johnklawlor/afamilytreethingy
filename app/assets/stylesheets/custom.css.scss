@@ -81,7 +81,7 @@ h4 {
 /* header */
 
 header {
-	background-color: $headerDark;
+	background-color: rgba(00, 33, 44, 0.7);
 	img {
 		float: left;
 		margin: 1px;
@@ -92,7 +92,7 @@ header {
 	a {
 		z-index: 10;
 		margin-top: 20px;
-		letter-spacing: -3px;
+		letter-spacing: -2.5px;
 		font-family: geosanslight;
 		font-size: 28px;
 		color: white;
@@ -181,6 +181,8 @@ footer {
 input.btn-vt{
   	width: initial;
   	margin-top: 5px;
+	font-size: 20px;
+	padding: 5px;
 }
 
 input.btn-hz{
@@ -373,10 +375,9 @@ label {
 
 /* images */
 .over_image {
-	display: inline-block;
 	position: absolute;
 	left: 0px;
-	display: none;
+	opacity: 1;
 	text-align: left;
 	padding-left: 3px;
 	color: #fff;
@@ -411,25 +412,25 @@ label {
 	width: 250px;
 	height: 80px;
 	overflow-y: hidden;
+	background-color: rgba( 44, 44, 44, 0.7);
+	border-radius: 10px;
 }
 
 #comment_content{
 	padding: 0;
 	margin: 0;
-	height: 26px;
-	width: 200px;
+	height: 28px;
+	width: 210px;
 	display: inline;
-	background-color: #444;
 	text-shadow: 2px 2px 2px #000;
 	color: #fff;
-	opacity: 0.5;
+	background-color: rgba( 44, 44, 44, 0.7);
 }
 
 #image_comments li{
 	display: inline-block;
-	background-color: #444;
+	text-shadow: 2px 2px 2px #000;
 	border-radius: 5px;
-	opacity: 0.5;
 	margin: 1px 0px;
 	padding: 2px;
 	width: 96%;
@@ -464,7 +465,7 @@ label {
 	color: #000;
 	text-shadow: 1px 1px 1px #fff;
 	a{
-		color: $headerDark;	
+		color: #ff7c00;	
 		text-shadow: 1px 1px 1px #fff;
 		&:hover{
 			color: #000;

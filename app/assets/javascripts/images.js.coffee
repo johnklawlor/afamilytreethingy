@@ -3,23 +3,28 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
 
-	overImageVisible = false
+	overImageVisible = true
 	
-	$('body').on 'mouseover', '.image_block', ->
-		if $('#profile_image').attr('alt') != "Medium default"
-			if overImageVisible == true
-				overImage = $(this).children('.over_image')
-				overImage.stop(true)
-				overImage.css( 'opacity', 1 )
-				overImageVisible = false
-			$(this).children('.over_image').fadeIn()
-			overImageVisible = true
+	$('body').on 'mouseenter', '.image_block', ->
+		if overImageVisible == true
+			overImage = $(this).children('.over_image')
+			overImage.stop(true)
+			overImage.css( 'opacity', 1 )
+			overImageVisible = false
+		$(this).children('.over_image').fadeIn()
+		overImageVisible = true
 
 	$('body').on 'mouseleave', '.image_block', ->
-		$(this).children('.over_image').delay(1000).fadeOut(1000, ->
+		$(this).children('.over_image').delay(1000).fadeOut( 1000, ->
 			overImageVisible = false
 		)
-
+	
+	delay=3000
+	timeout=setTimeout( ->
+		$('.over_image').fadeOut(1000, ->
+			overImageVisible = false)
+	, delay)
+		
 	$('#image_comments').perfectScrollbar({
 		wheelSpeed: 10
 	})

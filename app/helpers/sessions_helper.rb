@@ -52,26 +52,12 @@ module SessionsHelper
 		end
 	end
 	
-	def correct_member
-		member = Member.find( params[ :id])
-		
-		unless current_member?(member) ||
-					(member.immediate_family_of?(current_member) &&
-						!member.full_account?) ||
-		current_member.descendant_or_spouse_of_descendant?(member) ||
-		current_member.admin?
-			flash[ :error] = "You do not have permissions to edit or update this member."
-			redirect_to member_path(current_member)
-		end
-	end
-	
 	def within_family
 		member = Member.find( params[ :id])
 		
 		unless current_member?(member) ||
 					current_member.family_of?(member)
-			flash[ :error] = "You do not have permissions to view this member's profile or tree."
-			redirect_to member_path(current_member)
+			redirect_to member_path(current_member), flash: { error: "You do not have permissions to view this member's profile or tree."}
 		end
 	end
 end
