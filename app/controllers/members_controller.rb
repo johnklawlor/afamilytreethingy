@@ -56,7 +56,7 @@ class MembersController < ApplicationController
 			else
 				render 'tree/edit'
 			end
-		elsif params[ :commit] == 'update my profile'
+		else
 			if @member.update_attributes(member_params)
 				if params[ :member][ :image].present?
 					respond_to do |format|
@@ -70,8 +70,6 @@ class MembersController < ApplicationController
 			else
 				render :edit
 			end
-		else
-			redirect_to root_path, flash: { error: "We don't know what you're trying to do, so we sent you here."} 
 		end
 	end
 	
@@ -133,10 +131,10 @@ class MembersController < ApplicationController
 					redirect_to member_path( current_member), flash: { error: "You do not have permissions to edit or update this member."}
 				end
 			elsif params[ :commit] == 'update my profile'
-				unless current_member?(member) || ( !member.full_account && current_member.parent_or_child_of?(member) )
+				unless ( !member.full_account && current_member.parent_or_child_of?(member) )
 					redirect_to member_path( current_member), flash: { error: "You do not have permissions to edit or update this member."}
 				end
-			else redirect_to root_path, flash: { error: "We don't know what you're trying to do, so we sent you here." }
+			else redirect_to root_path, flash: { error: "We don't know what you're trying to do, so we've sent you here." }
 			end
 		end
 end

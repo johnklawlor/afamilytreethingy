@@ -1,6 +1,6 @@
 $('#profile_image_holder').fadeOut('slow', function() { 
 	$('#profile_image').remove()
 	$('#profile_image_holder').css('display', 'none')
-	$('#profile_image_holder > .image_block').prepend(" <%= j image_tag(@member.image_url(:medium), id: 'profile_image') %>")
+	$('#profile_image_holder').prepend(" <%= j render partial: 'member_profile_image', object: @member, as: :member %>")
 	$('#profile_image_holder').fadeIn(1000)
 })

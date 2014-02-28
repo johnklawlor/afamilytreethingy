@@ -2,13 +2,13 @@
 
 /* mixins, variables, etc. */ 
 
-$grayMediumLight: #eaeaea;
-$grayLight: #999;
-$header: #184661;
-$headerDark: #003344;
-$white: #ffffff;
+$grayLight: #222222;
+$white: fff;
+$headerBright: rgba( 0, 32, 96, 0.8);
+$header: rgba( 0, 32, 96, 0.8);
+$headerTransparent: rgba( 0, 86, 180, 0);
 $someColor: #7eaeca;
-$body: #e6edf1;
+$body: #eff5f8;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -81,7 +81,8 @@ h4 {
 /* header */
 
 header {
-	background-color: rgba(00, 33, 44, 0.7);
+	background-image: -webkit-gradient( linear, left top, left bottom, from($headerBright), to($headerTransparent), color-stop(1,$body));
+	border: none;
 	img {
 		float: left;
 		margin: 1px;
@@ -271,8 +272,9 @@ label {
 	display: inline-block;
 	width: 100%;
 	border-radius: 3px;
-	background-color: $someColor;
+	background-color: $header;
 	padding: 3px;
+	box-shadow: 3px 3px 10px;
 }
 
 #member_info{
@@ -285,7 +287,7 @@ label {
 	border-radius: 10px;
 	padding: 5px;
 	margin-right: 5px;
-	
+	box-shadow: 3px 3px 10px;
 	p {
 		font-size: 26px;
 		line-height: 1em;
@@ -321,9 +323,10 @@ label {
 #image_upload_section{
 	position: relative;
 	border-radius: 3px;
-	background-color: $someColor;
+	background-color: $header;
 	width: 98%;
 	padding: 3px;
+	box-shadow: 3px 3px 10px;
 }
 
 .crop_form {
@@ -385,12 +388,15 @@ label {
 	a{
 		color: #fff;
 		text-shadow: 2px 2px 2px #000;
+		display: inline-block;
+		width: 100%;
 		&:hover {
 			color: #000;
 			text-shadow: 1px 1px 1px #fff;
 			text-decoration: none;
 		}
 	}
+	line-height: 1;
 }
 
 .tp{
@@ -522,6 +528,16 @@ input.add_member{
 		float: left;
 		margin: 0 5px 0 0;
 	}
+}
+
+.qtip-title{
+	font-size: 20px;
+	text-align: center;
+}
+
+.qtip-content{
+	background-color: rgba( 44,44,44,0.8);
+	color: white;
 }
 
 div.update_block {

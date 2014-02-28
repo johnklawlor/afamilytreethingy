@@ -15,11 +15,11 @@
 					<%= link_to "my profile", current_member, id: 'my_profile_link' %>
 					<% updates = current_member.updates.where(counted: false).count %>
 					<% if updates == 0 %> 
-						<div id="updates_count" class='no_updates'>
+						<div id="updates_count" data-title='updates' class='no_updates'>
 							Up
 						</div>
 					<% else %>
-						<div id="updates_count" class='some_updates'>
+						<div id="updates_count" data-title='updates' data-titlebar='true' class='some_updates'>
 							+<%= updates %>
 						</div>
 					<% end %>

@@ -7,7 +7,7 @@
 ready = ->
 	setInterval( ->
 		$.ajax
-			type: "GET",
+			type: "POST",
 			url: '/updates/posts'
 	, 10000)
 

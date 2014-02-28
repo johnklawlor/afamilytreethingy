@@ -23,6 +23,8 @@ ready = ->
 	
 	updates_count = $('div#updates_count')
 	my_profile_link = $('#my_profile_link')
+	
+	console.log(updates_count.attr('data-title'))
 
 	updates_count.mouseenter ->
 		$(this).css( 'z-index', 20)
@@ -42,6 +44,7 @@ ready = ->
 			text: (e, api) ->
 				return $.ajax
 					url: '/updates/updates'
+					method: 'POST'
 				.then (content) ->
 					updates = updates_count.attr('data-updates')
 					console.log( updates )
@@ -49,8 +52,15 @@ ready = ->
 				, (xhr, status, error) ->
 					api.set( 'content.text', status + ': ' + error)
 				return 'Loading...'
+			title: $(updates_count).attr('data-title')
 		show: 'click',
-		hide: 'click',
+		hide: {
+			event: 'click unfocus'
+			fixed: true
+			effect: ->
+				$(this).slideUp(1000)
+			delay: 0
+		}
 		style: { classes: 'qtip-light qtip-rounded' }
 
 class AvatarCropper

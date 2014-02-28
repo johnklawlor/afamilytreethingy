@@ -4,11 +4,10 @@ ready = ->
 	if image.length != 0
 		myInterval = setInterval( ->
 			$.ajax
-				type: "GET",
+				type: "POST",
 				data: { 'image_id': image_id }
 				url: '/updates/comments'
 		, 5000)
-		console.log(myInterval)
 
 	$(document).on 'page:change', ->
 		clearInterval(myInterval)
