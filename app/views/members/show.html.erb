@@ -11,8 +11,6 @@
 		</div>
 		<%= render 'hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
 	</div>
-
-	<p id="name_header"><%= @member.first_name + " " + @member.last_name %></p>
 </div>
 
 <div id="wall">	
