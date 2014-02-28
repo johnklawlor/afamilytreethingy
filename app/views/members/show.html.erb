@@ -1,6 +1,8 @@
 <% javascript_include_tag "getComments.js" %>
 <% provide(:title, @member.first_name) %>
 
+<div id="images">
+
 <div id="member_info">
 
 	<div id="profile_image_section">
@@ -25,14 +27,6 @@
 	</span>
 
 </div>
-
-<div id="images">
-	
-	<% if current_member?(@member) %>
-		<div id="image_upload_section">
-			<%= render 'images/image_upload' if signed_in? && current_member?(current_member) %>
-		</div>
-	<% end %>
 	
 	<%= render partial: 'images/image', collection: @member.images.order('created_at DESC') %>
 	

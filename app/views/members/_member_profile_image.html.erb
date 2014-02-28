@@ -7,4 +7,5 @@
 			<%= link_to "remove image", member_path( member, member: { remove_image: true }), method: :patch %>
 		</div>
 	<% end %>
+	<p id="name_header"><%= @member.first_name + " " + @member.last_name %></p>
 </div>
