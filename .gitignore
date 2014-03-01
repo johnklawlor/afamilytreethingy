@@ -22,4 +22,5 @@ doc/
 .project
 .DS_Store
 .env
-/public/uploads/image
+/public/uploads/post
+/public/uploads/tmp

@@ -2,8 +2,8 @@ class UpdatesController < ApplicationController
 	def posts
 		if signed_in?
 			@new_posts = []
-			current_member.updates.where( what: 'post', viewed: false).each do |update|
-				@new_posts << Post.find_by_id( update.what_id)
+			current_member.updates.where( update_on_type: 'wall', viewed: false).each do |update|
+				@new_posts << Post.find_by_id( update.update_on_id)
 				update.viewed = true
 				update.save
 			end
@@ -16,10 +16,10 @@ class UpdatesController < ApplicationController
 	end
 	
 	def comments
-		image = Image.find_by_id( params[ :image_id])
+		post = Post.find_by_id( params[ :post_id])
 		if signed_in?
 			@new_comments = []
-			current_member.updates.where( commented_on_type: 'image', commented_on_id: image, what: 'comment', viewed: false).each do |update|
+			current_member.updates.where( update_on_type: 'post', update_on_id: post, viewed: false).each do |update|
 				@new_comments << Comment.find_by_id( update.what_id)
 				unless update.viewed
 					update.viewed = true

@@ -12,7 +12,7 @@ class MembersController < ApplicationController
 	
 	def show
 		@member = Member.find_by_id(params[ :id])
-		@member.updates.where(what: 'post', viewed: false).each do |update|
+		@member.updates.where(viewed: false).each do |update|
 			update.viewed = true
 			update.save
 		end

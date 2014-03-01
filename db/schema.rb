@@ -17,17 +17,10 @@ ActiveRecord::Schema.define(version: 20140220204113) do
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
-    t.integer  "image_id"
+    t.integer  "post_id"
+    t.integer  "update_id"
     t.integer  "member_id"
-    t.string   "member_name"
     t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "images", force: true do |t|
-    t.integer  "member_id"
-    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,8 +52,10 @@ ActiveRecord::Schema.define(version: 20140220204113) do
 
   create_table "posts", force: true do |t|
     t.integer  "member_id"
+    t.integer  "update_id"
     t.text     "content"
     t.integer  "from_member"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,13 +80,11 @@ ActiveRecord::Schema.define(version: 20140220204113) do
 
   create_table "updates", force: true do |t|
     t.integer  "member_id"
-    t.string   "what"
-    t.integer  "what_id"
-    t.boolean  "viewed",            default: false
-    t.boolean  "counted",           default: false
+    t.boolean  "viewed",         default: false
+    t.boolean  "counted",        default: false
     t.integer  "from_member"
-    t.string   "commented_on_type"
-    t.integer  "commented_on_id"
+    t.string   "update_on_type"
+    t.integer  "update_on_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,2 +1,6 @@
-$("#posts").prepend("<%= j render @post %>")
-$('#post_content').val('')
+<% if @post.new_record? %>
+	alert("Failed to upload image: <%= j @post.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+	$("#images").prepend("<%= j render @post %>")
+	$('#post_content').val('')
+<% end %>

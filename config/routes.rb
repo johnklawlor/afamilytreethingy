@@ -1,10 +1,10 @@
 Mypeeps::Application.routes.draw do
 
+	root to: "static_pages#home"
 	post "updates/updates"
 	post "updates/posts"
 	post "updates/comments"
-	root to: "static_pages#home"
-
+	
 	resources :members do
 		get 'crop', on: :member
 	end
@@ -15,7 +15,7 @@ Mypeeps::Application.routes.draw do
 	resources :password_resets, only: [ :new, :create, :edit, :update]
 	resources :images, only: [ :show, :new, :create, :destroy]
 	resources :comments, only: [ :create, :destroy]
-	resources :posts, only: [ :create, :edit, :update, :destroy]
+	resources :posts, only: [ :show, :create, :edit, :update, :destroy]
 	
 	get '/signup', to: 'members#new'
 	get '/signin', to: 'sessions#new'

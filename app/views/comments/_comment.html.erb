@@ -1,5 +1,5 @@
 <li id="<%= comment.id %>", class="comment_block">
-	<%= "#{comment.member_name.downcase}: #{comment.content} -" + time_ago_in_words(comment.created_at).to_s + " ago" %>
+	<%= "#{Member.find_by_id(comment.member_id).first_name.downcase}: #{comment.content} -" + time_ago_in_words(comment.created_at).to_s + " ago" %>
 	<% if current_member.can_delete_comment?(comment) %>
 		| <%= link_to "delete", comment_path(comment), method: :delete, remote: true %>
 	<% end %>

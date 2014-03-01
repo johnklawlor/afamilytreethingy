@@ -1,0 +1,17 @@
+<li id="<%= post.id %>">
+	<div>
+
+	<% from_member = Member.find_by_id( post.from_member) %>
+	<%= link_to image_tag( from_member.image_url(:thumb), class: 'img-rounded'), member_path( from_member) %>
+	
+	<div>
+		<%= link_to from_member.first_name.downcase, member_path( from_member) %>:
+		<%= "#{post.content} -" + time_ago_in_words(post.created_at).to_s + " ago" %>
+	</div>
+	<% if current_member.can_delete?(post) %>
+		<%= link_to "delete", post_path(post), method: :delete, remote: true %>
+	<% end %>
+	
+	</div>
+
+</li>

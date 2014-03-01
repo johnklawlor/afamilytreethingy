@@ -1,27 +1,23 @@
-<% distinct_updates = current_member.updates.find_by_sql("select commented_on_type, commented_on_id, max(created_at) as m from updates group by commented_on_type, commented_on_id order by m desc") %>
+<% distinct_updates = current_member.updates.find_by_sql("select update_on_type, update_on_id, max(created_at) as m from updates group by update_on_type, update_on_id order by m desc") %>
 <% distinct_updates.each do |distinct_group_of_updates| %>
 	<li>
 		<div class="update_block">
 		<% names = [] %>
 		<% link = 0 %>
 <!-- i could change this code so that i check the size of distinct_group_of_updates. if it's large than one, then iterate over that listed as i currently have below. otherwise, just run it. this avoids having to run subselects for every update. -->
-		<% current_member.updates.where(commented_on_type: distinct_group_of_updates.commented_on_type, commented_on_id: distinct_group_of_updates.commented_on_id).order('created_at DESC').each_with_index do |update, index| %>
+		<% current_member.updates.where(update_on_type: distinct_group_of_updates.update_on_type, update_on_id: distinct_group_of_updates.update_on_id).order('created_at DESC').each_with_index do |update, index| %>
 			<% member = Member.find_by_id( update.from_member) %>
 			<% if index == 0 %>
 				<%= image_tag member.image_url(:thumb) %>
-				<% if update.commented_on_type == 'image' %>
-					<% link = update.commented_on_id %>
-				<% elsif update.commented_on_type == 'wall' %>
-					<% link = update.what_id %>
-				<% end %>
+				<% link = update.update_on_id %>
 			<% end %>
 			<% names << member.first_name.downcase %>
 		<% end %>
 		<%= names.to_sentence %>
-		<% if distinct_group_of_updates.commented_on_type == 'wall' %>
+		<% if distinct_group_of_updates.update_on_type == 'wall' %>
 			<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
-		<% elsif distinct_group_of_updates.commented_on_type == 'image' %>
-			<%= link_to "commented", image_path( current_member.images.find_by_id( link)) %> on one of your images
+		<% elsif distinct_group_of_updates.update_on_type == 'post' %>
+			<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
 		<% end %>
 		</div>
 	</li>

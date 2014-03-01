@@ -8,7 +8,6 @@ class Member < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "child_id", class_name: Relationship, dependent: :destroy
 	has_many :spouses, through: :spouse_relationships, source: :spouse
 	has_many :spouse_relationships, foreign_key: "member_id", dependent: :destroy
-	has_many :images, dependent: :destroy
 	has_many :posts, dependent: :destroy
 	has_many :updates, dependent: :destroy
 	
@@ -75,8 +74,8 @@ class Member < ActiveRecord::Base
 	end
 	
 	def can_delete_comment?(comment)
-		image = Image.find_by_id(comment.image_id)
-		(comment.member_id == self.id || image.member_id == self.id)
+		post = Post.find_by_id(comment.post_id)
+		(comment.member_id == self.id || post.member_id == self.id)
 	end
 	
 	def can_delete?(post)

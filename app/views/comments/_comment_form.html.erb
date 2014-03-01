@@ -1,7 +1,6 @@
-<%= form_for( @image.comments.new( member_id: current_member.id, member_name: "#{current_member.first_name} #{current_member.last_name}"), html: {class: 'f-hz'}, remote: true) do |f| %>
-	<%= f.hidden_field :image_id %>
+<%= form_for( post.comments.new( member_id: current_member.id), html: {class: 'f-hz'}, remote: true) do |f| %>
+	<%= f.hidden_field :post_id %>
 	<%= f.hidden_field :member_id %>
-	<%= f.hidden_field :member_name %>
 	<%= f.text_field :content, placeholder: 'enter a comment...' %>
 	<%= f.submit "post", class: "btn btn-xs btn-hz" %>
 <% end %>

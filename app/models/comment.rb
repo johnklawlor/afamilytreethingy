@@ -4,29 +4,29 @@ class Comment < ActiveRecord::Base
 	before_destroy :delete_update
 	
 	def create_update
-		image = Image.find_by_id( self.image_id)
+		post = Post.find_by_id( self.post_id)
 		
-		if image.comments.count > 1
-			image.comments.select(:member_id).distinct.each do |commenters|
+		if post.comments.count > 1
+			post.comments.select(:member_id).distinct.each do |commenters|
 				next if self.new_record?
 				member = Member.find_by_id( commenters.member_id)
-				Update.where(member_id: member.id, commented_on_type: 'image', commented_on_id: image.id, from_member: self.member_id).each do |u|
+				Update.where(member_id: member.id, update_on_type: 'post', update_on_id: post.id, from_member: self.member_id).each do |u|
 					u.destroy
 				end
-				member.updates.create!( what: 'comment', what_id: self.id, from_member: self.member_id, commented_on_type: 'image', commented_on_id: image.id) unless member.id == self.member_id
+				member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id) unless member.id == self.member_id
 			end
 		end
-		if image.member_id != self.member_id
-			member = Member.find_by_id( image.member_id)
-			Update.where(member_id: member.id, commented_on_type: 'image', commented_on_id: image.id, from_member: self.member_id).each do |u|
+		if post.member_id != self.member_id
+			member = Member.find_by_id( post.member_id)
+			Update.where(member_id: member.id, update_on_type: 'post', update_on_id: post.id, from_member: self.member_id).each do |u|
 				u.destroy
 			end
-			member.updates.create!( what: 'comment', what_id: self.id, from_member: self.member_id, commented_on_type: 'image', commented_on_id: image.id)
+			member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id)
 		end
 	end
 	
 	def delete_update
-		Update.where(what_id: self.id).each do |update|
+		Update.where(what: self.what, what_id: self.id).each do |update|
 			update.destroy
 		end
 	end
