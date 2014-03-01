@@ -250,50 +250,41 @@ label {
 
 /* show member page */
 
-#wall{
-	float: right;
-	display: inline-block;
-	width: 377px;
-	z-index: 100;
-	right: 0;
-	color: black;
-	height: 325px;
-	line-height: 18px;
-	ul{
-		padding-left: 3px;
-	}
-	li{
-		list-style-type: none;
-		min-height: 75px;
-		margin: 5px 0;
-		display: inline-block;
-		img{
-			float: left;
-			margin-right: 2px;
-			width: 80px;
-		}
-	}
-
+.post_form{
+	width: 185;
+	height: 185;
 }
 
-.post_form{
-	display: inline-block;
-	width: 100%;
-	border-radius: 3px;
-	background-color: $header;
-	padding: 3px;
+#new_post{
+	position: relative;
+	float: right;
+	border: 2px solid black;
+	border-radius: 5px;
 	box-shadow: 3px 3px 10px;
 }
 
-img.member_img{
+#new_post_submit{
+	position: absolute;
+	bottom: 3px;
+	right: 3px;
+}
+
+#post_content{
+	padding: 5px;
+}
+
+img.member_image{
 	display: inline-block;
-	padding: 5px 0px 0px 0px;
 	width: 185px;
 }
 
-img.member_post{
-	display: inline-block;
-	padding: 5px 0px 0px 0px;
+.member_post{
+	float: left;
+}
+
+.post_content{
+	line-height: 13px;
+	width: 185px;
 }
 
 #member_info{
@@ -306,7 +297,6 @@ img.member_post{
 	box-shadow: 3px 3px 10px;
 	padding: 0;
 	background: black;
-	margin-top: 5px;
 	p {
 		position: absolute;
 		font-size: 33px;
@@ -348,6 +338,7 @@ img#profile_image {
 .image_block{
 	display: inline-block;
 	position: relative;
+	margin: 0 5px 5px 0;
 }
 
 #image_upload_section{

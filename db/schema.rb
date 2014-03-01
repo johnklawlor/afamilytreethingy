@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20140220204113) do
     t.datetime "updated_at"
   end
 
+  create_table "images", force: true do |t|
+    t.integer  "member_id"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "members", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"

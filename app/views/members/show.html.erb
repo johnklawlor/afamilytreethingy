@@ -13,12 +13,8 @@
 		</div>
 	</div>
 
-	<div id="wall">
-		<span>
-			<div class="post_form">
-				<%= render 'posts/post_form' %>
-			</div>
-		</span>
+	<div class="post_form">
+		<%= render 'posts/post_form' %>
 	</div>
 	
 	<%= render partial: 'posts/post', collection: @member.posts.order('updated_at DESC') %>
