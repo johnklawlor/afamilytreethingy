@@ -7,7 +7,7 @@ module MembersHelper
 		children = []
 		id = add_member.birthdate.to_time.to_i + rand(1000000)
 
-		name = "<div class='image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
+		name = "<div class='tree_image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
 		if add_member.has_spouse?
 			name += "#{ image_tag( add_member.spouse.image_url( :medium), class: 'img-rounded tree_image') }"
 		end
@@ -26,32 +26,20 @@ module MembersHelper
 		# add link to switch to member's spouse's tree, if any
 		if add_member.has_spouse?
 			link = link_to(add_member.spouse.first_name, tree_path(add_member.spouse) )
-			name += " and " + 
-			link + " " +
-			add_member.last_name
+			name += " and " + link + " " + add_member.last_name
 			# add link to edit member's and spouse's tree
 			edit =
 			"</span><div class='edit'>
-				edit
-				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) } or
-				#{ link_to "#{add_member.spouse.first_name}'s ", edit_tree_path(add_member.spouse) }
-				tree<br/>
-				view
-				#{ link_to "#{add_member.first_name}'s", member_path(add_member) } or
-				#{ link_to "#{add_member.spouse.first_name}'s", member_path(add_member.spouse) }
-				profile
+				edit #{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) } or #{ link_to "#{add_member.spouse.first_name}'s ", edit_tree_path(add_member.spouse) } tree<br/>
+				view #{ link_to "#{add_member.first_name}'s", member_path(add_member) } or 	#{ link_to "#{add_member.spouse.first_name}'s", member_path(add_member.spouse) }	profile
 			</div></div></div>"
 		else
 			name += " " + add_member.last_name
 			# add link to edit member's tree
 			edit = 
 			"</span><div class='edit'>
-				edit 
-				#{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) }
-				 tree<br/>
-				 view
-				#{ link_to "#{add_member.first_name}'s", member_path(add_member) }
-				 profile
+				edit #{ link_to "#{add_member.first_name}'s", edit_tree_path(add_member) }	 tree<br/>
+				view #{ link_to "#{add_member.first_name}'s", member_path(add_member) } profile
 			</div></div></div>"
 		end
 		

@@ -7,15 +7,18 @@
 			<% end %>
 		</div>
 	<% else %>
-		<% from_member = Member.find_by_id( post.from_member) %>
-		<%= link_to image_tag( from_member.image_url(:thumb), class: 'member_post img-rounded'), member_path( from_member) %>
+		<div class="post_content tp">
+			<% from_member = Member.find_by_id( post.from_member) %>
+			<%= link_to image_tag( from_member.image_url(:thumb), class: 'member_post img-rounded'), member_path( from_member) %>
 	
-		<div class="post_content">
-			<%= link_to from_member.first_name.downcase, member_path( from_member) %>:
-			<%= "#{post.content} -" + time_ago_in_words(post.created_at).to_s + " ago" %>
+				<%= link_to from_member.first_name.downcase, member_path( from_member) %>:<br/>
+				<%= post.content %>
 		</div>
-		<% if current_member.can_delete?(post) %>
-			<%= link_to "delete", post_path(post), method: :delete, remote: true %>
-		<% end %>
+		<div class="post_meta">
+		 <%= "- #{time_ago_in_words(post.created_at).to_s} ago" %>
+			<% if current_member.can_delete?(post) %>
+				<br/><%= link_to "delete", post_path(post), method: :delete, remote: true %>
+			<% end %>
+		</div>
 	<% end %>
 </div>

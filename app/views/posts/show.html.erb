@@ -1,5 +1,5 @@
-<div class="show_image center" id='image_page' >
-	<div class="image_block">
+<div class="center" id='image_page' >
+	<div class="show_image">
 		<% if @post.image? %>
 			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id } %>
 		<% end %>
@@ -9,7 +9,7 @@
 				<%= render @post.comments.order('created_at DESC') %>
 			</div>
 		</div>
-		
+	
 		<br/>
 		<%= link_to "delete image", post_path(@post), method: :delete, class: "white" if current_member?( Member.find_by_id(@post.member_id)) %>
 	</div>

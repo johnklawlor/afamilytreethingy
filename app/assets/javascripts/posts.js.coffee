@@ -13,7 +13,7 @@ ready = ->
 	
 	overImageVisible = true
 	
-	$('body').on 'mouseenter', '.image_block', ->
+	$('body').on 'mouseenter', '.image_block, .tree_image_block, .show_image', ->
 		if overImageVisible == true
 			overImage = $(this).children('.over_image')
 			overImage.stop(true)

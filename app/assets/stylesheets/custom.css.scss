@@ -251,16 +251,18 @@ label {
 /* show member page */
 
 .post_form{
-	width: 185;
-	height: 185;
+	width: 185px;
+	height: 185px;
+	float: left;
+	margin-right: 5px;
 }
 
 #new_post{
 	position: relative;
-	float: right;
 	border: 2px solid black;
 	border-radius: 5px;
 	box-shadow: 3px 3px 10px;
+	height: 100%;
 }
 
 #new_post_submit{
@@ -271,6 +273,8 @@ label {
 
 #post_content{
 	padding: 5px;
+	width: 100%;
+	height: 100%;
 }
 
 img.member_image{
@@ -278,13 +282,25 @@ img.member_image{
 	width: 185px;
 }
 
-.member_post{
+img.member_post{
 	float: left;
+	margin-right: 3px;
 }
 
 .post_content{
-	line-height: 13px;
-	width: 185px;
+	line-height: 1;
+	width: 100%;
+	position: absolute;
+}
+
+.post_meta{
+	display: block;
+	width: 100%;
+	line-height: 1;
+	clear: both;
+	position: absolute;
+	bottom: 0;
+	left: 12px;
 }
 
 #member_info{
@@ -330,7 +346,6 @@ img#profile_image {
 #images{
 	position: relative;
 	display: inline-block;
-	float: right;
 	width: 100%;
 	min-height: 400px;
 }
@@ -339,6 +354,9 @@ img#profile_image {
 	display: inline-block;
 	position: relative;
 	margin: 0 5px 5px 0;
+	width: 185px;
+	height: 185px;
+	float: left;
 }
 
 #image_upload_section{
@@ -348,6 +366,11 @@ img#profile_image {
 	width: 98%;
 	padding: 3px;
 	box-shadow: 3px 3px 10px;
+}
+
+.show_image{
+	display: inline-block;
+	position: relative;
 }
 
 .crop_form {
@@ -468,6 +491,12 @@ img#profile_image {
 	width: 100%;
 	height: 600px;
 	margin: auto;
+}
+
+.tree_image_block{
+	display: inline-block;
+	position: relative;
+	margin: 0 5px 5px 0;
 }
 
 .tree_image{
@@ -597,4 +626,24 @@ div.no_updates{
 	img{
 		width: 150px;
 	}
+}
+
+
+
+@-webkit-keyframes spin {  
+from {  
+	-webkit-transform:rotateY(0deg);
+	transform:rotateY(0deg);
+}  
+to {  
+	-webkit-transform:rotateY(90deg);
+	transform:rotateY(90deg);
+    } 
+}
+
+.spin {
+    -webkit-animation-name: spin; 
+    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 1.5s; 
 }

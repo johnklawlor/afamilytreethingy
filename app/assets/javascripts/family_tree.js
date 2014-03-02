@@ -64,7 +64,7 @@ ready = function() {
 				//nodes or edges
 			Node: {
 				height: 160,
-				width: 340,
+				width: 350,
 				type: 'rectangle',
 				color: 'transparent',
 				overridable: false
@@ -86,7 +86,7 @@ ready = function() {
 				};
 				//set label styles
 				var style = label.style;
-				style.width = 340 + 'px';
+				style.width = 350 + 'px';
 				style.height = 100 + 'px';          
 				style.cursor = 'pointer';
 				style.color = '#000';
