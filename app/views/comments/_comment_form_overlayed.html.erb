@@ -1,0 +1,6 @@
+<%= form_for( post.comments.new( member_id: current_member.id), html: {class: 'show_member_comment_form'}, remote: true) do |f| %>
+	<%= f.hidden_field :post_id %>
+	<%= f.hidden_field :member_id %>
+	<%= f.text_area :content, placeholder: 'enter a comment...', autofocus: true %>
+	<%= f.submit "post", class: "btn btn-primary btn-sm btn-hz btn-within" %>
+<% end %>

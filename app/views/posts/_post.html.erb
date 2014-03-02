@@ -5,6 +5,9 @@
 			<% if Member.find_by_id( post.from_member).can_delete?(post) %>
 				<%= link_to 'delete', post_path(post), method: :delete, remote: true %>
 			<% end %>
+			
+			<%= link_to 'comment', post_path(post), remote: true %>
+			
 		</div>
 	<% else %>
 		<div class="post_content tp">

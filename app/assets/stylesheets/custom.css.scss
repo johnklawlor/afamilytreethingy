@@ -192,6 +192,12 @@ input.btn-hz{
 	padding: 2px;
 }
 
+input.btn-within{
+	position: absolute;
+	bottom: 3px;
+	right: 3px;
+}
+
 .member_select{
 	display: inline;
 	width: 60%
@@ -264,13 +270,7 @@ label {
 	height: 100%;
 }
 
-#new_post_submit{
-	position: absolute;
-	bottom: 3px;
-	right: 3px;
-}
-
-form#post_content{
+textarea#post_content{
 	padding: 5px;
 	width: 100%;
 	height: 100%;
@@ -302,12 +302,22 @@ img.member_post{
 	left: 12px;
 }
 
-.comment_form{
+.show_member_comment_form_holder{
+	position: absolute;
+}
+
+.show_member_comment_form{
 	width: 260px;
 	height: 260px;
 	float: left;
 	opacity: .7;
-	position: absolute;
+	position: relative;
+}
+
+.show_member_comment_form > #comment_content{
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
 }
 
 #member_info{
@@ -473,7 +483,7 @@ img#profile_image {
 	border-radius: 10px;
 }
 
-#comment_content{
+.show_post_comment_form > #comment_content{
 	padding: 0;
 	margin: 0;
 	height: 28px;

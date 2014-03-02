@@ -1,0 +1,3 @@
+post = $("div#<%= @post.id%>")
+post.prepend("<div class='show_member_comment_form_holder'><%= j render partial: 'comments/comment_form_overlayed', object: @post, as: :post %></div>")
+console.log( post)
