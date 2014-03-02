@@ -17,7 +17,7 @@
 		<%= render 'posts/post_form' %>
 	</div>
 	
-	<%= render partial: 'posts/post', collection: @member.posts.order('updated_at DESC') %>
+	<%= render partial: 'posts/post', collection: @member.posts.order('updated_at DESC').offset(1) %>
 	
 	<%= render 'posts/hidden_image_upload' if signed_in? && current_member?(current_member) %>
 

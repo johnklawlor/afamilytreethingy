@@ -24,7 +24,6 @@ html {
 
 body {
   padding-top: 60px;
-  background-color: $body;
   font-family: geosanslight;
   font-size: 20px;
 }
@@ -251,8 +250,8 @@ label {
 /* show member page */
 
 .post_form{
-	width: 185px;
-	height: 185px;
+	width: 260px;
+	height: 260px;
 	float: left;
 	margin-right: 5px;
 }
@@ -271,7 +270,7 @@ label {
 	right: 3px;
 }
 
-#post_content{
+form#post_content{
 	padding: 5px;
 	width: 100%;
 	height: 100%;
@@ -279,7 +278,7 @@ label {
 
 img.member_image{
 	display: inline-block;
-	width: 185px;
+	width: 260px;
 }
 
 img.member_post{
@@ -303,12 +302,20 @@ img.member_post{
 	left: 12px;
 }
 
+.comment_form{
+	width: 260px;
+	height: 260px;
+	float: left;
+	opacity: .7;
+	position: absolute;
+}
+
 #member_info{
 	display: inline-block;
 	float: left;
 	text-align: center;
-	width: 184px;
-	height: 184px;
+	width: 260px;
+	height: 260px;
 	margin-right: 5px;
 	box-shadow: 3px 3px 10px;
 	padding: 0;
@@ -329,7 +336,7 @@ img.member_post{
 
 img#profile_image {
 	display: inline-block;
-	width: 184px;
+	width: 260px;
 	padding: 0;
 	border-radius: 28px;
 	opacity: .9;
@@ -354,8 +361,8 @@ img#profile_image {
 	display: inline-block;
 	position: relative;
 	margin: 0 5px 5px 0;
-	width: 185px;
-	height: 185px;
+	width: 260px;
+	height: 260px;
 	float: left;
 }
 
