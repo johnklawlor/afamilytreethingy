@@ -13,7 +13,10 @@ class Comment < ActiveRecord::Base
 				Update.where(member_id: member.id, update_on_type: 'post', update_on_id: post.id, from_member: self.member_id).each do |u|
 					u.destroy
 				end
-				member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id) unless member.id == self.member_id
+				unless member.id == self.member_id
+					update = member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id)
+					UpdateRelationship.create!( update_id: update.id, comment_id: self.id)
+				end
 			end
 		end
 		if post.member_id != self.member_id
@@ -21,7 +24,8 @@ class Comment < ActiveRecord::Base
 			Update.where(member_id: member.id, update_on_type: 'post', update_on_id: post.id, from_member: self.member_id).each do |u|
 				u.destroy
 			end
-			member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id)
+			update = member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id)
+			UpdateRelationship.create!( update_id: update.id, comment_id: self.id)
 		end
 	end
 	

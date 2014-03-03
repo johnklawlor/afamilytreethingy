@@ -18,17 +18,18 @@ class UpdatesController < ApplicationController
 	def comments
 		post = Post.find_by_id( params[ :post_id])
 		if signed_in?
-			@new_comments = []
-			current_member.updates.where( update_on_type: 'post', update_on_id: post.id, viewed: false).each do |update|
-				@new_comments << Comment.find_by_id( update.update_on_id)
+			updates = current_member.updates.where( update_on_type: 'post', update_on_id: post.id, viewed: false)
+			@new_comments = Comment.where( id: UpdateRelationship.where( update_id: updates.select(:id)).select(:comment_id))
+
+			respond_to do |format|
+				format.js
+			end
+			
+			updates.each do |update|
 				unless update.viewed
 					update.viewed = true
 					update.save
 				end
-			end
-		
-			respond_to do |format|
-				format.js
 			end
 		end
 	end

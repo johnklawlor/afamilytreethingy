@@ -1,6 +1,4 @@
 <% unless @new_comments.nil? %>
-	<% @new_comments.each do |comment| %>
-		$('#image_comments').prepend( "<%= j render partial: 'comments/comment', object: comment, as: :comment %>" )
-	<% end %>
+	console.log( ' <%= @new_comments.count %>')
+	$('#image_comments').prepend( "<%= j render partial: 'comments/comment', collection: @new_comments, as: :comment %>" )
 <% end %>
-console.log( ' <%= j @new_comment.inspect %>')
