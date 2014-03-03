@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20140303161043) do
 
   create_table "comments", force: true do |t|
     t.integer  "post_id"
-    t.integer  "update_id"
     t.integer  "member_id"
     t.string   "content"
     t.datetime "created_at"
@@ -94,6 +93,8 @@ ActiveRecord::Schema.define(version: 20140303161043) do
 
   create_table "updates", force: true do |t|
     t.integer  "member_id"
+    t.integer  "updatable_id"
+    t.string   "updatable_type"
     t.boolean  "viewed",         default: false
     t.boolean  "counted",        default: false
     t.integer  "from_member"
