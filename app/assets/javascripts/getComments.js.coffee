@@ -8,7 +8,7 @@ ready = ->
 				type: "POST",
 				data: { 'post_id' : image_id }
 				url: '/updates/comments'
-			.always
+			.always ->
 				$(document).on 'page:change', ->
 					clearInterval(myInterval)
 		, 5000)
