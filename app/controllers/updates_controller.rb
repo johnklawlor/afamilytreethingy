@@ -17,19 +17,13 @@ class UpdatesController < ApplicationController
 	
 	def comments
 		post = Post.find_by_id( params[ :post_id])
+		most_recent_post = params[ :most_recent_post].to_i + 1
 		if signed_in?
-			updates = current_member.updates.where( update_on_type: 'post', updated_by_type: 'comment', update_on_id: post.id, viewed: false)
-			@new_comments = Comment.where( id: updates.select( :updated_by_id))
+			updates = current_member.updates.where( "update_on_type= 'post' and updated_by_type='comment' and update_on_id= ? and created_at > ?", post.id, Time.at( most_recent_post))
+			@new_comments = Comment.where( id: updates.select( :updated_by_id)).order('created_at DESC')
 
 			respond_to do |format|
 				format.js
-			end
-			
-			updates.each do |update|
-				unless update.viewed
-					update.viewed = true
-					update.save
-				end
 			end
 		end
 	end

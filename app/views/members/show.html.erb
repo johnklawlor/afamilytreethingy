@@ -1,7 +1,9 @@
 <% javascript_include_tag "getComments.js" %>
 <% provide(:title, @member.first_name) %>
 
-<div id="images">
+<% posts = @member.posts.order('updated_at DESC') %>
+
+<div id="images" data-time"<%= posts.first.created_at.to_i %>">
 
 	<div id="member_info">
 
@@ -17,7 +19,7 @@
 		<%= render 'posts/post_form' %>
 	</div>
 	
-	<%= render partial: 'posts/post', collection: @member.posts.order('updated_at DESC').offset(1) %>
+	<%= render partial: 'posts/post', collection: posts %>
 	
 	<%= render 'posts/hidden_image_upload' if signed_in? && current_member?(current_member) %>
 

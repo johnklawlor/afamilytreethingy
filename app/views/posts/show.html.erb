@@ -1,12 +1,15 @@
+<% comments = @post.comments.order('created_at DESC') %>
+
 <div class="center" id='image_page' >
 	<div class="show_image">
 		<% if @post.image? %>
-			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id } %>
+			<%= most_recent_post = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
+			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id, most_recent_post: most_recent_post} %>
 		<% end %>
 		<div class="over_image tp">
 			<%= render partial: "comments/comment_form", object: @post, as: :post %>
 			<div id="image_comments" >
-				<%= render @post.comments.order('created_at DESC') %>
+				<%= render comments %>
 			</div>
 		</div>
 	
