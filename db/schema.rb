@@ -93,10 +93,10 @@ ActiveRecord::Schema.define(version: 20140303161043) do
 
   create_table "updates", force: true do |t|
     t.integer  "member_id"
-    t.integer  "updatable_id"
-    t.string   "updatable_type"
-    t.boolean  "viewed",         default: false
-    t.boolean  "counted",        default: false
+    t.integer  "updated_by_id"
+    t.string   "updated_by_type"
+    t.boolean  "viewed",          default: false
+    t.boolean  "counted",         default: false
     t.integer  "from_member"
     t.string   "update_on_type"
     t.integer  "update_on_id"

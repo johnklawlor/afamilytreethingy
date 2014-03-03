@@ -2,7 +2,7 @@ class CreateUpdates < ActiveRecord::Migration
 	def change
 		create_table :updates do |t|
 			t.belongs_to :member
-			t.references :updatable, polymorphic: true
+			t.references :updated_by, polymorphic: true
 			t.boolean :viewed, default: false
 			t.boolean :counted, default: false
 			t.integer :from_member

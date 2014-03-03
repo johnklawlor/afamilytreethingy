@@ -18,8 +18,8 @@ class UpdatesController < ApplicationController
 	def comments
 		post = Post.find_by_id( params[ :post_id])
 		if signed_in?
-			updates = current_member.updates.where( update_on_type: 'post', updatable_type: 'comment', update_on_id: post.id, viewed: false)
-			@new_comments = Comment.where( id: updates.select( :updatable_id))
+			updates = current_member.updates.where( update_on_type: 'post', updated_by_type: 'comment', update_on_id: post.id, viewed: false)
+			@new_comments = Comment.where( id: updates.select( :updated_by_id))
 
 			respond_to do |format|
 				format.js

@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
 
-	has_one :update, as: :updatable
+	has_one :update, as: :updated_by
 
 	after_create :create_update
 	before_destroy :delete_update
@@ -16,7 +16,7 @@ class Comment < ActiveRecord::Base
 					u.destroy
 				end
 				unless member.id == self.member_id
-					update = member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id, updatable_type: 'comment', updatable_id: self.id)
+					update = member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id, updated_by_type: 'comment', updated_by_id: self.id)
 				end
 			end
 		end
@@ -25,7 +25,7 @@ class Comment < ActiveRecord::Base
 			Update.where(member_id: member.id, update_on_type: 'post', update_on_id: post.id, from_member: self.member_id).each do |u|
 				u.destroy
 			end
-			update = member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id, updatable_type: 'comment', updatable_id: self.id)
+			update = member.updates.create!( from_member: self.member_id, update_on_type: 'post', update_on_id: post.id, updated_by_type: 'comment', updated_by_id: self.id)
 		end
 	end
 	
