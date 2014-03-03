@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 	before_filter :can_delete?, only: :destroy
 
 	def create
-		@comment = Comment.new( image_params)
+		@comment = Comment.new( comment_params)
 		@comment.save
 		respond_to do |format|
 			format.js
@@ -21,8 +21,8 @@ class CommentsController < ApplicationController
 	end
 	
 	private
-		def image_params
-			params.require(:comment).permit(:image_id, :member_id, :member_name, :content)
+		def comment_params
+			params.require(:comment).permit(:post_id, :member_id, :member_name, :content)
 		end
 		
 		def can_delete?

@@ -11,9 +11,16 @@ ready = ->
 			url: '/updates/posts'
 	, 10000)
 	
-	overImageVisible = true
+	$('body').on 'click', '.exit_button', ->
+		post = $(this).closest( '.image_block')
+		post.off( 'mouseover')
+		form_holder = $(this).closest( '.show_member_comment_form_holder')
+		form_holder.nextAll( '.hidden_over_image').attr( 'class', 'over_image tp')
+		form_holder.fadeOut 1000, ->
+			$(this).remove()
 	
-	$('body').on 'mouseenter', '.image_block, .tree_image_block, .show_image', ->
+	overImageVisible = true
+	$('body').on 'mouseover', '.image_block, .tree_image_block, .show_image', ->
 		if overImageVisible == true
 			overImage = $(this).children('.over_image')
 			overImage.stop(true)
@@ -23,11 +30,10 @@ ready = ->
 		overImageVisible = true
 
 	$('body').on 'mouseleave', '.image_block', ->
-		$(this).children('.over_image').delay(1000).fadeOut( 1000, ->
+		$(this).children('.over_image').delay(1000).fadeOut 1000, ->
 			overImageVisible = false
-		)
 	
-	delay=3000
+	delay=2000
 	timeout=setTimeout( ->
 		$('.over_image').fadeOut(1000, ->
 			overImageVisible = false)

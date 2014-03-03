@@ -6,7 +6,7 @@
 				<%= link_to 'delete', post_path(post), method: :delete, remote: true %>
 			<% end %>
 			
-			<%= link_to 'comment', post_path(post), remote: true %>
+			<%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
 			
 		</div>
 	<% else %>

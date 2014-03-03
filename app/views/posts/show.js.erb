@@ -1,3 +1,10 @@
 post = $("div#<%= @post.id%>")
+post.find( '.over_image').fadeOut(1000)
 post.prepend("<div class='show_member_comment_form_holder'><%= j render partial: 'comments/comment_form_overlayed', object: @post, as: :post %></div>")
-console.log( post)
+post.on( 'mouseover', function(e) {
+	e.preventDefault()
+	$(this).find( '.over_image').fadeOut( 1000, function() {
+		$(this).attr( 'class', 'hidden_over_image') })
+})
+$('.show_member_comment_form_holder').children( '.show_member_comment_form').prepend( "<span class='exit_button' >")
+$('.show_member_comment_form_holder').fadeIn(1000)

@@ -304,13 +304,15 @@ img.member_post{
 
 .show_member_comment_form_holder{
 	position: absolute;
+	background-color: rgba(9,9,9,0.5);
+	border-radius: 5px;
+	display: none;
 }
 
 .show_member_comment_form{
 	width: 260px;
 	height: 260px;
 	float: left;
-	opacity: .7;
 	position: relative;
 }
 
@@ -318,6 +320,9 @@ img.member_post{
 	width: 100%;
 	height: 100%;
 	border-radius: 5px;
+	background: transparent;
+	color: white;
+	text-shadow: 1px 1px 1px black;
 }
 
 #member_info{
@@ -645,9 +650,23 @@ div.no_updates{
 	}
 }
 
+.exit_button{
+	background-image: image-url('exit_button.png');
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	z-index: 10;
+	background-size: 20px 20px;
+	position: absolute;
+	right: -5px;
+	top: -5px;
+	&:hover{
+		cursor: pointer;
+	}
+}
 
 
-@-webkit-keyframes spin {  
+@-webkit-keyframes collapse {  
 from {  
 	-webkit-transform:rotateY(0deg);
 	transform:rotateY(0deg);
@@ -658,9 +677,27 @@ to {
     } 
 }
 
-.spin {
-    -webkit-animation-name: spin; 
+.collapse {
+    -webkit-animation-name: collapse; 
     -webkit-animation-iteration-count: infinite; 
     -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 1.5s; 
+    -webkit-animation-duration: 1s; 
+}
+
+@-webkit-keyframes expand {  
+from {  
+	-webkit-transform:rotateY(90deg);
+	transform:rotateY(90deg);
+}  
+to {  
+	-webkit-transform:rotateY(180deg);
+	transform:rotateY(180deg);
+    } 
+}
+
+.expand {
+    -webkit-animation-name: expand; 
+    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 1s; 
 }
