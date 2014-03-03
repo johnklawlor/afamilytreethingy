@@ -19,8 +19,8 @@ class UpdatesController < ApplicationController
 		post = Post.find_by_id( params[ :post_id])
 		if signed_in?
 			@new_comments = []
-			current_member.updates.where( update_on_type: 'post', update_on_id: post, viewed: false).each do |update|
-				@new_comments << Comment.find_by_id( update.what_id)
+			current_member.updates.where( update_on_type: 'post', update_on_id: post.id, viewed: false).each do |update|
+				@new_comments << Comment.find_by_id( update.update_on_id)
 				unless update.viewed
 					update.viewed = true
 					update.save

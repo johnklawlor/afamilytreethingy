@@ -5,7 +5,7 @@
 		<% end %>
 		<div class="over_image tp">
 			<%= render partial: "comments/comment_form", object: @post, as: :post %>
-			<div id="image_comments" class="comments">
+			<div id="image_comments" >
 				<%= render @post.comments.order('created_at DESC') %>
 			</div>
 		</div>

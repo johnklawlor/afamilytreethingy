@@ -286,10 +286,23 @@ img.member_post{
 	margin-right: 3px;
 }
 
-.post_content{
+.post{
 	line-height: 1;
 	width: 100%;
 	position: absolute;
+}
+
+.post_content{
+	margin-bottom: 5px;
+	font-size: 22px;
+}
+
+.post_comments{
+	list-style: none;
+	font-size: 18px;
+	li {
+	
+	}
 }
 
 .post_meta{
@@ -307,6 +320,7 @@ img.member_post{
 	background-color: rgba(9,9,9,0.5);
 	border-radius: 5px;
 	display: none;
+	z-index: 10;
 }
 
 .show_member_comment_form{
@@ -322,7 +336,7 @@ img.member_post{
 	border-radius: 5px;
 	background: transparent;
 	color: white;
-	text-shadow: 1px 1px 1px black;
+	text-shadow: 2px 2px 2px black;
 }
 
 #member_info{
@@ -454,8 +468,6 @@ img#profile_image {
 	a{
 		color: #fff;
 		text-shadow: 2px 2px 2px #000;
-		display: inline-block;
-		width: 100%;
 		&:hover {
 			color: #000;
 			text-shadow: 1px 1px 1px #fff;
@@ -479,13 +491,7 @@ img#profile_image {
 }
 
 .comments {
-	position: relative;
-	text-align: left;
-	width: 250px;
-	height: 80px;
-	overflow-y: hidden;
-	background-color: rgba( 44, 44, 44, 0.7);
-	border-radius: 10px;
+
 }
 
 .show_post_comment_form > #comment_content{
@@ -499,13 +505,32 @@ img#profile_image {
 	background-color: rgba( 44, 44, 44, 0.7);
 }
 
-#image_comments li{
-	display: inline-block;
-	text-shadow: 2px 2px 2px #000;
-	border-radius: 5px;
-	margin: 1px 0px;
-	padding: 2px;
-	width: 96%;
+#image_comments {
+	position: relative;
+	text-align: left;
+	width: 250px;
+	height: 80px;
+	overflow-y: hidden;
+	background-color: rgba( 44, 44, 44, 0.7);
+	border-radius: 10px;
+
+	li {
+		display: inline-block;
+		text-shadow: 2px 2px 2px #000;
+		border-radius: 5px;
+		margin: 1px 0px;
+		padding: 2px;
+		width: 96%;
+		a {
+			color: #fff;
+			text-shadow: 2px 2px 2px #000;
+		}
+	}
+}
+
+.comment_member_image{
+	float: left;
+	margin-right: 3px;
 }
 
 /* tree */

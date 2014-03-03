@@ -2,5 +2,5 @@
 	<%= f.hidden_field :post_id %>
 	<%= f.hidden_field :member_id %>
 	<%= f.text_area :content, placeholder: 'enter a comment...', autofocus: true %>
-	<%= f.submit "post", class: "btn btn-primary btn-sm btn-hz btn-within" %>
+	<%= f.submit "post", class: "btn btn-primary btn-sm btn-hz btn-within", id: "comment_submit" %>
 <% end %>

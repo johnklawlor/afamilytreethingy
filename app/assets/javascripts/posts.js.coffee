@@ -9,9 +9,10 @@ ready = ->
 		$.ajax
 			type: "POST",
 			url: '/updates/posts'
+
 	, 10000)
 	
-	$('body').on 'click', '.exit_button', ->
+	$('body').on 'click', '.exit_button, #comment_submit', ->
 		post = $(this).closest( '.image_block')
 		post.off( 'mouseover')
 		form_holder = $(this).closest( '.show_member_comment_form_holder')

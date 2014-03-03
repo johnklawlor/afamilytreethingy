@@ -11,3 +11,10 @@
 	$("div#updates_count").html("+<%= j @updates_count.to_s %>")
 	$("div#updates_count").attr( 'class', 'some_updates')
 <% end %>
+
+<% unless @new_comments.nil? %>
+	<% @new_comments.each do |comment| %>
+		$('#image_comments').prepend( "<%= j render partial: 'comments/comment', object: comment %>" )
+		$('#post_comments').append( "<%= j render partial: 'comments/comment', object: comment %>" )
+	<% end %>
+<% end %>
