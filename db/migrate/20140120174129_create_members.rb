@@ -8,6 +8,7 @@ class CreateMembers < ActiveRecord::Migration
 			t.string :remember_token
 			t.boolean :admin, default: false
 			t.boolean :allows_editing, default: true
+			t.datetime :last_checked_updates
 			
 			t.timestamps
 		end

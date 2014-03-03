@@ -1,5 +1,5 @@
 <% unless @new_comments.empty? %>
-	$("#actual_image").attr('data-most-recent-post', "<%= @new_comments.first.created_at.to_i %>")
+	$("#actual_image").attr('data-most-recent-comment', "<%= @new_comments.first.created_at.to_i %>")
 
 	$('#image_comments').prepend( "<%= j render partial: 'comments/comment', collection: @new_comments, as: :comment %>" )
 <% end %>

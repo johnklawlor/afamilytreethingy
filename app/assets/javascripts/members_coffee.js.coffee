@@ -23,8 +23,6 @@ ready = ->
 	
 	updates_count = $('div#updates_count')
 	my_profile_link = $('#my_profile_link')
-	
-	console.log(updates_count.attr('data-title'))
 
 	updates_count.mouseenter ->
 		$(this).css( 'z-index', 20)
@@ -38,6 +36,15 @@ ready = ->
 	my_profile_link.mouseout ->
 			updates_count.stop(true)
 			updates_count.css( 'opacity', 1)
+			
+	updates_count.click ->
+		$(this).text('Up')
+		path = $('#my_profile_link').attr('href')
+		id = path.replace( "/members/", '')
+		$.ajax
+			type: "PATCH"
+			url: path
+			data: { id: id, member: { 'last_checked_updates' : new Date().getTime() } }
 
 	updates_count.qtip
 		content:

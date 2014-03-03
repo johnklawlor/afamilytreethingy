@@ -6,11 +6,14 @@
 
 ready = ->
 	setInterval( ->
+		most_recent_post = $('#images').attr( 'data-most-recent-post')
+		console.log( most_recent_post)
 		$.ajax
-			type: "POST",
+			type: "GET",
 			url: '/updates/posts'
+			data: { 'most_recent_post' : most_recent_post }
 
-	, 10000)
+	, 20000)
 	
 	$('body').on 'click', '.exit_button, #comment_submit', ->
 		post = $(this).closest( '.image_block')
@@ -30,7 +33,7 @@ ready = ->
 		$(this).children('.over_image').fadeIn()
 		overImageVisible = true
 
-	$('body').on 'mouseleave', '.image_block', ->
+	$('body').on 'mouseleave', '.image_block, .tree_image_block, .show_image', ->
 		$(this).children('.over_image').delay(1000).fadeOut 1000, ->
 			overImageVisible = false
 	

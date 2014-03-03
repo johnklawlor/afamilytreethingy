@@ -4,11 +4,11 @@ ready = ->
 
 	if image.length != 0
 		myInterval = setInterval( ->
-			most_recent_post = image.attr('data-most-recent-post')
+			most_recent_comment = image.attr('data-most-recent-comment')
 			$.ajax
-				type: "POST",
-				data: { 'post_id' : image_id, 'most_recent_post' : most_recent_post }
+				type: "GET",
 				url: '/updates/comments'
+				data: { 'post_id' : image_id, 'most_recent_comment' : most_recent_comment }
 			.always ->
 				$(document).on 'page:change', ->
 					clearInterval(myInterval)

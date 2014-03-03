@@ -1,4 +1,5 @@
-<% unless @new_posts.nil? %>
+<% unless @new_posts.empty? %>
+	$('#images').attr( 'data-most-recent-post', "<%= @new_posts.first.created_at.to_i %>")
 	<% @new_posts.each do |post| %>
 		new_post = $("<%= j render partial: 'posts/post', collection: @new_posts, as: :post %>")
 		$(".post_form").after( new_post)

@@ -3,8 +3,8 @@
 <div class="center" id='image_page' >
 	<div class="show_image">
 		<% if @post.image? %>
-			<%= most_recent_post = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
-			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id, most_recent_post: most_recent_post} %>
+			<% most_recent_comment = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
+			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id, most_recent_comment: most_recent_comment} %>
 		<% end %>
 		<div class="over_image tp">
 			<%= render partial: "comments/comment_form", object: @post, as: :post %>

@@ -2,8 +2,8 @@ Mypeeps::Application.routes.draw do
 
 	root to: "static_pages#home"
 	post "updates/updates"
-	post "updates/posts"
-	post "updates/comments"
+	get "updates/posts"
+	get "updates/comments"
 	
 	resources :members do
 		get 'crop', on: :member

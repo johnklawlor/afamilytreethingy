@@ -2,6 +2,7 @@
 	alert("Failed to post comment: <%= j @comment.errors.full_messages.join(', ').html_safe %>");
 <% else %>
 	$('#image_comments').prepend("<%= j render @comment %>")
-	$('.post_comments').append("<%= j render @comment %>")
+	console.log( 		$('div#<%= @comment.post_id %>').find('.post_comments') )
+	$('div#<%= @comment.post_id %>').find('.post_comments').append("<%= j render @comment %>")
 	$('#comment_content').val('')
 <% end %>

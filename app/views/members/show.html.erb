@@ -1,9 +1,10 @@
 <% javascript_include_tag "getComments.js" %>
 <% provide(:title, @member.first_name) %>
 
-<% posts = @member.posts.order('updated_at DESC') %>
+<% posts = @member.posts.order('created_at DESC') %>
 
-<div id="images" data-time"<%= posts.first.created_at.to_i %>">
+	<% most_recent_post = (!posts.empty? && posts.first.created_at.to_i) || 0 %>
+	<div id="images" data-most-recent-post="<%= most_recent_post %>">
 
 	<div id="member_info">
 
