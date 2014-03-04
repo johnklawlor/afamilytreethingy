@@ -51,7 +51,7 @@ ready = ->
 			text: (e, api) ->
 				return $.ajax
 					url: '/updates/updates'
-					method: 'POST'
+					method: 'GET'
 				.then (content) ->
 					updates = updates_count.attr('data-updates')
 					console.log( updates )

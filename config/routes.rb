@@ -1,7 +1,7 @@
 Mypeeps::Application.routes.draw do
 
 	root to: "static_pages#home"
-	post "updates/updates"
+	get "updates/updates"
 	get "updates/posts"
 	get "updates/comments"
 	
