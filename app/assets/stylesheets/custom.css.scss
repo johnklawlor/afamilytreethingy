@@ -4,7 +4,7 @@
 
 $grayLight: #222222;
 $white: fff;
-$headerBright: rgba(0,0,0,.75);
+$headerBright: #1474CF;
 $header: rgba(0,0,0,.75);
 $headerTransparent: rgba( 0, 86, 180, 0);
 $someColor: #7eaeca;
@@ -17,6 +17,9 @@ $body: #eff5f8;
 }
 
 /* universal */ 
+.btn-primary{
+	background-color: #1474CF;
+}
 
 html {
   overflow-y: scroll;
@@ -301,7 +304,14 @@ img.member_post{
 	list-style: none;
 	font-size: 18px;
 	li {
-	
+		display: inline-block;
+		float: left;
+		width: 100%;
+		margin-bottom: 3px;
+		&:first-child{
+			display: inline;
+			float: none;
+		}
 	}
 }
 
@@ -348,6 +358,7 @@ img.member_post{
 	margin-right: 5px;
 	box-shadow: 3px 3px 10px;
 	padding: 0;
+	background: black;
 	p {
 		position: absolute;
 		font-size: 33px;
@@ -366,7 +377,6 @@ img#profile_image {
 	display: inline-block;
 	width: 260px;
 	padding: 0;
-	opacity: .9;
 }
 
 #profile_image_holder{
@@ -391,8 +401,6 @@ img#profile_image {
 	width: 260px;
 	height: 260px;
 	float: left;
-	border-radius: 5px;
-	box-shadow: 2px 2px 50px black;
 }
 
 #image_upload_section{
@@ -509,7 +517,7 @@ img#profile_image {
 	position: relative;
 	text-align: left;
 	width: 250px;
-	height: 140px;
+	height: 80px;
 	overflow-y: hidden;
 	background-color: rgba( 44, 44, 44, 0.7);
 	border-radius: 10px;
@@ -531,7 +539,6 @@ img#profile_image {
 .comment_member_image{
 	float: left;
 	margin-right: 3px;
-	background-color: white;
 }
 
 /* tree */

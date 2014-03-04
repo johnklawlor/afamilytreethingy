@@ -1,7 +1,8 @@
 <li id="<%= comment.id %>", class="comment_block">
 	<% member = Member.find_by_id(comment.member_id) %>
 	<%= link_to image_tag( member.image_url(:micro), class: 'comment_member_image img-rounded'), member_path(member) %>
-	<%= link_to member.first_name.downcase, member_path(member) %><%= ": #{comment.content} -" + time_ago_in_words(comment.created_at).to_s + " ago" %>
+	<%= link_to member.first_name.downcase, member_path(member) %><%= ": #{comment.content}" %><br/>
+	<%= "- " + time_ago_in_words(comment.created_at).to_s + " ago" %>
 	<% if current_member.can_delete_comment?(comment) %>
 		| <%= link_to "delete", comment_path(comment), method: :delete, remote: true %>
 	<% end %>
