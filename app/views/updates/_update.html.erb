@@ -14,10 +14,15 @@
 			<% names << member.first_name.downcase %>
 		<% end %>
 		<%= names.to_sentence %>
-		<% if distinct_group_of_updates.update_on_type == 'wall' %>
+		<% if distinct_group_of_updates.update_on_type == 'post' %>
+			<% post = Post.find_by_id( distinct_group_of_updates.update_on_id) %>
+			<% if post.image? %>
+				<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
+			<% else %>
+				<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
+			<% end %>
+		<% elsif distinct_group_of_updates.update_on_type == 'wall' %>
 			<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
-		<% elsif distinct_group_of_updates.update_on_type == 'post' %>
-			<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
 		<% end %>
 		</div>
 	</li>
