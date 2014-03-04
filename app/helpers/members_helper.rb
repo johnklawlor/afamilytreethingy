@@ -7,9 +7,9 @@ module MembersHelper
 		children = []
 		id = add_member.birthdate.to_time.to_i + rand(1000000)
 
-		name = "<div class='tree_image_block'>#{ image_tag( add_member.image_url( :medium), class: 'img-rounded tree_image') }"
+		name = "<div class='tree_image_block'>#{ image_tag( add_member.image_url( :small), class: 'img-rounded tree_image') }"
 		if add_member.has_spouse?
-			name += "#{ image_tag( add_member.spouse.image_url( :medium), class: 'img-rounded tree_image') }"
+			name += "#{ image_tag( add_member.spouse.image_url( :small), class: 'img-rounded tree_image') }"
 		end
 		# add link to switch to member's other divorced parent's tree
 		if add_member.parents.count==2 && !(add_member.parents.first.spouse == add_member.parents.last)
