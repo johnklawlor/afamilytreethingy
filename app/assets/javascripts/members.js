@@ -5,7 +5,7 @@ ready = function() {
  	var source = new EventSource("/comments/events")
 	source.onmessage = function(e) {
 		if( e.data.length > 4) {
-			console.log( e.data)
+			console.log('e.data', e.data)
 			data = $.parseJSON(e.data)
 			comment = data.comment
 			name = data.name

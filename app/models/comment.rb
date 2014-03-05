@@ -9,7 +9,7 @@ class Comment < ActiveRecord::Base
 	
 	def publish_comment
 		from_whom = Member.find_by_id(self.member_id)
-		comment = { comment: self.to_json, name: from_whom.first_name.downcase, sent_when: time_ago_in_words(self.created_at).to_s + ' ago', url: from_whom.image_url( :micro) }
+		comment = { comment: self, name: from_whom.first_name.downcase, sent_when: time_ago_in_words(self.created_at).to_s + ' ago', url: from_whom.image_url( :micro) }.to_json
 		$redis.publish( 'comments.create', comment)
 	end
 	
