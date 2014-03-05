@@ -10,6 +10,7 @@ gem 'state_machine'
 gem 'jquery-fileupload-rails'
 gem 'dotenv-rails'
 gem 'puma'
+gem 'redis'
 
 group :production do
 	gem 'rails_12factor'

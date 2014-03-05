@@ -14,7 +14,9 @@ Mypeeps::Application.routes.draw do
 	resources :tree, only: [ :show, :edit, :update]
 	resources :password_resets, only: [ :new, :create, :edit, :update]
 	resources :images, only: [ :show, :new, :create, :destroy]
-	resources :comments, only: [ :create, :destroy]
+	resources :comments, only: [ :create, :destroy] do
+		collection { get :events }
+	end
 	resources :posts, only: [ :show, :create, :edit, :update, :destroy]
 	
 	get '/signup', to: 'members#new'

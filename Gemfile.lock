@@ -161,6 +161,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    redis (3.0.7)
     rmagick (2.13.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -251,6 +252,7 @@ DEPENDENCIES
   puma
   rails (= 4.0.2)
   rails_12factor
+  redis
   rmagick (= 2.13.2)
   rspec-rails
   sass-rails (~> 4.0.0)

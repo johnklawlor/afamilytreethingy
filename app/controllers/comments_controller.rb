@@ -1,14 +1,13 @@
 class CommentsController < ApplicationController
+	include ActionController::Live
+	
 	before_filter :signed_in_filter
 	before_filter :can_delete?, only: :destroy
 
 	def create
-		@comment = Comment.new( comment_params)
-		@comment.save
-		respond_to do |format|
-			format.js
-			format.html
-		end
+		response.headers["Content-Type"] = "text/javascript"
+		@comment = Comment.create( comment_params)
+
 	end
 
 	def destroy
@@ -19,6 +18,22 @@ class CommentsController < ApplicationController
 			format.html { redirect_to image_path( @comment_to_delete.image_id) }
 		end
 	end
+	
+	def events
+		response.headers["Content-Type"] = "text/event-stream"
+		redis = Redis.new
+		redis.subscribe('comments.create') do |on|
+			on.message do |event, data|
+				response.stream.write("data: #{data} \n\n")
+			end
+		end
+		rescue IOError
+			logger.info "Stream closed"
+		ensure
+			redis.quit
+			response.stream.close
+	end
+
 	
 	private
 		def comment_params

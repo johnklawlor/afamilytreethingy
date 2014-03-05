@@ -1,9 +1,17 @@
 class Comment < ActiveRecord::Base
+	include ActionView::Helpers::DateHelper
 
 	has_one :update, as: :updated_by
 
 	after_create :create_update
+	after_create :publish_comment
 	before_destroy :delete_update
+	
+	def publish_comment
+		from_whom = Member.find_by_id(self.member_id)
+		comment = { comment: self, name: from_whom.first_name.downcase, sent_when: time_ago_in_words(self.created_at).to_s + ' ago', url: from_whom.image_url( :micro) }.to_json
+		$redis.publish( 'comments.create', comment)
+	end
 	
 	def create_update
 		post = Post.find_by_id( self.post_id)
