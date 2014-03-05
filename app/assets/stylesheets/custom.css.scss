@@ -258,13 +258,6 @@ label {
 
 /* show member page */
 
-.post_form{
-	width: 260px;
-	height: 260px;
-	float: left;
-	margin-right: 5px;
-}
-
 #new_post{
 	position: relative;
 	border: 2px solid black;
@@ -308,21 +301,16 @@ img.member_post{
 		float: left;
 		width: 100%;
 		margin-bottom: 3px;
-		&:first-child{
-			display: inline;
-			float: none;
-		}
 	}
 }
 
+.post_comments .comment_member_image{
+	background: transparent;
+}
+
 .post_meta{
-	display: block;
-	width: 100%;
-	line-height: 1;
-	clear: both;
-	position: absolute;
-	bottom: 0;
-	left: 12px;
+	margin: 0 10px;
+	font-size: 18px;
 }
 
 .show_member_comment_form_holder{
@@ -350,15 +338,6 @@ img.member_post{
 }
 
 #member_info{
-	display: inline-block;
-	float: left;
-	text-align: center;
-	width: 260px;
-	height: 260px;
-	margin-right: 5px;
-	box-shadow: 3px 3px 10px;
-	padding: 0;
-	background: black;
 	p {
 		position: absolute;
 		font-size: 33px;
@@ -401,6 +380,8 @@ img#profile_image {
 	width: 260px;
 	height: 260px;
 	float: left;
+	border-radius: 5px;
+	box-shadow: 2px 2px 50px black;
 }
 
 #image_upload_section{

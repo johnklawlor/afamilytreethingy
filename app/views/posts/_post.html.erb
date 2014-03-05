@@ -17,17 +17,18 @@
 				<div class="post_content">	
 					<%= link_to from_member.first_name.downcase, member_path( from_member) %>:	<%= post.content %>
 				</div>
-				
+
+				<div class="post_meta">
+				<%= "- #{time_ago_in_words(post.created_at).to_s} ago" %>
+					<% if current_member.can_delete?(post) %>
+						<br/><%= link_to "delete", post_path(post), method: :delete, remote: true %>
+						| <%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
+					<% end %>
+				</div>
+
 				<div class="post_comments">				
 					<%= render partial: 'comments/comment', collection: post.comments.order('created_at ASC') %>
 				</div>
-		</div>
-		<div class="post_meta">
-		 <%= "- #{time_ago_in_words(post.created_at).to_s} ago" %>
-			<% if current_member.can_delete?(post) %>
-				<br/><%= link_to "delete", post_path(post), method: :delete, remote: true %>
-				| <%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
-			<% end %>
 		</div>
 	<% end %>
 </div>

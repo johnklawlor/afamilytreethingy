@@ -6,7 +6,7 @@
 	<% most_recent_post = (!posts.empty? && posts.first.created_at.to_i) || 0 %>
 	<div id="images" data-most-recent-post="<%= most_recent_post %>">
 
-	<div id="member_info">
+	<div id="member_info" class="image_block">
 
 		<div id="profile_image_section">
 			<div id="profile_image_holder">
@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	<div class="post_form">
+	<div class="image_block">
 		<%= render 'posts/post_form' %>
 	</div>
 	
