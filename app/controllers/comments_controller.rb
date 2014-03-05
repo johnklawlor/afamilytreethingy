@@ -1,13 +1,11 @@
 class CommentsController < ApplicationController
-	include ActionController::Live
+#	include ActionController::Live
 	
 	before_filter :signed_in_filter
 	before_filter :can_delete?, only: :destroy
 
 	def create
-		response.headers["Content-Type"] = "text/javascript"
 		@comment = Comment.create( comment_params)
-
 	end
 
 	def destroy

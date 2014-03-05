@@ -286,6 +286,7 @@ img.member_post{
 	line-height: 1;
 	width: 100%;
 	position: absolute;
+	margin: 0 7px;
 }
 
 .post_content{
@@ -299,7 +300,7 @@ img.member_post{
 	li {
 		display: inline-block;
 		float: left;
-		width: 100%;
+		width: 95%;
 		margin-bottom: 3px;
 	}
 }
@@ -382,6 +383,7 @@ img#profile_image {
 	float: left;
 	border-radius: 5px;
 	box-shadow: 2px 2px 50px black;
+	overflow: hidden;
 }
 
 #image_upload_section{
@@ -668,14 +670,14 @@ div.no_updates{
 
 .exit_button{
 	background-image: image-url('exit_button.png');
-	width: 20px;
-	height: 20px;
+	width: 32px;
+	height: 32px;
 	display: inline-block;
 	z-index: 10;
-	background-size: 20px 20px;
+	background-size: 32px 32px;
 	position: absolute;
-	right: -5px;
-	top: -5px;
+	left: 3px;
+	bottom: 3px;
 	&:hover{
 		cursor: pointer;
 	}

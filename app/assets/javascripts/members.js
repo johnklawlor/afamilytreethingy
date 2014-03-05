@@ -2,7 +2,7 @@ var ready;
 
 ready = function() {
 
- 	var source = new EventSource("/comments/events")
+/* 	var source = new EventSource("/comments/events")
 	source.onmessage = function(e) {
 		if( e.data.length > 4) {
 			console.log('e.data', e.data)
@@ -17,7 +17,7 @@ ready = function() {
 			$(div).find('.post_comments').prepend(" <li id='" + comment.id + "', class='comment_block'> <a href='/members/" + comment.member_id + "'> <img class='comment_member_image img-rounded' src='" + url + "' > </a> <a href='/members/" + comment.member_id + "'>" + name + "</a>: " + comment.content + "<br/> -" + sent_when + " | <a data-method='delete' data-remote='true' href='/comments/" + comment.id + "' rel='nofollow'>delete</a><br/> </li> ")
 		}
 	}
-	
+*/	
 	$("form").on( "click", ".add_fields", function(event) {
 		var time = new Date().getTime()
 		var regexp = new RegExp($(this).data('id'), 'g')
