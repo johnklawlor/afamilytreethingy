@@ -3,7 +3,7 @@
 /* mixins, variables, etc. */ 
 
 $grayLight: #222222;
-$white: fff;
+$white: #fff;
 $headerBright: #1474CF;
 $header: rgba(0,0,0,.75);
 $headerTransparent: rgba( 0, 86, 180, 0);
@@ -358,7 +358,7 @@ img.member_post{
 	margin-right: 5px;
 	box-shadow: 3px 3px 10px;
 	padding: 0;
-	background: black;
+	background-color: #fff;
 	p {
 		position: absolute;
 		font-size: 33px;
@@ -686,7 +686,7 @@ div.no_updates{
 }
 
 .exit_button{
-	background-image: image-url('exit_button.png');
+	background-image: url(asset-path('exit_button.png'));
 	width: 20px;
 	height: 20px;
 	display: inline-block;

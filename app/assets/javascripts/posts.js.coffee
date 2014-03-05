@@ -1,10 +1,9 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-# 	source = new EventSource('/posts/events')
-#	source.onmessage = (e) ->
 
 ready = ->
+
 	setInterval( ->
 		most_recent_post = $('#images').attr( 'data-most-recent-post')
 		console.log( most_recent_post)
@@ -124,7 +123,6 @@ ready = ->
 		
 	$(document).bind 'drop dragover', (e) ->
 		e.preventDefault()
-
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
