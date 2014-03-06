@@ -11,9 +11,9 @@
 		</div>
 		
 	<% elsif post.video? %>
-<!--		<%= image_tag post.video.url(:thumb), class: "member_image", href: post.video.url(:medium) %> 
-		<%= image_tag 'play_button.png', class: "play_button" %> -->
-		<%= video_tag post.video.url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', data: { setup: '' } %>
+		<%= image_tag post.video.url(:thumb), class: "member_image member_video_thumb", href: post.video.url(:medium) %> 
+		<%= image_tag 'play_button.png', class: "play_button" %>
+		<%= video_tag post.video.url, class: "member_video ", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}" %>
 	
 	<% else %>
 		<div class="post tp">

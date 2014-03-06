@@ -5,7 +5,9 @@
 ready = ->
 
 	$('img.member_image').colorbox({rel:'gal'})
-	$('.member_video').colorbox({rel:'gal'})
+	$('.play_button').click ->
+		$('.member_video').css( 'display', 'inline-block');
+		$(this).colorbox({ inline: true, href: $(".member_video_thumb").siblings('video')});
 
 	setInterval( ->
 		most_recent_post = $('#images').attr( 'data-most-recent-post')

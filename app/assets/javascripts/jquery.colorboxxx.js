@@ -941,8 +941,6 @@
 		} else if (settings.get('html')) {
 			prep(settings.get('html'));
 		} else if (isImage(settings, href)) {
-		
-			console.log( 'this ma shit right here');
 
 			href = retinaUrl(settings, href);
 
