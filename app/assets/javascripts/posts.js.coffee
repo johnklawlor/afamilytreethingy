@@ -4,6 +4,9 @@
 
 ready = ->
 
+	$('img.member_image').colorbox({rel:'gal'})
+	$('.member_video').colorbox({rel:'gal'})
+
 	setInterval( ->
 		most_recent_post = $('#images').attr( 'data-most-recent-post')
 		console.log( most_recent_post)
@@ -98,12 +101,8 @@ ready = ->
 						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
 							$('#upload_complete').remove())
 		else if this.id == 'hidden_new_image'
-			data = { member_id: $('#post_member_id').val(), from_member : $('#post_from_member').val() }
-			console.log( data)
 			$(this).fileupload
 				dropZone: $(this).parent()
-				formData: data
-				dataType: "script"
 				replaceFileInput: false
 				add: (e, data) ->
 					types = /(\.|\/)(gif|jpe?g|png)$/i

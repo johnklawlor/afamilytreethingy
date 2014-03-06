@@ -421,6 +421,12 @@ img#profile_image {
 	float: left;
 }
 
+/* videos */
+
+.member_video{
+	margin-top: 30px;
+}
+
 /* progress bar */
 #progress_bar_section {
 	position: absolute;
@@ -680,6 +686,20 @@ div.no_updates{
 	bottom: 3px;
 	&:hover{
 		cursor: pointer;
+	}
+}
+
+.play_button{
+	position: absolute;
+	top: 102px;
+	left: 112px;
+	width: 35px;
+	border-radius: 5px;
+	&:hover{
+		width: 39px;
+		top: 100px;
+		left: 110px;
+		box-shadow: 3px 3px 15px black;
 	}
 }
 

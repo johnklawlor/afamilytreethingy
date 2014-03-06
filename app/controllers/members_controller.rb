@@ -12,10 +12,6 @@ class MembersController < ApplicationController
 	
 	def show
 		@member = Member.find_by_id(params[ :id])
-		@member.updates.where(viewed: false).each do |update|
-			update.viewed = true
-			update.save
-		end
 	end
 
 	def new

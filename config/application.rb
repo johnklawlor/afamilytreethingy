@@ -23,5 +23,7 @@ module Mypeeps
 			"#{html_tag}".html_safe 
 		end
 	
+	config.assets.paths << Rails.root.join('app', 'assets', 'flash')
+	config.assets.paths << Rails.root.join('vendor', 'assets', 'flash')
 	end
 end

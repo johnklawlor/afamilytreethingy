@@ -19,5 +19,7 @@
 //= require members
 //= require turbolinks
 //= require jit.js
+
+
 //= require_tree ../../../vendor/assets/javascripts
 //= require_tree .
