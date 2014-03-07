@@ -432,7 +432,7 @@ img#profile_image {
 }
 
 .show_post_video{
-	padding: 50px;
+
 }
 
 /* progress bar */
@@ -462,6 +462,11 @@ img#profile_image {
 }
 
 /* images */
+
+#image_page{
+	display: inline-block;
+}
+
 .over_image {
 	position: absolute;
 	left: 0px;
@@ -489,6 +494,11 @@ img#profile_image {
 .btm{
 	bottom: -18px;
 	left: 8px;
+}
+
+.btmLeft{
+	bottom: 5px;
+	left: 3px;
 }
 
 .white{

@@ -6,7 +6,7 @@ class UpdatesController < ApplicationController
 			current_member.updates.where( "update_on_type= 'wall' and created_at > ?", Time.at( most_recent_post)).each do |update|
 				@new_posts << Post.find_by_id( update.update_on_id)
 			end
-			@updates_count = current_member.updates.where("created_at > ?", (current_member.last_checked_updates || 0)).count
+			@updates_count = current_member.updates.where("created_at > ?", current_member.last_checked_updates).count
 		
 			respond_to do |format|
 				format.js

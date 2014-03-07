@@ -10,9 +10,9 @@
 
 		<div id="profile_image_section">
 			<div id="profile_image_holder">
-				<%= render partial: 'member_profile_image', object: @member, as: :member %>
+				<%= render partial: 'members/member_profile_image', object: @member, as: :member %>
 			</div>
-			<%= render 'hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
+			<%= render 'members/hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
 		</div>
 	</div>
 

@@ -1,45 +1,11 @@
 <div class="image_block vjs-default-skin" id="<%= post.id %>">
 	<% if post.image? %>
-		<%= link_to image_tag(post.image_url(:medium), class: "member_image img-rounded", href: post.image.url), post_path(post) %>
-		<div class="over_image tp">
-			<% if Member.find_by_id( post.from_member).can_delete?(post) %>
-				<%= link_to 'delete', post_path(post), method: :delete, remote: true %><br/>
-			<% end %>
-			
-			<%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
-			
-		</div>
-
+		<%= link_to image_tag(post.image_url(:medium), class: "member_image img-rounded", href: partial_post_path(post) ), post_path(post) %>
+		<%= render partial: 'posts/over_image', object: post, as: :post	 %>
 	<% elsif post.video? %>
-		<%= image_tag post.video.url(:thumb), class: "member_image member_video_thumb", href: post.video.url(:thumb) %> 
-
-		<%= link_to( post_path( post)) do %>
-			<div class='vjs-small-play-button' role='button' aria-live='polite' tabindex='0' aria-label='play video'>
-			<span aria-hidden='true'></span>
-			</div>
-			<% end %>
-		<%= video_tag post.video.url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}", data: { setup: '' } %>
-	
+		<%= render partial: 'posts/video_thumb', object: post, as: :post %>
+		<%= render partial: 'posts/over_image', object: post, as: :post	 %>
 	<% else %>
-		<div class="post tp">
-			<% from_member = Member.find_by_id( post.from_member) %>
-			<%= link_to image_tag( from_member.image_url(:thumb), class: 'member_post img-rounded'), member_path( from_member) %>
-
-				<div class="post_content">	
-					<%= link_to from_member.first_name.downcase, member_path( from_member) %>:	<%= post.content %>
-				</div>
-
-				<div class="post_meta">
-				<%= "- #{time_ago_in_words(post.created_at).to_s} ago" %>
-					<% if current_member.can_delete?(post) %>
-						<br/><%= link_to "delete", post_path(post), method: :delete, remote: true %>
-						| <%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
-					<% end %>
-				</div>
-
-				<div class="post_comments">				
-					<%= render partial: 'comments/comment', collection: post.comments.order('created_at ASC') %>
-				</div>
-		</div>
+		<%= render partial: 'posts/written', object: post, as: :post %>
 	<% end %>
 </div>

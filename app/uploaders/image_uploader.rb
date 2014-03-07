@@ -24,11 +24,23 @@ class ImageUploader < CarrierWave::Uploader::Base
 	end
 
   # Process files as they are uploaded:
-		resize_to_fit(800, 800)
+	resize_to_fit(800, 800)
   #
   # def scale(width, height)
   #   # do something
   # end
+	process :get_geometry
+
+	def geometry
+		@geometry
+	end
+    
+	def get_geometry
+		if (@file)
+			img = ::Magick::Image::read(@file.file).first
+			@geometry = img.columns.to_s + 'x' + img.rows.to_s
+		end
+	end
 
   # Create different versions of your uploaded files:
   	version :micro do

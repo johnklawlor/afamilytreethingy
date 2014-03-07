@@ -1,19 +1,27 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-#	$('img.member_image').colorbox({rel:'gal'})
-#	$('.play_button').click ->
-#		$(this).siblings('.member_video').css( 'display', 'inline-block');
-#		$(this).colorbox({ inline: true, href: $(".member_video_thumb").siblings('div.member_video')});
 
 ready = ->
 
 # WE HAVE TO BIND EVENTS TO VIDEO TAG BEFORE VIDEO JS DOES ITS THINGS!
 	$('video#actual_image').bind 'ended', ->
 		$('.over_image_marker').addClass('over_image tp')
-
+		
 	if $('.show_post_video').length != 0
 		videojs( $('.show_post_video')[0], {}, -> )
+			
+	loadVJS = ->	
+		if $('body').find('.show_post_video').length != 0
+			videojs( $('.show_post_video')[0], {}, -> )
+		$('body').find('video#actual_image_html5_api').bind 'ended', ->
+			$('.over_image_marker').addClass('over_image tp')
+		
+	$('body').on 'click', ->
+		$('img.member_image').colorbox({
+			rel: 'gal'
+			onComplete: loadVJS
+		})
 
 	$('body').on 'click', '.vjs-big-play-button, .vjs-play-control', ->
 		over_image = $(this).parents('#actual_image').siblings('.over_image_marker')

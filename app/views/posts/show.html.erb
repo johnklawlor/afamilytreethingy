@@ -1,10 +1,12 @@
 <% comments = @post.comments.order('created_at DESC') %>
 
+<% width = ( @post.image? && @post.image.get_geometry.partition('x').first+'px' ) || ( @post.video? && '260px' ) %>
+
 <div class="center" id='image_page' >
 	<div class="show_image">
 		<% most_recent_comment = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
 		<% if @post.image? %>
-			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id, most_recent_comment: most_recent_comment} %>
+			<%= image_tag @post.image_url, id: 'actual_image', size: @post.image.get_geometry, data: { image: @post.id, most_recent_comment: most_recent_comment} %>
 		<% elsif @post.video? %>
 			<%= video_tag @post.video.url, id: 'actual_image', class: "show_post_video video-js vjs-default-skin ", controls: true, width: '260px', height: '195px', data: { image: @post.id, most_recent_comment: most_recent_comment } %>
 
@@ -15,7 +17,8 @@
 				<%= render comments %>
 			</div>
 		</div>
+		<div class="over_image_marker over_image btmLeft">
+			<%= link_to "delete post", post_path(@post), method: :delete if current_member?( Member.find_by_id(@post.member_id)) %>
+		</div>
 	</div>
-	<br/>
-	<%= link_to "delete post", post_path(@post), method: :delete, class: "white" if current_member?( Member.find_by_id(@post.member_id)) %>
 </div>

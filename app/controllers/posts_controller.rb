@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_filter :can_delete?, only: :destroy
 
 	def show
 		@post = Post.find_by_id( params[ :id])
@@ -39,5 +40,11 @@ class PostsController < ApplicationController
 	private
 		def post_params
 			params.require( :post).permit( :member_id, :from_member, :content, :image)
+		end
+		
+		def can_delete?
+			unless current_member.can_delete?(Post.find_by_id(params[ :id]))
+				redirect_to member_path( current_member), status: 303, error: "You are not allowed to delete this post."
+			end
 		end
 end

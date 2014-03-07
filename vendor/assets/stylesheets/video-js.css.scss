@@ -638,6 +638,7 @@ positioning, use another containing element. Otherwise you risk messing up
 control positioning and full window mode. **
 */
 .video-js {
+  display: inline-block;
   background-color: #000;
   position: relative;
   padding: 0;
