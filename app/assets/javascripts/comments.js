@@ -20,4 +20,4 @@ ready = function() {
 	}
 }
 
-$(document).ready(ready);
+//$(document).ready(ready);

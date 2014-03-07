@@ -19,7 +19,7 @@
 			<% if post.image? %>
 				<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
 			<% else %>
-				<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
+				<%= link_to "commented", member_path( current_member, anchor: link) %> on a written thing on your profile page
 			<% end %>
 		<% elsif distinct_group_of_updates.update_on_type == 'wall' %>
 			<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
