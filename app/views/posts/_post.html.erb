@@ -1,4 +1,4 @@
-<div class="image_block" id="<%= post.id %>">
+<div class="image_block vjs-default-skin" id="<%= post.id %>">
 	<% if post.image? %>
 		<%= link_to image_tag(post.image_url(:medium), class: "member_image img-rounded", href: post.image.url), post_path(post) %>
 		<div class="over_image tp">
@@ -9,10 +9,15 @@
 			<%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
 			
 		</div>
-		
+
 	<% elsif post.video? %>
-		<%= image_tag post.video.url(:thumb), class: "member_video_thumb", href: post.video.url %> 
-		<%= image_tag 'play_button.png', class: "play_button" %>
+		<%= image_tag post.video.url(:thumb), class: "member_image member_video_thumb", href: post.video.url(:thumb) %> 
+
+		<%= link_to( post_path( post)) do %>
+			<div class='vjs-small-play-button' role='button' aria-live='polite' tabindex='0' aria-label='play video'>
+			<span aria-hidden='true'></span>
+			</div>
+			<% end %>
 		<%= video_tag post.video.url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}", data: { setup: '' } %>
 	
 	<% else %>

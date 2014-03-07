@@ -2,18 +2,20 @@
 
 <div class="center" id='image_page' >
 	<div class="show_image">
+		<% most_recent_comment = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
 		<% if @post.image? %>
-			<% most_recent_comment = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
 			<%= image_tag @post.image_url, id: 'actual_image', data: { image: @post.id, most_recent_comment: most_recent_comment} %>
+		<% elsif @post.video? %>
+			<%= video_tag @post.video.url, id: 'actual_image', class: "show_post_video video-js vjs-default-skin ", controls: true, width: '260px', height: '195px', data: { image: @post.id, most_recent_comment: most_recent_comment } %>
+
 		<% end %>
-		<div class="over_image tp">
+		<div class="over_image_marker over_image tp">
 			<%= render partial: "comments/comment_form", object: @post, as: :post %>
 			<div id="image_comments" >
 				<%= render comments %>
 			</div>
 		</div>
-	
-		<br/>
-		<%= link_to "delete image", post_path(@post), method: :delete, class: "white" if current_member?( Member.find_by_id(@post.member_id)) %>
 	</div>
+	<br/>
+	<%= link_to "delete post", post_path(@post), method: :delete, class: "white" if current_member?( Member.find_by_id(@post.member_id)) %>
 </div>

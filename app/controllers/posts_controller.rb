@@ -3,6 +3,11 @@ class PostsController < ApplicationController
 	def show
 		@post = Post.find_by_id( params[ :id])
 	end
+	
+	def partial
+		@post = Post.find_by_id( params[ :id])
+		render 'show', layout: false
+	end
 
 	def create
 		@post = Post.new( post_params) 

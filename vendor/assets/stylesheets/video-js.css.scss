@@ -4,7 +4,6 @@ Version 4.4.1
 Create your own skin at http://designer.videojs.com
 */
 /* SKIN
-================================================================================
 The main class name for all skin-specific styles. To make your own skin,
 replace all occurances of 'vjs-default-skin' with a new name. Then add your new
 skin name to your video tag instead of the default skin.
@@ -362,10 +361,9 @@ fonts to show/hide properly.
 Positioning of the play button in the center or other corners can be done more
 easily in the skin designer. http://designer.videojs.com/
 */
-.vjs-default-skin .vjs-big-play-button {
+.vjs-play-button{
   left: 0.5em;
-  top: 0.5em;
-  font-size: 3em;
+  bottom: 0.5em;
   display: block;
   z-index: 2;
   position: absolute;
@@ -394,6 +392,18 @@ easily in the skin designer. http://designer.videojs.com/
   -o-transition: all 0.4s;
   transition: all 0.4s;
 }
+
+a .vjs-small-play-button{
+  @extend .vjs-play-button;
+  font-size: 1em;
+  color: #ccc;
+}
+
+.vjs-big-play-button{
+  @extend .vjs-play-button;
+  font-size: 2em;
+}
+
 /* Optionally center */
 .vjs-default-skin.vjs-big-play-centered .vjs-big-play-button {
   /* Center it horizontally */
@@ -416,7 +426,7 @@ easily in the skin designer. http://designer.videojs.com/
 .vjs-default-skin.vjs-using-native-controls .vjs-big-play-button {
   display: none;
 }
-.vjs-default-skin:hover .vjs-big-play-button,
+.vjs-default-skin:hover .vjs-play-button,
 .vjs-default-skin .vjs-big-play-button:focus {
   outline: 0;
   border-color: #fff;
@@ -433,7 +443,7 @@ easily in the skin designer. http://designer.videojs.com/
   -o-transition: all 0s;
   transition: all 0s;
 }
-.vjs-default-skin .vjs-big-play-button:before {
+.vjs-play-button:before {
   content: "\e001";
   font-family: VideoJS;
   /* In order to center the play icon vertically we need to set the line height

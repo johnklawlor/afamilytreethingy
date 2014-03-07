@@ -13,11 +13,12 @@ Mypeeps::Application.routes.draw do
 	resources :spouse_relationships, only: [ :create, :destroy]
 	resources :tree, only: [ :show, :edit, :update]
 	resources :password_resets, only: [ :new, :create, :edit, :update]
-	resources :images, only: [ :show, :new, :create, :destroy]
 	resources :comments, only: [ :create, :destroy] do
 		collection { get :events }
 	end
-	resources :posts, only: [ :show, :create, :edit, :update, :destroy]
+	resources :posts, only: [ :show, :create, :edit, :update, :destroy] do
+		member { get  :partial }
+	end
 	
 	get '/signup', to: 'members#new'
 	get '/signin', to: 'sessions#new'

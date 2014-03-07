@@ -1,13 +1,24 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+#	$('img.member_image').colorbox({rel:'gal'})
+#	$('.play_button').click ->
+#		$(this).siblings('.member_video').css( 'display', 'inline-block');
+#		$(this).colorbox({ inline: true, href: $(".member_video_thumb").siblings('div.member_video')});
 
 ready = ->
 
-	$('img.member_image').colorbox({rel:'gal'})
-	$('.play_button').click ->
-		$(this).siblings('.member_video').css( 'display', 'inline-block');
-		$(this).colorbox({ inline: true, href: $(".member_video_thumb").siblings('div.member_video')});
+# WE HAVE TO BIND EVENTS TO VIDEO TAG BEFORE VIDEO JS DOES ITS THINGS!
+	$('video#actual_image').bind 'ended', ->
+		$('.over_image_marker').addClass('over_image tp')
+
+	if $('.show_post_video').length != 0
+		videojs( $('.show_post_video')[0], {}, -> )
+
+	$('body').on 'click', '.vjs-big-play-button, .vjs-play-control', ->
+		over_image = $(this).parents('#actual_image').siblings('.over_image_marker')
+		over_image.attr( 'class', 'over_image_marker' )
+		over_image.hide()
 
 	setInterval( ->
 		most_recent_post = $('#images').attr( 'data-most-recent-post')
