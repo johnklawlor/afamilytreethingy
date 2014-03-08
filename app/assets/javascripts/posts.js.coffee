@@ -19,14 +19,27 @@ ready = ->
 		written_post.hide().css( { 'height': 'initial' })
 		setTimeout ->
 			height = written_post.outerHeight()
-			console.log( height )
 			written_post.animate { height: '260px'}, 0, ->
-				written_post.show()
+				written_post
 				written_post.attr( 'data-height', height)
 				if height > 260
 					written_post.append("<div class='expand expand_convo'>+</div>")
 					$('.expand_convo').bind 'click', expanding
 		, 0
+	
+	duration = 100
+	$('.image_block').hide()
+	posts = $('.image_block').toArray()
+	
+	length = posts.length
+	i=0
+
+	expandAndShow = ->
+		$(posts[i++]).show().addClass('expand')
+		if i < length
+			setTimeout expandAndShow, duration
+	
+	expandAndShow()
 
 # WE HAVE TO BIND EVENTS TO VIDEO TAG BEFORE VIDEO JS DOES ITS THINGS!
 	$('video#actual_image').bind 'ended', ->
