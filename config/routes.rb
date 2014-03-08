@@ -7,6 +7,7 @@ Mypeeps::Application.routes.draw do
 	
 	resources :members do
 		get 'crop', on: :member
+		get 'new_post', on: :member
 	end
 	resources :sessions, only: [ :new, :create, :destroy]
 	resources :relationships, only: [ :create, :destroy]

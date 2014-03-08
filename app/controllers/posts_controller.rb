@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new( post_params)
-		if params[ :post][ :image].content_type == "video/mp4"
+		if( params[ :post][ :image].present? && params[ :post][ :image].content_type == "video/mp4")
 			@post.image = nil
 			@post.video = params[ :post][:image]
 		end

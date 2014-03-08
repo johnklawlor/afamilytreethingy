@@ -93,6 +93,10 @@ class MembersController < ApplicationController
 		end
 	end
 	
+	def new_post
+		@member = Member.find_by_id( params[ :id])
+	end
+	
 	private
 	
 		def member_params

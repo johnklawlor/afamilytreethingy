@@ -3,6 +3,6 @@
 <% else %>
 	console.log("<%= j render @post %>")
 	new_post = $("<%= j render @post %>")
-	$("#post_form").after( new_post)
+	$("#member_info").after( new_post)
 	$('#post_content').val('')
 <% end %>

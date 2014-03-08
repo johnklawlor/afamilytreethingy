@@ -38,11 +38,11 @@ ready = ->
 
 	, 20000)
 	
-	$('body').on 'click', '.exit_button, #comment_submit', ->
+	$('body').on 'click', '.exit_button, #comment_submit, #post_submit', ->
 		post = $(this).closest( '.image_block')
 		post.off( 'mouseover')
 		form_holder = $(this).closest( '.show_member_comment_form_holder')
-		form_holder.nextAll( '.hidden_over_image').attr( 'class', 'over_image tp')
+		post.find( '.hidden_over_image').attr( 'class', 'over_image tp')
 		form_holder.fadeOut 1000, ->
 			$(this).remove()
 	

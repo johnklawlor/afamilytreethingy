@@ -1,0 +1,10 @@
+member_info = $("div#member_info")
+member_info.find( '.over_image').fadeOut(1000)
+member_info.prepend("<div class='show_member_comment_form_holder'><%= j render partial: 'posts/post_form' %></div>")
+member_info.on( 'mouseover', function(e) {
+	e.preventDefault()
+	$(this).find( '.over_image').fadeOut( 1000, function() {
+		$(this).attr( 'class', 'hidden_over_image') })
+})
+$('.show_member_comment_form_holder').children( '.show_member_post_form').prepend( "<span class='exit_button' >")
+$('.show_member_comment_form_holder').fadeIn(1000)

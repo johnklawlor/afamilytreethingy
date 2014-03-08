@@ -1,6 +1,6 @@
-<%= form_for( @member.posts.new( from_member: current_member.id ), html: { class: 'f-hz'}, remote: true) do |f| %>
-	<%= f.text_area :content, placeholder: "write to #{@member.first_name.downcase}", size: "18x9" %>
+<%= form_for( @member.posts.new( from_member: current_member.id ), html: { class: 'show_member_post_form f-hz'}, remote: true) do |f| %>
+	<%= f.text_area :content, placeholder: "write to #{@member.first_name.downcase}" %>
 	<%= f.hidden_field :from_member %>
 	<%= f.hidden_field :member_id %>
-	<%= f.submit 'post', class: 'btn btn-primary btn-sm btn-hz btn-within' %>
+	<%= f.submit 'post', class: 'btn btn-primary btn-sm btn-hz btn-within', id: "post_submit" %>
 <% end %>

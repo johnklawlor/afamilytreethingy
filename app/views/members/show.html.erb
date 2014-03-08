@@ -3,21 +3,16 @@
 
 <% posts = @member.posts.order('created_at DESC') %>
 
-	<% most_recent_post = (!posts.empty? && posts.first.created_at.to_i) || 0 %>
-	<div id="images" data-most-recent-post="<%= most_recent_post %>">
+<% most_recent_post = (!posts.empty? && posts.first.created_at.to_i) || 0 %>
+<div id="images" data-most-recent-post="<%= most_recent_post %>">
 
 	<div id="member_info" class="image_block">
-
 		<div id="profile_image_section">
 			<div id="profile_image_holder">
 				<%= render partial: 'members/member_profile_image', object: @member, as: :member %>
 			</div>
 			<%= render 'members/hidden_profile_image_upload' if signed_in? && current_member?(current_member) %>
 		</div>
-	</div>
-
-	<div class="image_block" id="post_form">
-		<%= render 'posts/post_form' %>
 	</div>
 	
 	<%= render partial: 'posts/post', collection: posts %>
