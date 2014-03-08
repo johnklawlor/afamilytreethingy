@@ -265,7 +265,7 @@ img.member_image{
 
 img.member_post{
 	float: left;
-	margin-right: 3px;
+	margin: 0 3px 5px 0;
 }
 
 .post{
@@ -288,6 +288,7 @@ img.member_post{
 		float: left;
 		width: 95%;
 		margin-bottom: 3px;
+		margin-left: 7px;
 	}
 }
 
@@ -343,6 +344,7 @@ img#profile_image {
 	display: inline-block;
 	width: 260px;
 	padding: 0;
+	border: 33px solid #111123;
 }
 
 #profile_image_holder{

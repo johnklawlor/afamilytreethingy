@@ -1,4 +1,4 @@
-<div class="image_block vjs-default-skin" id="<%= post.id %>">
+<div class="image_block " id="<%= post.id %>">
 	<% if post.image? %>
 		<%= link_to image_tag(post.image_url(:medium), class: "member_image img-rounded", href: partial_post_path(post) ), post_path(post) %>
 		<%= render partial: 'posts/over_image', object: post, as: :post	 %>

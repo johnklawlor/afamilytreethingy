@@ -9,9 +9,9 @@
 		<div class="post_meta">
 		<%= "- #{time_ago_in_words(post.created_at).to_s} ago" %>
 			<% if current_member.can_delete?(post) %>
-				<br/><%= link_to "delete", post_path(post), method: :delete, remote: true %>
-				| <%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
+				<br/><%= link_to "delete", post_path(post), method: :delete, remote: true %> |
 			<% end %>
+			<%= link_to 'comment', post_path(post), class: "comment_link", remote: true %>
 		</div>
 
 		<div class="post_comments">				
