@@ -1,3 +1,4 @@
+/*
 var ready;
 
 ready = function() {
@@ -20,4 +21,5 @@ ready = function() {
 	}
 }
 
-//$(document).ready(ready);
+$(document).ready(ready);
+*/

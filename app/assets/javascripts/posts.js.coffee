@@ -110,10 +110,19 @@ ready = ->
 					types = /(\.|\/)(gif|jpe?g|png)$/i
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
-						$('#progress_bar_section').show()
-						data.submit()
+						if filesSent > 0
+							alert( "You can only post one photo or video at a time to another person's page")
+							filesSent = 0
+							return false
+						else
+							$('#progress_bar_section').show()
+							data.submit()
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file")
+				send: (e, data) ->
+					filesSent += 1
+				done: (e, data) ->
+					filesSent = 0
 				progressall: (e, data) ->
 					progress = parseInt(data.loaded / data.total * 100, 10)
 					$('#bar').css('width', progress + '%')
@@ -122,17 +131,27 @@ ready = ->
 						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
 							$('#upload_complete').remove())
 		else if this.id == 'hidden_new_image'
+			filesSent = 0
 			$(this).fileupload
 				dropZone: $(this).parent()
 				replaceFileInput: false
 				add: (e, data) ->
-					types = /(\.|\/)(gif|jpe?g|png)$/i
+					types = /(\.|\/)(gif|jpe?g|png|m4v)$/i
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
-						$('#progress_bar_section').fadeTo(200, 0.8)
-						data.submit()
+						if filesSent > 0
+							alert( "You can only post one photo or video at a time to another person's page")
+							filesSent = 0
+							return false
+						else
+							$('#progress_bar_section').fadeTo(200, 0.8)
+							data.submit()
 					else
-						alert("#{file.name} is not a gif, jpeg, or png image file")
+						alert("#{file.name} is not a gif, jpeg, or png image file nor an mv4 file")
+				send: (e, data) ->
+					filesSent += 1
+				done: (e, data) ->
+					filesSent = 0
 				progressall: (e, data) ->
 					progress = parseInt(data.loaded / data.total * 100, 10)
 					$('#bar').css('width', progress + '%')
