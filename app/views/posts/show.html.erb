@@ -17,8 +17,6 @@
 				<%= render comments %>
 			</div>
 		</div>
-		<div class="over_image_marker over_image btmLeft">
-			<%= link_to "delete post", post_path(@post), method: :delete if current_member?( Member.find_by_id(@post.member_id)) %>
 		</div>
 	</div>
 </div>

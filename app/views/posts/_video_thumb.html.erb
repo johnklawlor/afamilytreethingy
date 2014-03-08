@@ -1,10 +1,9 @@
 <div class="vjs-default-skin">
-	<%= image_tag post.video.url(:thumb), class: "member_image member_video_thumb", href: partial_post_path(post) %> 
+	<%= image_tag post.video.url(:thumb), class: "member_video_thumb" %> 
 
-	<%= link_to( post_path( post)) do %>
-		<div class='vjs-small-play-button' role='button' aria-live='polite' tabindex='0' aria-label='play video'>
+		<div class='member_image vjs-small-play-button' href="<%= partial_post_path( post) %>" role='button' aria-live='polite' tabindex='0' aria-label='play video'>
 		<span aria-hidden='true'></span>
 		</div>
-		<% end %>
+		
 	<%= video_tag post.video.url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}", data: { setup: '' } %>
 </div>

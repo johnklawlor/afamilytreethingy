@@ -271,8 +271,20 @@ img.member_post{
 .post{
 	line-height: 1;
 	width: 100%;
+	margin: 5px;
+}
+
+.image_block .expand_convo{
 	position: absolute;
-	margin: 0 7px;
+	bottom: 22px;
+	right: 10px;
+	font-size: 56px;
+	display: inline-block;
+	line-height: 0;
+	color: $headerBright;
+	&:hover{
+		cursor: pointer;
+	}
 }
 
 .post_content{
@@ -485,7 +497,7 @@ img#profile_image {
 }
 
 .btmLeft{
-	bottom: 5px;
+	bottom: 44px;
 	left: 3px;
 }
 
@@ -734,14 +746,14 @@ from {
 	transform:rotateY(90deg);
 }  
 to {  
-	-webkit-transform:rotateY(180deg);
-	transform:rotateY(180deg);
+	-webkit-transform:rotateY(0deg);
+	transform:rotateY(0deg);
     } 
 }
 
 .expand {
     -webkit-animation-name: expand; 
-    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-iteration-count: 1; 
     -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-duration: 1s; 
 }

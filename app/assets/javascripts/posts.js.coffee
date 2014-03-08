@@ -3,6 +3,30 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
+	
+	expanding = ->
+		$('.expand_convo').unbind 'click', expanding
+		written_post = $(this).parents('.image_block')
+		height = written_post.attr('data-height')
+		written_post.show().animate { 'height': "#{height}"+'px'}, 1000, ->
+			$('.expand_convo').bind 'click', collapsing = ->
+				written_post.animate {'height': '260px'}, 1000, (e) ->
+					$('.expand_convo').unbind 'click', collapsing
+					$('.expand_convo').bind 'click', expanding
+					
+	$('.post').each ->
+		written_post = $(this).parents('.image_block')
+		written_post.hide().css( { 'height': 'initial' })
+		setTimeout ->
+			height = written_post.outerHeight()
+			console.log( height )
+			written_post.animate { height: '260px'}, 0, ->
+				written_post.show()
+				written_post.attr( 'data-height', height)
+				if height > 260
+					written_post.append("<div class='expand expand_convo'>+</div>")
+					$('.expand_convo').bind 'click', expanding
+		, 0
 
 # WE HAVE TO BIND EVENTS TO VIDEO TAG BEFORE VIDEO JS DOES ITS THINGS!
 	$('video#actual_image').bind 'ended', ->
@@ -18,7 +42,7 @@ ready = ->
 			$('.over_image_marker').addClass('over_image tp')
 		
 	$('body').on 'click', ->
-		$('img.member_image').colorbox({
+		$('.member_image').colorbox({
 			rel: 'gal'
 			onComplete: loadVJS
 		})
