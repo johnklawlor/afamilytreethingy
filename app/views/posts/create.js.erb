@@ -4,5 +4,6 @@
 	console.log("<%= j render @post %>")
 	new_post = $("<%= j render @post %>")
 	$("#member_info").after( new_post)
+	new_post.addClass('expand')
 	$('#post_content').val('')
 <% end %>

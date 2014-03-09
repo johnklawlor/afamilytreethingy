@@ -1,4 +1,4 @@
-<% distinct_updates = current_member.updates.find_by_sql("select update_on_type, update_on_id, max(created_at) as m from updates group by update_on_type, update_on_id order by m desc") %>
+<% distinct_updates = Update.find_by_sql("select update_on_type, update_on_id, max(created_at) as m from updates where member_id=#{current_member.id} group by update_on_type, update_on_id order by m desc") %>
 <% distinct_updates.each do |distinct_group_of_updates| %>
 	<li>
 		<div class="update_block">
