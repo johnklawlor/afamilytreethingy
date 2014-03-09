@@ -3,8 +3,9 @@ class UpdatesController < ApplicationController
 		if signed_in?
 			@new_posts = []
 			most_recent_post = params[ :most_recent_post].to_i + 1
-			current_member.updates.where( "update_on_type= 'wall' and created_at > ?", Time.at( most_recent_post)).each do |update|
-				@new_posts << Post.find_by_id( update.update_on_id)
+			member = Member.find_by_id( params[ :member_id])
+			member.updates.where( "updated_by_type= 'post' and created_at > ?", Time.at( most_recent_post)).each do |update|
+				@new_posts << Post.find_by_id( update.updated_by_id)
 			end
 			@updates_count = current_member.updates.where("created_at > ?", current_member.last_checked_updates).count
 		

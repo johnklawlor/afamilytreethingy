@@ -1,28 +1,36 @@
-<% distinct_updates = Update.find_by_sql("select update_on_type, update_on_id, max(created_at) as m from updates where member_id=#{current_member.id} group by update_on_type, update_on_id order by m desc") %>
+<% distinct_updates = Update.find_by_sql("select updated_by_type, updated_by_id, max(created_at) as m from updates where member_id=#{current_member.id} group by updated_by_type, updated_by_id order by m desc") %>
 <% distinct_updates.each do |distinct_group_of_updates| %>
 	<li>
 		<div class="update_block">
 		<% names = [] %>
 		<% link = 0 %>
 <!-- i could change this code so that i check the size of distinct_group_of_updates. if it's large than one, then iterate over that listed as i currently have below. otherwise, just run it. this avoids having to run subselects for every update. -->
-		<% current_member.updates.where(update_on_type: distinct_group_of_updates.update_on_type, update_on_id: distinct_group_of_updates.update_on_id).order('created_at DESC').each_with_index do |update, index| %>
+		<% current_member.updates.where(updated_by_type: distinct_group_of_updates.updated_by_type, updated_by_id: distinct_group_of_updates.updated_by_id).order('created_at DESC').each_with_index do |update, index| %>
 			<% member = Member.find_by_id( update.from_member) %>
 			<% if index == 0 %>
 				<%= image_tag member.image_url(:thumb) %>
-				<% link = update.update_on_id %>
+				<% link = update.updated_by_id %>
 			<% end %>
 			<% names << member.first_name.downcase %>
 		<% end %>
 		<%= names.to_sentence %>
-		<% if distinct_group_of_updates.update_on_type == 'post' %>
-			<% post = Post.find_by_id( distinct_group_of_updates.update_on_id) %>
+		<% post = Post.find_by_id( distinct_group_of_updates.updated_by_id) %>
+		<% if distinct_group_of_updates.updated_by_type == 'comment' %>
 			<% if post.image? %>
 				<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
+			<% elsif post.video?%>
+				<%= link_to "comment", post_path( current_member.posts.find_by_id( link)) %> on one of your videos
 			<% else %>
 				<%= link_to "commented", member_path( current_member, anchor: link) %> on a written thing on your profile page
 			<% end %>
-		<% elsif distinct_group_of_updates.update_on_type == 'wall' %>
-			<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
+		<% elsif distinct_group_of_updates.updated_by_type == 'post' %>
+			<% if post.image? %>
+				posted an <%= link_to "image", post_path( current_member.posts.find_by_id( link)) %> to your profile page
+			<% elsif post.video? %>
+				posted a <%= link_to "video", post_path( current_member.posts.find_by_id( link)) %> to your profile page
+			<% else %>
+				<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
+			<% end %>
 		<% end %>
 		</div>
 	</li>

@@ -16,11 +16,13 @@ class Post < ActiveRecord::Base
 	
 	def create_update
 		to_member = Member.find_by_id( self.member_id)
-		to_member.updates.create!( update_on_type: 'wall', update_on_id: self.id, from_member: self.from_member) unless to_member.id == self.from_member
+		type = "written"
+		type = ( self.image? && 'image') || (self.video? && 'video') || 'written'
+		to_member.updates.create!( update_on_type: type, updated_by_type: 'post', updated_by_id: self.id, from_member: self.from_member) unless to_member.id == self.from_member
 	end
 	
 	def delete_update
-		update_to_delete = Update.where( update_on_type: 'wall', update_on_id: self.id).each do |update|
+		Update.where( updated_by_type: 'post', updated_by_id: self.id).each do |update|
 			update.destroy
 		end
 	end

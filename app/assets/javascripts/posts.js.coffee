@@ -27,19 +27,21 @@ ready = ->
 					$('.expand_convo').bind 'click', expanding
 		, 0
 	
-	duration = 100
-	$('.image_block').hide()
-	posts = $('.image_block').toArray()
+	rotateInPosts = ->
+		duration = 100
+		$('.image_block').hide()
+		posts = $('.image_block').toArray()
 	
-	length = posts.length
-	i=0
+		length = posts.length
+		i=0
 
-	expandAndShow = ->
-		$(posts[i++]).show().addClass('expand')
-		if i < length
-			setTimeout expandAndShow, duration
+		expandAndShow = ->
+			$(posts[i++]).show().addClass('expand')
+			if i < length
+				setTimeout expandAndShow, duration
 	
-	expandAndShow()
+		expandAndShow()
+	rotateInPosts()
 
 # WE HAVE TO BIND EVENTS TO VIDEO TAG BEFORE VIDEO JS DOES ITS THINGS!
 	$('video#actual_image').bind 'ended', ->
@@ -67,11 +69,12 @@ ready = ->
 
 	setInterval( ->
 		most_recent_post = $('#images').attr( 'data-most-recent-post')
+		member_id = $('#post_member_id').val()
 		console.log( most_recent_post)
 		$.ajax
 			type: "GET",
 			url: '/updates/posts'
-			data: { 'most_recent_post' : most_recent_post }
+			data: { 'most_recent_post' : most_recent_post, 'member_id': member_id }
 
 	, 20000)
 	
