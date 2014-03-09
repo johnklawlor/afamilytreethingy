@@ -128,8 +128,14 @@
 
 .qtip-transparent{
 	background-color: transparent;
-	color: #454545;
+	border-color: #E2E2E2;
+	color: #fff;
 }
+	
+	.qtip-transparent .qtip-titlebar{
+		background-color: #000;
+		color: #fff;
+	}
 
 /*! Light tooltip style */
 .qtip-light{

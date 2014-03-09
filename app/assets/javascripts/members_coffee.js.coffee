@@ -68,7 +68,7 @@ ready = ->
 				$(this).slideUp(1000)
 			delay: 0
 		}
-		style: { classes: 'qtip-light qtip-rounded' }
+		style: { classes: 'qtip-transparent qtip-rounded' }
 
 class AvatarCropper
 	constructor: ->
