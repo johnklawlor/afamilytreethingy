@@ -126,7 +126,10 @@
 		color: #111;
 	}
 
-
+.qtip-transparent{
+	background-color: transparent;
+	color: #454545;
+}
 
 /*! Light tooltip style */
 .qtip-light{

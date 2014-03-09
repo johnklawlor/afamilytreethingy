@@ -274,17 +274,29 @@ img.member_post{
 	margin: 5px;
 }
 
-.image_block .expand_convo{
+.image_block .change_post_height{
 	position: absolute;
-	bottom: 22px;
+	bottom: 10px;
 	right: 10px;
-	font-size: 56px;
+	background-size: 20px 20px;
+	height: 20px;
+	width: 20px;
 	display: inline-block;
 	line-height: 0;
 	color: $headerBright;
 	&:hover{
 		cursor: pointer;
 	}
+}
+
+.expand_convo{
+	@extend .change_post_height;
+	background-image: image-url('plus_sign.png');
+}
+
+.collapse_convo{
+	@extend .change_post_height;
+	background-image: image-url('minus_sign.png');
 }
 
 .post_content{
@@ -345,8 +357,8 @@ img.member_post{
 		font-family: geosanslight;
 		letter-spacing: -2px;
 		text-align: left;
-		bottom: -20px;
-		left: 0;
+		bottom: -15px;
+		left: 5px;
 		text-shadow: 1px 1px 1px black;
 		width: 100%;
 	}
@@ -356,7 +368,7 @@ img#profile_image {
 	display: inline-block;
 	width: 260px;
 	padding: 0;
-	border: 33px solid #111123;
+	border: 5px solid #111123;
 }
 
 #profile_image_holder{
@@ -722,22 +734,29 @@ div.no_updates{
 }
 
 
-@-webkit-keyframes collapse {  
+@-webkit-keyframes rotate {  
 from {  
-	-webkit-transform:rotateY(0deg);
-	transform:rotateY(0deg);
+	transform:rotateZ(0deg);
+	-ms-transform:rotateZ(0deg);
+	-webkit-transform:rotateZ(0deg);
 }  
 to {  
-	-webkit-transform:rotateY(90deg);
-	transform:rotateY(90deg);
+	transform:rotateZ(90deg);
+	-ms-transform:rotateZ(90deg);
+	-webkit-transform:rotateZ(90deg);
     } 
 }
 
-.collapse {
-    -webkit-animation-name: collapse; 
+.rotate {
+    -webkit-animation-name: rotate; 
     -webkit-animation-iteration-count: infinite; 
     -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-duration: 1s; 
+}
+
+.rotateBack{
+	@extend .rotate;
+	-webkit-animation-direction: reverse;
 }
 
 @-webkit-keyframes expand {  

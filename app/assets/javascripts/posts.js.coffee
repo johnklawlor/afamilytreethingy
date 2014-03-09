@@ -3,16 +3,25 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
+
+	expand_collapse = $('.expand_convo')
+	expand_collapse.addClass('rotate')
 	
 	expanding = ->
-		$('.expand_convo').unbind 'click', expanding
+		expand_collapse = $('.expand_convo')
+		expand_collapse.unbind 'click', expanding
+		expand_collapse.addClass('rotate')
 		written_post = $(this).parents('.image_block')
 		height = written_post.attr('data-height')
+		
 		written_post.show().animate { 'height': "#{height}"+'px'}, 1000, ->
-			$('.expand_convo').bind 'click', collapsing = ->
+			expand_collapse.removeClass('rotate expand_convo').addClass('collapse_convo')
+			expand_collapse.bind 'click', collapsing = ->
+				expand_collapse.addClass('rotateBack')
 				written_post.animate {'height': '260px'}, 1000, (e) ->
-					$('.expand_convo').unbind 'click', collapsing
-					$('.expand_convo').bind 'click', expanding
+					expand_collapse.removeClass('rotateBack collapse_convo').addClass('expand_convo')
+					expand_collapse.unbind 'click', collapsing
+					expand_collapse.bind 'click', expanding
 					
 	$('.post').each ->
 		written_post = $(this).parents('.image_block')
@@ -23,7 +32,7 @@ ready = ->
 				written_post
 				written_post.attr( 'data-height', height)
 				if height > 260
-					written_post.append("<div class='expand expand_convo'>+</div>")
+					written_post.append("<div class='expand_convo'></div>")
 					$('.expand_convo').bind 'click', expanding
 		, 0
 	
@@ -41,6 +50,9 @@ ready = ->
 				setTimeout expandAndShow, duration
 	
 		expandAndShow()
+		setTimeout ->
+			$('.image_block').removeClass('expand')
+		, 10000
 	rotateInPosts()
 
 # WE HAVE TO BIND EVENTS TO VIDEO TAG BEFORE VIDEO JS DOES ITS THINGS!
@@ -83,6 +95,7 @@ ready = ->
 		post.off( 'mouseover')
 		form_holder = $(this).closest( '.show_member_comment_form_holder')
 		post.find( '.hidden_over_image').attr( 'class', 'over_image tp')
+		post.find('p').fadeIn(1000)
 		form_holder.fadeOut 1000, ->
 			$(this).remove()
 	

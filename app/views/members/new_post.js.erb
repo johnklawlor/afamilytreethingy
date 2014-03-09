@@ -1,5 +1,6 @@
 member_info = $("div#member_info")
 member_info.find( '.over_image').fadeOut(1000)
+member_info.find('p').fadeOut(1000)
 member_info.prepend("<div class='show_member_comment_form_holder'><%= j render partial: 'posts/post_form' %></div>")
 member_info.on( 'mouseover', function(e) {
 	e.preventDefault()
