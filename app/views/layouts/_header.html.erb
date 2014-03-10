@@ -13,7 +13,7 @@
 				<li> <%= link_to "edit my profile", edit_member_path(current_member) %></li>
 				<li>
 					<%= link_to "my profile", current_member, id: 'my_profile_link' %>
-					<% updates = current_member.updates.where("created_at > ?", (current_member.last_checked_updates) ).count %>
+					<% updates = ( signed_in? && current_member.updates.where("created_at > ?", (current_member.last_checked_updates) ).count) || 0 %>
 					<% if updates == 0 %> 
 						<div id="updates_count" data-title='updates' class='no_updates'>
 							Up
