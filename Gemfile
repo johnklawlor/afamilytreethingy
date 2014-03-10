@@ -15,6 +15,7 @@ gem 'carrierwave', '0.9.0'
 gem 'rmagick', '2.13.2'
 gem "jquery-colorbox-rails", "~> 0.1.5"
 gem "video-js-rails", "~> 4.3.0.0"
+gem "rack-timeout"
 
 group :production do
 	gem 'rails_12factor'

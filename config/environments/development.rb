@@ -31,4 +31,6 @@ Mypeeps::Application.configure do
 	config.action_mailer.delivery_method = :smtp
 
 	Paperclip.options[:command_path] = "/usr/local/bin/"
+	
+	ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
 end
