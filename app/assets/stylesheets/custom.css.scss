@@ -154,7 +154,7 @@ footer {
 
 .box{
 	display: inline-block;
-	background-image: image-url('blue_box.png');
+	background-image: image-url("blue_box.png");
 	width: 61px;
 	height: 54px;
 }
@@ -313,12 +313,12 @@ img.member_post{
 
 .expand_convo{
 	@extend .change_post_height;
-	background-image: image-url('plus_sign.png');
+	background-image: image-url("plus_sign.png");
 }
 
 .collapse_convo{
 	@extend .change_post_height;
-	background-image: image-url('minus_sign.png');
+	background-image: image-url("minus_sign.png");
 }
 
 .post_content{
@@ -733,7 +733,7 @@ div.no_updates{
 }
 
 .exit_button{
-	background-image: image-url('exit_button.png');
+	background-image: image-url("exit_button.png");
 	width: 32px;
 	height: 32px;
 	display: inline-block;
