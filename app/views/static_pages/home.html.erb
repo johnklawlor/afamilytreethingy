@@ -1,9 +1,21 @@
 <div class="center hero-unit"> 
 	<h1>Welcome to my peeps!</h1> 
-  
-  	<div class="welcome">
-  	so what is mypeeps? mypeeps is an excessively elaborate family tree. it's a place that allows you to add family members, update information, keep track of the family tree's changes, and then view it all in a simple tree animation. new features will be added as i learn how to build them, and the layout will be changing constantly. for now, though, sign up below or sign in above!
-	</div><br/>
 
-	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %> 
+	<div id="my_peeps_description">a place to share your photos and videos with the family.</div>
+
+	<br/>
+	<%= link_to "Sign in now!", signin_path, class: "btn btn-lg btn-primary" %>
+	<br/>
+	<br/>
+	
+	<div class="boxes">
+		<% (1..4).each do |i| %>
+			<% (1..4).each do |i| %>
+				<div class="box"></div>
+			<% end %>
+			<br/>
+		<% end %>
+	</div>
+	
+	<div id="fb">because what happens on facebook stays on facebook.</div>
 </div> 

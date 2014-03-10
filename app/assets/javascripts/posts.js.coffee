@@ -79,16 +79,19 @@ ready = ->
 		over_image.attr( 'class', 'over_image_marker' )
 		over_image.hide()
 
-	setInterval( ->
-		most_recent_post = $('#images').attr( 'data-most-recent-post')
-		member_id = $('#post_member_id').val()
-		console.log( most_recent_post)
-		$.ajax
-			type: "GET",
-			url: '/updates/posts'
-			data: { 'most_recent_post' : most_recent_post, 'member_id': member_id }
-
-	, 20000)
+	if $('div#images').length != 0
+		getPosts = setInterval( ->
+			most_recent_post = $('#images').attr( 'data-most-recent-post')
+			member_id = $('#post_member_id').val()
+			console.log( most_recent_post)
+			$.ajax
+				type: "GET",
+				url: '/updates/posts'
+				data: { 'most_recent_post' : most_recent_post, 'member_id': member_id }
+			.always ->
+				$(document).on 'page:change', ->
+					clearInterval(getPosts)
+		, 20000)
 	
 	$('body').on 'click', '.exit_button, #comment_submit, #post_submit', ->
 		post = $(this).closest( '.image_block')
@@ -113,11 +116,13 @@ ready = ->
 		$(this).children('.over_image').delay(1000).fadeOut 1000, ->
 			overImageVisible = false
 	
-	delay=2000
-	timeout=setTimeout( ->
-		$('.over_image').fadeOut(1000, ->
-			overImageVisible = false)
-	, delay)
+	fadeOutOverImage = ->
+		delay=4000
+		fadeOutOverImageTimeout = setTimeout ->
+			$('body').find('.over_image').fadeOut 1000, ->
+				overImageVisible = false
+		, delay
+	fadeOutOverImage()
 		
 	$('#image_comments').perfectScrollbar({
 		wheelSpeed: 10

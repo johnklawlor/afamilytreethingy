@@ -3,7 +3,7 @@ ready = ->
 	image_id = image.attr('data-image')
 
 	if image.length != 0
-		myInterval = setInterval( ->
+		getComments = setInterval( ->
 			most_recent_comment = image.attr('data-most-recent-comment')
 			$.ajax
 				type: "GET",
@@ -11,7 +11,7 @@ ready = ->
 				data: { 'post_id' : image_id, 'most_recent_comment' : most_recent_comment }
 			.always ->
 				$(document).on 'page:change', ->
-					clearInterval(myInterval)
+					clearInterval(getComments)
 		, 5000)
 		
 $(document).ready(ready)

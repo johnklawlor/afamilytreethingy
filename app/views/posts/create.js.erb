@@ -1,8 +1,8 @@
 <% if @post.new_record? %>
 	alert("Failed to upload image: <%= j @post.errors.full_messages.join(', ').html_safe %>");
 <% else %>
-	console.log("<%= j render @post %>")
 	new_post = $("<%= j render @post %>")
+	$('div#images').attr('data-most-recent-post', "<%= j @post.created_at.to_i.to_s %>")
 	$("#member_info").after( new_post)
 	new_post.addClass('expand')
 	$('#post_content').val('')
