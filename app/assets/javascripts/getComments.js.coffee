@@ -1,3 +1,4 @@
+
 ready = ->
 	image = $("#actual_image")
 	image_id = image.attr('data-image')

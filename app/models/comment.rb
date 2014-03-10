@@ -38,7 +38,7 @@ class Comment < ActiveRecord::Base
 	end
 	
 	def delete_update
-		Update.where( update_on_type: 'comment', update_on_id: self.id).each do |update|
+		Update.where( updated_by_type: 'comment', updated_by_id: self.id).each do |update|
 			update.destroy
 		end
 	end
