@@ -1,9 +1,9 @@
 <div class="image_block " id="<%= post.id %>">
 	<% if post.image? %>
-		<%= link_to image_tag(post.image_url(:medium), class: "member_image img-rounded", href: partial_post_path(post) ), post_path(post) %>
+		<% link_to image_tag(post.image_url(:medium), class: "member_image img-rounded", href: partial_post_path(post) ), post_path(post) %>
 		<%= render partial: 'posts/over_image', object: post, as: :post	 %>
 	<% elsif post.video? %>
-		<%= render partial: 'posts/video_thumb', object: post, as: :post %>
+		<% render partial: 'posts/video_thumb', object: post, as: :post %>
 		<%= render partial: 'posts/over_image', object: post, as: :post	 %>
 	<% else %>
 		<%= render partial: 'posts/written', object: post, as: :post %>

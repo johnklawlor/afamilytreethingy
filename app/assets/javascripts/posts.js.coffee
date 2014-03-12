@@ -187,7 +187,7 @@ ready = ->
 						$('#progress_bar_section').append("<span id='upload_complete'>Upload complete!</span>")
 						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
 							$('#upload_complete').remove())
-		else if this.id == 'hidden_new_image'
+		else if this.id == 'hidden_new_post'
 			filesSent = 0
 			$(this).fileupload
 				dropZone: $(this).parent()

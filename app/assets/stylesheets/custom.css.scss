@@ -389,6 +389,7 @@ img.member_post{
 img#profile_image {
 	display: inline-block;
 	width: 260px;
+	height: 260px;
 	padding: 0;
 	border: 5px solid #111123;
 }
@@ -803,6 +804,24 @@ to {
     -webkit-animation-iteration-count: 1; 
     -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-duration: 1s; 
+}
+
+@-webkit-keyframes spin {  
+from {  
+	-webkit-transform:rotateY(0deg);
+	transform:rotateY(0deg);
+}  
+to {  
+	-webkit-transform:rotateY(7200deg);
+	transform:rotateY(7200deg);
+    } 
+}
+
+.spin{
+    -webkit-animation-name: spin; 
+    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 5s; 	
 }
 
 @keyframes changeColor {

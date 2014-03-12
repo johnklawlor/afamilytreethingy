@@ -1,5 +1,3 @@
-<%= form_for @member.posts.new, html: { id: 'hidden_new_image', class: 'file-upload hide' } do |f| %>
+<%= direct_upload_form_for @uploader, html: { id: 'hidden_new_image', class: 'file-upload hide' } do |f| %>
 	<%= f.file_field :image, multiple: true, name: "post[image]" %>
-	<%= f.hidden_field :member_id, value: @member.id %>
-	<%= f.hidden_field :from_member, value: current_member.id %>
 <% end %>

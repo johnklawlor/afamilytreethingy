@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
 
 	after_create :create_update
 	before_destroy :delete_update
+	after_create :save_image_dimensions
 	
 	def create_update
 		to_member = Member.find_by_id( self.member_id)
@@ -26,5 +27,15 @@ class Post < ActiveRecord::Base
 			update.destroy
 		end
 	end
+	
+	private
+
+		def save_image_dimensions
+			if self.image?
+				self.image_width = self.image.geometry[:width]
+				self.image_height = self.image.geometry[:height]
+				save
+			end
+		end
 
 end

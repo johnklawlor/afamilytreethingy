@@ -11,6 +11,8 @@ class MembersController < ApplicationController
 	end
 	
 	def show
+#		@uploader = Post.new.image
+#		@uploader.success_action_redirect = new_post_url
 		@member = Member.find_by_id(params[ :id])
 	end
 
