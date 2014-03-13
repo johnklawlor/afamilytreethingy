@@ -819,7 +819,7 @@ to {
 
 .spin{
     -webkit-animation-name: spin; 
-    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-iteration-count: 1; 
     -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-duration: 5s; 	
 }

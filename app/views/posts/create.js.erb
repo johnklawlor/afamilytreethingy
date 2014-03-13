@@ -2,8 +2,13 @@
 	alert("Failed to upload image: <%= j @post.errors.full_messages.join(', ').html_safe %>");
 <% else %>
 	new_post = $("<%= j render @post %>")
+	new_post.hide()
 	$('div#images').attr('data-most-recent-post', "<%= j @post.created_at.to_i.to_s %>")
-	$("#member_info").after( new_post)
-	new_post.addClass('expand')
+	$("#new_post").html(new_post)
+	setTimeout( function() {
+		new_post.fadeIn(1000)
+	},
+	2000)
+	console.log(new_post)
 	$('#post_content').val('')
 <% end %>
