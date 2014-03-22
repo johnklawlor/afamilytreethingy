@@ -203,7 +203,7 @@ ready = ->
 						else
 							$('#progress_bar_section').fadeTo(200, 0.8)
 							console.log(file.name)
-							new_post = $("<div class='image_block spin' id='new_post'></div>")
+							new_post = $("<div class='image_block' id='new_post'></div>")
 							$("#member_info").after( new_post)
 							data.submit()
 					else

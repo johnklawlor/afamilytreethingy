@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
 
 	
 	mount_uploader :image, ImageUploader
+	mount_uploader :tmp_image, TmpImageUploader
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
 	after_create :create_update

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311223421) do
+ActiveRecord::Schema.define(version: 20140322181652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,18 @@ ActiveRecord::Schema.define(version: 20140311223421) do
     t.datetime "video_updated_at"
     t.string   "image_width"
     t.string   "image_height"
+    t.string   "s3_image_url"
+    t.string   "tmp_image"
   end
+
+  create_table "queue_classic_jobs", force: true do |t|
+    t.text     "q_name",    null: false
+    t.text     "method",    null: false
+    t.json     "args",      null: false
+    t.datetime "locked_at"
+  end
+
+  add_index "queue_classic_jobs", ["q_name", "id"], name: "idx_qc_on_name_only_unlocked", where: "(locked_at IS NULL)", using: :btree
 
   create_table "relationships", force: true do |t|
     t.integer  "parent_id"

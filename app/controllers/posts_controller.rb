@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require( :post).permit( :member_id, :from_member, :content, :image)
+			params.require( :post).permit( :member_id, :from_member, :content, :tmp_image)
 		end
 		
 		def can_delete?
