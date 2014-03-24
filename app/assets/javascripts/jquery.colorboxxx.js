@@ -4,6 +4,7 @@
 	(c) 2014 Jack Moore - http://www.jacklmoore.com/colorbox
 	license: http://www.opensource.org/licenses/mit-license.php
 */
+
 (function ($, document, window) {
 	var
 	// Default settings object.
@@ -113,6 +114,8 @@
 	$rightBorder,
 	$bottomBorder,
 	$related,
+	$nextGet = '',
+	$prevGet = '',
 	$window,
 	$loaded,
 	$loadingBay,
@@ -127,6 +130,8 @@
 	$events = $('<a/>'), // $({}) would be prefered, but there is an issue with jQuery 1.4.2
 	
 	// Variables for cached values or use across multiple functions
+	isFirstLoad = true,
+	direction = '',
 	settings,
 	interfaceHeight,
 	interfaceWidth,
@@ -203,8 +208,7 @@
 
 	// Determine the next and previous members in a group.
 	function getIndex(increment) {
-		var
-		max = $related.length,
+		var max = $related.length,
 		newIndex = (index + increment) % max;
 		
 		return (newIndex < 0) ? max + newIndex : newIndex;
@@ -815,7 +819,7 @@
 				
 				// Preloads images within a rel group
 				if (settings.get('preloading')) {
-					$.each([getIndex(-1), getIndex(1)], function(){
+					$.each([getIndex(-1), getIndex(1)], function(index){
 						var img,
 							i = $related[this],
 							settings = new Settings(i, $.data(i, colorbox)),
@@ -825,6 +829,26 @@
 							src = retinaUrl(settings, src);
 							img = document.createElement('img');
 							img.src = src;
+						}
+						else{
+							if(index == 1 && (direction == 'next' || direction == '')) {
+								$.ajax({
+									url: src,
+									type: 'get',
+									success: function(data){
+										$nextGet = data;
+										console.log('im ajax getting $nextGet', $nextGet);
+									}
+								})
+							}else if(index == 0 && (direction == 'prev' || direction == '')){
+								$.ajax({
+									url: src,
+									type: 'get',
+									success: function(data){
+										$prevGet = data;
+									}
+								})							
+							}
 						}
 					});
 				}
@@ -1008,11 +1032,28 @@
 				photo.src = href;
 			}, 1);
 		} else if (href) {
-			$loadingBay.load(href, settings.get('data'), function (data, status) {
-				if (request === requests) {
-					prep(status === 'error' ? $tag(div, 'Error').html(settings.get('xhrError')) : $(this).contents());
+
+			if( $nextGet.length == 0 || isFirstLoad == true){
+				$loadingBay.load(href, settings.get('data'), function (data, status) {
+					console.log('im LOADing stuff', $(this).contents())
+					if (request === requests) {
+						prep(status === 'error' ? $tag(div, 'Error').html(settings.get('xhrError')) : $(this).contents());
+					}
+				});
+				isFirstLoad = false;
+			}else{
+				console.log('im supposed to be loading', href);
+				console.log('next get is ', $nextGet);
+				console.log('prev get is ', $prevGet);
+				console.log('direction is ', direction);
+				if(direction == 'next'){
+					$loadingBay.html($nextGet);
+					prep($($nextGet));
+				} else {
+					$loadingBay.html($prevGet);
+					prep($($prevGet));
 				}
-			});
+			}
 		}
 	}
 		
@@ -1020,6 +1061,9 @@
 	publicMethod.next = function () {
 		if (!active && $related[1] && (settings.get('loop') || $related[index + 1])) {
 			index = getIndex(1);
+			console.log('im about to set $prevget', $content.html());
+			$prevGet = $content.html();
+			direction = 'next';
 			launch($related[index]);
 		}
 	};
@@ -1027,6 +1071,8 @@
 	publicMethod.prev = function () {
 		if (!active && $related[1] && (settings.get('loop') || index)) {
 			index = getIndex(-1);
+			$nextGet = $content.html();
+			direction = 'prev';
 			launch($related[index]);
 		}
 	};
@@ -1058,6 +1104,9 @@
 					closing = false;
 					trigger(event_closed);
 					settings.get('onClosed');
+					isFirstLoad = true;
+					direction = '';
+					$nextGet = '';
 				}, 1);
 			});
 		}

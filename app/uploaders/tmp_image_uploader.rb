@@ -29,16 +29,26 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
 	resize_to_fit(800, 800)
-	resize_to_fill(260,260)
   #
 
+	process :get_geometry
+
+	def geometry
+		@geometry ||= get_geometry
+	end
+    
+	def get_geometry
+		if (@file)
+			img = ::Magick::Image::read(@file.file).first
+			@geometry = { width: img.columns, height: img.rows }
+		end
+	end
+
+
   # Create different versions of your uploaded files:
-=begin
 	version :medium do
-		process :crop
 		resize_to_fill(260,260)
 	end
-=end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

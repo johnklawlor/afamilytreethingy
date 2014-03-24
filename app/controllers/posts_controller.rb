@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 			@post.video = params[ :post][:image]
 		end
 		if @post.save
+#			QC.enqueue("Post.upload_to_s3", @post.id)
 			respond_to do |format|
 				format.js
 				format.html { redirect_to member_path( current_member) }

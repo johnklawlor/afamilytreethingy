@@ -17,8 +17,7 @@ gem "jquery-colorbox-rails", "~> 0.1.5"
 gem "video-js-rails", "~> 4.3.0.0"
 gem "rack-timeout", "0.0.4"
 gem "fog", "1.20.0"
-gem "carrierwave_direct", "0.0.13"
-gem "sidekiq", "2.17.7"
+gem "queue_classic", "2.2.3"
 
 group :production do
 	gem 'rails_12factor'

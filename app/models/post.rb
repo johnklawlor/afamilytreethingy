@@ -7,14 +7,23 @@ class Post < ActiveRecord::Base
 	}, processors: [ :ffmpeg]
 	validates_attachment_content_type :video, content_type: ["video/avi", "video/quicktime", "video/x-msvideo", "video/mp4"]
 
-	
+
 	mount_uploader :image, ImageUploader
 	mount_uploader :tmp_image, TmpImageUploader
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
 	after_create :create_update
-	before_destroy :delete_update
 	after_create :save_image_dimensions
+	before_destroy :delete_update
+
+	def self.upload_to_s3(id)
+		post = find(id)
+		post.image = post.tmp_image
+		post.remove_tmp_image!
+		post.image_width = post.image.geometry[:width]
+		post.image_height = post.image.geometry[:height]
+		post.save!
+	end
 	
 	def create_update
 		to_member = Member.find_by_id( self.member_id)
@@ -32,10 +41,10 @@ class Post < ActiveRecord::Base
 	private
 
 		def save_image_dimensions
-			if self.image?
-				self.image_width = self.image.geometry[:width]
-				self.image_height = self.image.geometry[:height]
-				save
+			if self.tmp_image?
+				self.image_width = self.tmp_image.geometry[:width]
+				self.image_height = self.tmp_image.geometry[:height]
+				save!
 			end
 		end
 

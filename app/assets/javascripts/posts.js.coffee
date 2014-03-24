@@ -68,10 +68,10 @@ ready = ->
 		$('body').find('video#actual_image_html5_api').bind 'ended', ->
 			$('.over_image_marker').addClass('over_image tp')
 		
-	$('body').find('.member_image').colorbox({
-		rel: 'gal'
-		onComplete: loadVJS
-	})
+	$('body').on 'click', ->
+		$('.member_image').colorbox
+			rel: 'member_image'
+			onComplete: loadVJS
 
 	$('body').on 'click', '.vjs-big-play-button, .vjs-play-control', ->
 		over_image = $(this).parents('#actual_image').siblings('.over_image_marker')

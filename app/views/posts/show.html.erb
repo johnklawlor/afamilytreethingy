@@ -1,13 +1,15 @@
 <% comments = @post.comments.order('created_at DESC') %>
 
-<% width = ( @post.image? && @post.image_width.to_s ) || ( @post.video? && '260px' ) %>
-<% height = ( @post.image? && @post.image_height.to_s ) || ( @post.video? && '195px' ) %>
+<% width = ( (@post.image? || @post.tmp_image?) && @post.image_width.to_s ) || ( @post.video? && '260px' ) %>
+<% height = ( (@post.image? || @post.tmp_image?) && @post.image_height.to_s ) || ( @post.video? && '195px' ) %>
 
 <div class="center" id='image_page' >
 	<div class="show_image">
 		<% most_recent_comment = ( !comments.empty? && comments.first.created_at.to_i) || 0 %>
 		<% if @post.image? %>
 			<%= image_tag @post.image_url, id: 'actual_image', size: "#{width}x#{height}", data: { image: @post.id, most_recent_comment: most_recent_comment} %>
+		<% elsif @post.tmp_image? %>
+			<%= image_tag @post.tmp_image_url, id: 'actual_image', size: "#{width}x#{height}", data: { image: @post.id, most_recent_comment: most_recent_comment} %>
 		<% elsif @post.video? %>
 			<%= video_tag @post.video.url, id: 'actual_image', class: "show_post_video video-js vjs-default-skin ", controls: true, width: '260px', height: '195px', data: { image: @post.id, most_recent_comment: most_recent_comment } %>
 		<% end %>
