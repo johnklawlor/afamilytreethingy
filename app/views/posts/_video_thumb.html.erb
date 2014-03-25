@@ -5,5 +5,5 @@
 		<span aria-hidden='true'></span>
 		</div>
 		
-	<%= video_tag post.video.url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}", data: { setup: '' } %>
+	<%= video_tag post.video_url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}", data: { setup: '' } %>
 </div>

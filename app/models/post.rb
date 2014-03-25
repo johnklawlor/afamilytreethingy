@@ -1,12 +1,15 @@
 class Post < ActiveRecord::Base
 
 	has_many :comments, dependent: :destroy
+=begin
 	has_attached_file :video, styles: {
 		medium: { geometry: "640x480", format: "flv"},
 		thumb: { geometry: "100x100#", format: 'jpg', time: 1 }
 	}, processors: [ :ffmpeg]
 	validates_attachment_content_type :video, content_type: ["video/avi", "video/quicktime", "video/x-msvideo", "video/mp4"]
+=end
 
+	mount_uploader :video, VideoUploader
 
 	mount_uploader :image, ImageUploader
 	mount_uploader :tmp_image, TmpImageUploader
