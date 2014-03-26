@@ -1,9 +1,13 @@
+<% if post.tmp_video? %>
+	<% thumb = post.tmp_video_url(:thumb) %>
+<% elsif post.video? %>
+	<% thumb = post.video_url(:thumb) %>
+<% end %>
+
 <div class="vjs-default-skin">
-	<%= image_tag post.video.url(:thumb), class: "member_video_thumb" %> 
+	<%= image_tag thumb, class: "member_video_thumb" %> 
 
 		<div class='member_image vjs-small-play-button' href="<%= partial_post_path( post) %>" role='button' aria-live='polite' tabindex='0' aria-label='play video'>
 		<span aria-hidden='true'></span>
 		</div>
-		
-	<%= video_tag post.video_url, class: "member_video video-js vjs-default-skin vjs-big-play-centered", id: "#{post.id}_video", controls: true, width: '260px', height: '195px', href: "#{post.video.url}", data: { setup: '' } %>
 </div>

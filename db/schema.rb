@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324233306) do
+ActiveRecord::Schema.define(version: 20140325020621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140324233306) do
     t.string   "s3_image_url"
     t.string   "tmp_image"
     t.string   "video"
+    t.string   "tmp_video"
   end
 
   create_table "queue_classic_jobs", force: true do |t|

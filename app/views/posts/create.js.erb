@@ -5,7 +5,8 @@
 	new_post.hide()
 	$('div#images').attr('data-most-recent-post', "<%= j @post.created_at.to_i.to_s %>")
 	$("#new_post").html(new_post)
-	new_post.fadeIn(1000)
-	console.log(new_post)
+	new_post.fadeIn(1000, function(){
+		$('#new_post').attr('id', <%= j @post.id.to_s %>)
+	})
 	$('#post_content').val('')
 <% end %>

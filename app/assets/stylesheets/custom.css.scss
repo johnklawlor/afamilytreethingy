@@ -279,7 +279,6 @@ label {
 }
 
 /* show member page */
-
 img.member_image{
 	display: inline-block;
 	width: 260px;
@@ -458,7 +457,8 @@ img#profile_image {
 
 /* videos */
 .member_video_thumb{
-	@extend .member_image;
+	display: inline-block;
+	height: 260px;
 }
 
 .member_video{

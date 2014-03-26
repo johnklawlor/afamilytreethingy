@@ -19,7 +19,7 @@ gem "rack-timeout", "0.0.4"
 gem "fog", "1.20.0"
 gem "queue_classic", "2.2.3"
 gem "carrierwave-video", "~> 0.5.5"
-#gem 'carrierwave-video-thumbnailer', '~> 0.1.4'
+gem 'carrierwave-video-thumbnailer', '~> 0.1.4'
 
 group :production do
 	gem 'rails_12factor'

@@ -51,6 +51,8 @@ GEM
     carrierwave-video (0.5.5)
       carrierwave
       streamio-ffmpeg
+    carrierwave-video-thumbnailer (0.1.4)
+      carrierwave
     celluloid (0.15.2)
       timers (~> 1.1.0)
     celluloid-io (0.15.0)
@@ -281,6 +283,7 @@ DEPENDENCIES
   capybara (= 1.1.2)
   carrierwave (= 0.9.0)
   carrierwave-video (~> 0.5.5)
+  carrierwave-video-thumbnailer (~> 0.1.4)
   coffee-rails (~> 4.0.0)
   cucumber-rails (= 1.2.1)
   database_cleaner (= 0.7.0)

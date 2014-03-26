@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
 =end
 
 	mount_uploader :video, VideoUploader
+	mount_uploader :tmp_video, TmpVideoUploader
 
 	mount_uploader :image, ImageUploader
 	mount_uploader :tmp_image, TmpImageUploader
@@ -21,10 +22,15 @@ class Post < ActiveRecord::Base
 
 	def self.upload_to_s3(id)
 		post = find(id)
-		post.image = post.tmp_image
-		post.remove_tmp_image!
-		post.image_width = post.image.geometry[:width]
-		post.image_height = post.image.geometry[:height]
+		if post.tmp_image?
+			post.image = post.tmp_image
+			post.remove_tmp_image!
+			post.image_width = post.image.geometry[:width]
+			post.image_height = post.image.geometry[:height]
+		elsif post.tmp_video?
+			post.video = post.tmp_video
+			post.remove_tmp_video!
+		end
 		post.save!
 	end
 	

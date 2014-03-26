@@ -12,12 +12,12 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new( post_params)
-		if( params[ :post][ :image].present? && params[ :post][ :image].content_type == "video/mp4")
-			@post.image = nil
-			@post.video = params[ :post][:image]
+		if( params[ :post][ :tmp_image].present? && params[ :post][ :tmp_image].content_type == "video/mp4")
+			@post.tmp_image = nil
+			@post.tmp_video = params[ :post][:tmp_image]
 		end
 		if @post.save
-#			QC.enqueue("Post.upload_to_s3", @post.id)
+			QC.enqueue("Post.upload_to_s3", @post.id)
 			respond_to do |format|
 				format.js
 				format.html { redirect_to member_path( current_member) }
