@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
 	after_save :remove_tmp_image, if: :has_image_and_tmp?
+	after_save :remove_tmp_video, if: :has_video_and_tmp?
 	after_create :create_update
 	after_create :save_image_dimensions
 	before_destroy :delete_update
@@ -20,9 +21,15 @@ class Post < ActiveRecord::Base
 	end
 	
 	def has_image_and_tmp?
-		logger.debug("Image: #{image?}")
-		logger.debug("Tmp Image: #{tmp_image?}")
 		(tmp_image? && image?)
+	end
+	
+	def remove_tmp_video
+		remove_tmp_video!
+	end
+	
+	def has_video_and_tmp?
+		(tmp_video? && video?)
 	end
 
 	def self.upload_to_s3(id)
@@ -31,7 +38,6 @@ class Post < ActiveRecord::Base
 			post.image = post.tmp_image
 		elsif post.tmp_video?
 			post.video = post.tmp_video
-			post.remove_tmp_video!
 		end
 		post.save!
 	end
