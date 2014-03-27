@@ -1,13 +1,6 @@
 class Post < ActiveRecord::Base
 
 	has_many :comments, dependent: :destroy
-=begin
-	has_attached_file :video, styles: {
-		medium: { geometry: "640x480", format: "flv"},
-		thumb: { geometry: "100x100#", format: 'jpg', time: 1 }
-	}, processors: [ :ffmpeg]
-	validates_attachment_content_type :video, content_type: ["video/avi", "video/quicktime", "video/x-msvideo", "video/mp4"]
-=end
 
 	mount_uploader :video, VideoUploader
 	mount_uploader :tmp_video, TmpVideoUploader
@@ -16,17 +9,26 @@ class Post < ActiveRecord::Base
 	mount_uploader :tmp_image, TmpImageUploader
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
+	after_save :remove_tmp_image, if: :has_image_and_tmp?
 	after_create :create_update
 	after_create :save_image_dimensions
 	before_destroy :delete_update
+	
+	def remove_tmp_image
+		remove_tmp_image!
+		save!
+	end
+	
+	def has_image_and_tmp?
+		logger.debug("Image: #{image?}")
+		logger.debug("Tmp Image: #{tmp_image?}")
+		(tmp_image? && image?)
+	end
 
 	def self.upload_to_s3(id)
 		post = find(id)
 		if post.tmp_image?
 			post.image = post.tmp_image
-			post.remove_tmp_image!
-			post.image_width = post.image.geometry[:width]
-			post.image_height = post.image.geometry[:height]
 		elsif post.tmp_video?
 			post.video = post.tmp_video
 			post.remove_tmp_video!

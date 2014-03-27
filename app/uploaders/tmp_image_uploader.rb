@@ -11,6 +11,10 @@ class TmpImageUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
 	storage :file
 	# storage :fog
+	
+	def move_to_cache
+		false
+	end
 
 	def filename
 		 "#{secure_token}.#{file.extension}" if original_filename.present?
@@ -47,7 +51,6 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 			@geometry = { width: img.columns, height: img.rows }
 		end
 	end
-
 
   # Create different versions of your uploaded files:
 	version :medium do

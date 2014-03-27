@@ -2,68 +2,52 @@
 
 class ImageUploader < CarrierWave::Uploader::Base
 
-	#include CarrierWaveDirect::Uploader
-  # Include RMagick or MiniMagick support:
+	# Include RMagick or MiniMagick support:
 	include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+	# include CarrierWave::MiniMagick
 
-  # Choose what kind of storage to use for this uploader:
-  # storage :file
-  storage :fog
+	# Choose what kind of storage to use for this uploader:
+	# storage :file
+	storage :fog
 
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
-  #def store_dir
-    #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  #end
-
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-	def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
-		ActionController::Base.helpers.image_path([version_name, "default.png"].compact.join('_'))
-		# "/images/fallback/" + [:thumb, "default.jpg"].compact.join('_')
+	def move_to_cache
+		false
 	end
 
-  # Process files as they are uploaded:
-	resize_to_fit(800, 800)
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
-	process :get_geometry
+	# Override the directory where uploaded files will be stored.
+	# This is a sensible default for uploaders that are meant to be mounted:
+	#def store_dir
+	#"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+	#end
 
-	def geometry
-		@geometry ||= get_geometry
-	end
-    
-	def get_geometry
-		if (@file)
-			img = ::Magick::Image::read(@file.file).first
-			@geometry = { width: img.columns, height: img.rows }
-		end
+	# Process files as they are uploaded:
+	# resize_to_fit(800, 800)
+	#
+	# def scale(width, height)
+	#   # do something
+	# end
+
+	# Create different versions of your uploaded files:
+	version :micro do
+		process :crop
+		resize_to_fill(40,40)
 	end
 
-  # Create different versions of your uploaded files:
-  	version :micro do
-  		process :crop
-  		resize_to_fill(40,40)
-  	end
-  
 	version :thumb do
 		process :crop
 		resize_to_fill(75,75)
 	end
-	
+
 	version :small do
 		process :crop
 		resize_to_fill(160,160)
 	end
-	
+
 	version :medium do
 		process :crop
 		resize_to_fill(260,260)
 	end
-	
+
 	def crop
 		resize_to_fit(800, 800)
 		if model.crop_x.present?
@@ -77,16 +61,16 @@ class ImageUploader < CarrierWave::Uploader::Base
 		end
 	end	
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
+	# Add a white list of extensions which are allowed to be uploaded.
+	# For images you might use something like this:
 	def extension_white_list
 		%w(jpg jpeg gif png)
 	end
 
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+	# Override the filename of the uploaded files:
+	# Avoid using model.id or version_name here, see uploader/store.rb for details.
+	# def filename
+	#   "something.jpg" if original_filename
+	# end
 
-end
+	end
