@@ -26,6 +26,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 	# def scale(width, height)
 	#   # do something
 	# end
+	
+	def default_url
+  #   # For Rails 3.1+ asset pipeline compatibility:
+		ActionController::Base.helpers.image_path( [version_name, "default.png"].compact.join('_'))
+	end
 
 	# Create different versions of your uploaded files:
 	version :micro do

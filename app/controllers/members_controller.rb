@@ -120,12 +120,13 @@ class MembersController < ApplicationController
 		
 		def correct_member_update
 			member = Member.find_by_id( params[ :id])
+			logger.debug("Commit is #{['add child', 'add parent', 'add spouse'].include?(params[ :commit])}")
 
 			if current_member?(member)
 				return
 			end
 
-			if params[ :commit] == ('add child' || 'add parent' || 'add spouse')
+			if ['add child', 'add parent', 'add spouse'].include?(params[ :commit])
 				unless member.allows_editing
 					redirect_to member_path( current_member), flash: { error: "This member does not allow other members to edit their tree."}
 				end

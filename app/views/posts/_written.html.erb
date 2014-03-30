@@ -3,7 +3,7 @@
 	<%= link_to image_tag( from_member.image_url(:thumb), class: 'member_post img-rounded'), member_path( from_member) %>
 
 		<div class="post_content">	
-			<%= link_to from_member.first_name.downcase, member_path( from_member) %>:	<%= post.content %>
+			<%= link_to from_member.first_name.downcase, member_path( from_member) %>:	<%= wrap_links( post.content) %>
 		</div>
 
 		<div class="post_meta">

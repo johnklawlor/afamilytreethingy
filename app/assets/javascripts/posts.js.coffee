@@ -18,7 +18,7 @@ ready = ->
 			expand_collapse.removeClass('rotate expand_convo').addClass('collapse_convo')
 			expand_collapse.bind 'click', collapsing = ->
 				expand_collapse.addClass('rotateBack')
-				written_post.animate {'height': '260px'}, 1000, (e) ->
+				written_post.animate {'height': '330px'}, 1000, (e) ->
 					expand_collapse.removeClass('rotateBack collapse_convo').addClass('expand_convo')
 					expand_collapse.unbind 'click', collapsing
 					expand_collapse.bind 'click', expanding
@@ -28,10 +28,10 @@ ready = ->
 		written_post.hide().css( { 'height': 'initial' })
 		setTimeout ->
 			height = written_post.outerHeight()
-			written_post.animate { height: '260px'}, 0, ->
+			written_post.animate { height: '330px'}, 0, ->
 				written_post
 				written_post.attr( 'data-height', height)
-				if height > 260
+				if height > 330
 					written_post.append("<div class='expand_convo'></div>")
 					$('.expand_convo').bind 'click', expanding
 		, 0
@@ -91,6 +91,10 @@ ready = ->
 				$(document).on 'page:change', ->
 					clearInterval(getPosts)
 		, 20000)
+		
+	$('body').on 'click', '#post_submit', ->
+		new_post = $("<div class='image_block new_post'></div>")
+		$("#member_info").after( new_post)
 	
 	$('body').on 'click', '.exit_button, #comment_submit, #post_submit', ->
 		post = $(this).closest( '.image_block')
@@ -116,6 +120,8 @@ ready = ->
 			overImageVisible = false
 	
 	fadeOutOverImage = ->
+		$('body').on 'click', ->
+			$("#colorbox .over_image").hide()
 		delay=4000
 		fadeOutOverImageTimeout = setTimeout ->
 			$('body').find('.over_image').fadeOut 1000, ->
@@ -168,7 +174,7 @@ ready = ->
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
 						if filesSent > 0
-							alert( "You can only post one photo or video at a time to another person's page")
+							alert( "You can only upload one photo to your profile page.")
 							filesSent = 0
 							return false
 						else
@@ -196,18 +202,18 @@ ready = ->
 					types = /(\.|\/)(gif|jpe?g|png|m4v)$/i
 					file = data.files[0]
 					if types.test(file.type) || types.test(file.name)
-						if filesSent > 0
+						if filesSent > 0 && $(this).find('input#post_member_id').val() != $(this).find('input#post_from_member').val()
 							alert( "You can only post one photo or video at a time to another person's page")
 							filesSent = 0
 							return false
 						else
 							$('#progress_bar_section').fadeTo(200, 0.8)
 							console.log(file.name)
-							new_post = $("<div class='image_block' id='new_post'></div>")
+							new_post = $("<div class='image_block new_post'></div>")
 							$("#member_info").after( new_post)
 							data.submit()
 					else
-						alert("#{file.name} is not a gif, jpeg, or png image file nor an mv4 file")
+						alert("#{file.name} is not a gif, jpeg, or png image file nor an mv4 video file")
 				send: (e, data) ->
 					filesSent += 1
 				done: (e, data) ->

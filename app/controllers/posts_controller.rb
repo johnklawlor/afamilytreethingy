@@ -12,6 +12,15 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new( post_params)
+		if @post.member_id == @post.from_member &&
+			@post.member_id != current_member.id
+			logger.debug("Member posting to his own profile")
+			respond_to do |format|
+				format.js { render file: "posts/illegal_post.js.coffee" }
+				format.html { redirect_to member_path( current_member) }
+			end
+			return
+		end
 		if( params[ :post][ :tmp_image].present? && params[ :post][ :tmp_image].content_type == "video/mp4")
 			@post.tmp_image = nil
 			@post.tmp_video = params[ :post][:tmp_image]

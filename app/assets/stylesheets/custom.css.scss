@@ -9,6 +9,8 @@ $header: rgba(0,0,0,.75);
 $headerTransparent: rgba( 0, 86, 180, 0);
 $someColor: #7eaeca;
 $body: #eff5f8;
+$member_image_width: 330px;
+$member_image_height: 330px;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -17,6 +19,9 @@ $body: #eff5f8;
 }
 
 /* universal */ 
+.nav{
+	margin-right: 18px;
+}
 .btn-primary{
 	background-color: #1474CF;
 }
@@ -281,12 +286,12 @@ label {
 /* show member page */
 img.member_image{
 	display: inline-block;
-	width: 260px;
+	width: $member_image_width;
 }
 
 img.member_post{
 	float: left;
-	margin: 0 3px 5px 0;
+	margin: 0 5px 5px 0;
 }
 
 .post{
@@ -325,6 +330,21 @@ img.member_post{
 	font-size: 22px;
 }
 
+a.post_link{
+	display: inline-block;
+	width: 81%;
+	margin: 0 24px;
+	background-color: rgba(20, 116, 207, 0.7);
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+	word-wrap: break-word;
+	&:hover{
+		text-decoration: none;
+		color: black;
+	}
+}
+
 .post_comments{
 	list-style: none;
 	font-size: 18px;
@@ -355,8 +375,8 @@ img.member_post{
 }
 
 .show_member_comment_form, .show_member_post_form{
-	width: 260px;
-	height: 260px;
+	width: $member_image_width;
+	height: $member_image_height;
 	float: left;
 	position: relative;
 }
@@ -368,6 +388,7 @@ img.member_post{
 	background: transparent;
 	color: white;
 	text-shadow: 2px 2px 2px black;
+	padding: 0 5px;
 }
 
 #member_info{
@@ -387,8 +408,8 @@ img.member_post{
 
 img#profile_image {
 	display: inline-block;
-	width: 260px;
-	height: 260px;
+	width: $member_image_width;
+	height: $member_image_height;
 	padding: 0;
 	border: 5px solid #111123;
 }
@@ -411,13 +432,14 @@ img#profile_image {
 .image_block{
 	display: inline-block;
 	position: relative;
-	margin: 0 5px 5px 0;
-	width: 260px;
-	height: 260px;
+	margin: 0 25px 25px 0;
+	width: $member_image_width;
+	height: $member_image_height;
 	float: left;
 	border-radius: 5px;
 	box-shadow: 2px 2px 50px black;
 	overflow: hidden;
+	padding-right: 6px;
 }
 
 #image_upload_section{
@@ -458,7 +480,7 @@ img#profile_image {
 /* videos */
 .member_video_thumb{
 	display: inline-block;
-	height: 260px;
+	height: $member_image_height;
 }
 
 .member_video{
