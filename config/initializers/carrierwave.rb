@@ -1,4 +1,4 @@
-AWS_CONFIG = YAML.load_file("#{::Rails.root}/config/aws.yml")[::Rails.env] if Rails.env=="development"
+AWS_CONFIG = (Rails.env=="development" && YAML.load_file("#{::Rails.root}/config/aws.yml")[::Rails.env]) || nil
 
 CarrierWave.configure do |config|
 	config.fog_credentials = {
