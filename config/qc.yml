@@ -1,2 +1,4 @@
 development:
   database_url: "postgres://localhost/mypeeps_development"
+production:
+  database_url: "postgres://yyvppdzkmjknrq:qIqZv25qHXClZJ8Ufa6sLQddYE@ec2-107-20-214-225.compute-1.amazonaws.com:5432/d81abfmru1t5l2"
