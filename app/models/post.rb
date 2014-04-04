@@ -34,12 +34,15 @@ class Post < ActiveRecord::Base
 
 	def self.upload_to_s3(id)
 		post = find(id)
+		post.destroy
+=begin
 		if post.tmp_image?
 			post.image = post.tmp_image
 		elsif post.tmp_video?
 			post.video = post.tmp_video
 		end
 		post.save!
+=end
 	end
 	
 	def create_update
