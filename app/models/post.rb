@@ -34,7 +34,6 @@ class Post < ActiveRecord::Base
 
 	def self.upload_to_s3(id)
 		post = find(id)
-		post.destroy
 		if post.tmp_image?
 			post.image = post.tmp_image
 		elsif post.tmp_video?
