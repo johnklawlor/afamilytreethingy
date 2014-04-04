@@ -25,5 +25,7 @@ module Mypeeps
 	
 	config.assets.paths << Rails.root.join('app', 'assets', 'flash')
 	config.assets.paths << Rails.root.join('vendor', 'assets', 'flash')
+	
+	config.autoload_paths += %W(#{config.root}/lib)
 	end
 end

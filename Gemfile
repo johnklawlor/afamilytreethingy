@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'pg', "0.17.1"
+gem 'pg', "0.17.0"
 gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate', "3.0.5"
 gem 'bootstrap-will_paginate', "0.0.10"
@@ -15,12 +15,14 @@ gem "jquery-colorbox-rails", "~> 0.1.5"
 gem "video-js-rails", "~> 4.3.0.0"
 gem "rack-timeout", "0.0.4"
 gem "fog", "1.20.0"
+gem 'unf', '~> 0.1.3'
 gem "queue_classic", "2.2.3"
 gem "carrierwave-video", "~> 0.5.5"
 gem "carrierwave-video-thumbnailer", "~> 0.1.4"
 
 group :production do
 	gem 'rails_12factor'
+	gem 'heroku-api', '~> 0.3.18'
 end
 
 group :test, :development do 
