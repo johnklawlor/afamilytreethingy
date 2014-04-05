@@ -20,13 +20,14 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 		 "#{secure_token}.#{file.extension}" if original_filename.present?
 	end
 	
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
-  #def store_dir
- #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  #end
-  
-  process :set_content_type
+	# Override the directory where uploaded files will be stored.
+	# This is a sensible default for uploaders that are meant to be mounted:
+	def store_dir
+		"tmp/"
+	#"tmp/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+	end
+
+	process :set_content_type
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
 	def default_url

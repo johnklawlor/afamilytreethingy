@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'pg', "0.17.0"
+gem 'pg', "0.17.1"
 gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate', "3.0.5"
 gem 'bootstrap-will_paginate', "0.0.10"
