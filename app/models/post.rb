@@ -36,10 +36,12 @@ class Post < ActiveRecord::Base
 		post = find(id)
 		if post.tmp_image?
 			QC.log( shit: "i have a tmp img")
-			post.image = post.tmp_image
+			#post.image = post.tmp_image
+			post.remove_tmp_image!
 		elsif post.tmp_video?
 			post.video = post.tmp_video
 		end
+		post.image = post.tmp_image
 		post.save!
 	end
 	
