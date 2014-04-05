@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
 		elsif post.tmp_video?
 			post.video = post.tmp_video
 		end
-		post.image = post.tmp_image
+		post.remove_tmp_image!
 		post.save!
 	end
 	
