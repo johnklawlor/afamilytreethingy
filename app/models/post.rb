@@ -35,13 +35,12 @@ class Post < ActiveRecord::Base
 	def self.upload_to_s3(id)
 		post = find(id)
 		if post.tmp_image?
-			QC.log( shit: "i have a tmp img")
+			logger.debug("i have a tmp img")
 			#post.image = post.tmp_image
 			post.remove_tmp_image!
 		elsif post.tmp_video?
 			post.video = post.tmp_video
 		end
-		post.remove_tmp_image!
 		post.save!
 	end
 	
