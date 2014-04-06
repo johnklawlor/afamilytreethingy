@@ -15,6 +15,14 @@ class Post < ActiveRecord::Base
 	after_create :save_image_dimensions
 	before_destroy :delete_update
 	
+	def tmp_image?
+		!self.tmp_image.file.nil?
+	end
+
+	def image?
+		!self.image.file.nil?
+	end
+
 	def remove_tmp_image
 		remove_tmp_image!
 		save!
