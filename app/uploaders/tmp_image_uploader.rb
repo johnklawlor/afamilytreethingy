@@ -13,7 +13,11 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 	# storage :fog
 	
 	def move_to_cache
-		false
+		true
+	end
+
+	def move_to_store
+		true
 	end
 
 	def filename
