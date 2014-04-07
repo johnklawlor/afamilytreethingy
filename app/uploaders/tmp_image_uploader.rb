@@ -9,8 +9,8 @@ class TmpImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-	storage :file
-	# storage :fog
+	#storage :file
+	storage :fog
 	
 	def move_to_cache
 		true
@@ -26,12 +26,9 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 	
 	# Override the directory where uploaded files will be stored.
 	# This is a sensible default for uploaders that are meant to be mounted:
-	def store_dir
-		"#{Rails.root}/uploads"
-	end
 	
 	def cache_dir
-		"#{Rails.root}/uploads"
+		"#{Rails.root}/tmp/uploads"
 	end
 
 	process :set_content_type

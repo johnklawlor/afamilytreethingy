@@ -17,6 +17,6 @@
 	
 	<%= render partial: 'posts/post', collection: posts %>
 	
-	<%= render 'posts/hidden_post_upload' if signed_in? && current_member?(current_member) %>
+	<%= render 'posts/hidden_image_upload' if signed_in? && current_member?(current_member) %>
 
 </div>
