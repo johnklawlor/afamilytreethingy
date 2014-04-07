@@ -22,6 +22,14 @@ class Post < ActiveRecord::Base
 	def image?
 		!self.image.file.nil?
 	end
+	
+	def tmp_video?
+		!self.tmp_video.file.nil?
+	end
+	
+	def video?
+		!self.video.file.nil?
+	end
 
 	def remove_tmp_image
 		remove_tmp_image!
@@ -48,7 +56,7 @@ class Post < ActiveRecord::Base
 			post.image=f
 		elsif post.tmp_video?
 			post.tmp_video.cache_stored_file!
-			f=File.open("#{Rails.root}/tmp/uploads/" + post.tmp_image.cache_name)
+			f=File.open("#{Rails.root}/tmp/uploads/" + post.tmp_video.cache_name)
 			post.video=f
 		end
 		post.save!
