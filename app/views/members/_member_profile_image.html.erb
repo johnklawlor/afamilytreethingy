@@ -1,5 +1,5 @@
 <div class="image_block">
-	<%= image_tag(member.image_url, id: 'profile_image') %>
+	<%= image_tag(member.image_url(:medium), id: 'profile_image') %>
 
 	<% if current_member?(member) %>
 		<% if member.image? %>

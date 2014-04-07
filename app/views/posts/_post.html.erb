@@ -1,7 +1,7 @@
 <div class="image_block " id="<%= post.id %>">
 
 	<% if post.tmp_image_url.present? || post.image_url.present? %>
-		<% image_url = ((post.tmp_image? && post.tmp_image_url(:medium)) || (post.image? && post.image_url)) %>
+		<% image_url = ((post.tmp_image? && post.tmp_image_url(:medium)) || (post.image? && post.image_url(:medium))) %>
 		
 		<%= link_to image_tag( image_url, class: "member_image img-rounded", href: partial_post_path(post)), post_path(post) %>
 		<%= render partial: 'posts/over_image', object: post, as: :post	 %>

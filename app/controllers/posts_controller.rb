@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 			@post.tmp_video = params[ :post][:tmp_image]
 		end
 		if @post.save
-#			QC.enqueue("Post.upload_to_s3", @post.id)
+			QC.enqueue("Post.upload_to_s3", @post.id)
 			respond_to do |format|
 				format.js
 				format.html { redirect_to member_path( current_member) }
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
 	
 	private
 		def post_params
-			params.require( :post).permit( :member_id, :from_member, :content, :image)
+			params.require( :post).permit( :member_id, :from_member, :content, :tmp_image)
 		end
 		
 		def can_delete?

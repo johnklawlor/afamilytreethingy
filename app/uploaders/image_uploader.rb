@@ -10,19 +10,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 	# storage :file
 	storage :fog
 
-	def move_to_cache
-		true
-	end
-
-	def move_to_store
-		true
-	end
-
 	# Override the directory where uploaded files will be stored.
 	# This is a sensible default for uploaders that are meant to be mounted:
-	#def store_dir
-	#"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-	#end
+	def store_dir
+		"uploads/"
+	end
 
 	# Process files as they are uploaded:
 	resize_to_fit(800, 800)
@@ -35,7 +27,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # For Rails 3.1+ asset pipeline compatibility:
 		ActionController::Base.helpers.image_path( [version_name, "default.png"].compact.join('_'))
 	end
-=begin
+
 	# Create different versions of your uploaded files:
 	version :micro do
 		process :crop
@@ -69,7 +61,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 			end
 		end
 	end	
-=end
+
 	# Add a white list of extensions which are allowed to be uploaded.
 	# For images you might use something like this:
 	def extension_white_list

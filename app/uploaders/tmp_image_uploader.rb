@@ -30,6 +30,10 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 	def cache_dir
 		"#{Rails.root}/tmp/uploads"
 	end
+	
+	def store_dir
+		"uploads/tmp"
+	end
 
 	process :set_content_type
 
