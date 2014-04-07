@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 			@post.tmp_image = nil
 			@post.tmp_video = params[ :post][:tmp_image]
 		end
+		logger.debug("post is #{@post}")
 		if @post.save
 			QC.enqueue("Post.upload_to_s3", @post.id)
 			respond_to do |format|
