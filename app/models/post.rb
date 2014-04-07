@@ -43,12 +43,13 @@ class Post < ActiveRecord::Base
 	def self.upload_to_s3(id)
 		post = find(id)
 		if post.tmp_image?
-			QC.log(action: "fucking shit")
 			post.tmp_image.cache_stored_file!
 			f=File.open("#{Rails.root}/tmp/uploads/" + post.tmp_image.cache_name)
 			post.image=f
 		elsif post.tmp_video?
-			post.video = post.tmp_video.file
+			post.tmp_video.cache_stored_file!
+			f=File.open("#{Rails.root}/tmp/uploads/" + post.tmp_image.cache_name)
+			post.video=f
 		end
 		post.save!
 	end
