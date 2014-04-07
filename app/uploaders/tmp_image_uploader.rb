@@ -27,11 +27,11 @@ class TmpImageUploader < CarrierWave::Uploader::Base
 	# Override the directory where uploaded files will be stored.
 	# This is a sensible default for uploaders that are meant to be mounted:
 	def store_dir
-		"#{Rails.root}/public/uploads"
+		"#{Rails.root}/uploads"
 	end
 	
 	def cache_dir
-		"#{Rails.root}/public/uploads"
+		"#{Rails.root}/uploads"
 	end
 
 	process :set_content_type
