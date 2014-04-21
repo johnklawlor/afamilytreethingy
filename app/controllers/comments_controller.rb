@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-#	include ActionController::Live
+	include ActionController::Live
 	
 	before_filter :signed_in_filter
 	before_filter :can_delete?, only: :destroy
