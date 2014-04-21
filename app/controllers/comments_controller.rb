@@ -19,8 +19,7 @@ class CommentsController < ApplicationController
 	
 	def events
 		response.headers["Content-Type"] = "text/event-stream"
-		redis = Redis.connect(:url =>  ENV['REDISTOGO_URL'])
-		redis.subscribe('comments.create') do |on|
+		$redis.subscribe('comments.create') do |on|
 			on.message do |event, data|
 				response.stream.write("data: #{data} \n\n")
 			end
@@ -28,7 +27,7 @@ class CommentsController < ApplicationController
 		rescue IOError
 			logger.info "Stream closed"
 		ensure
-			redis.quit
+			$redis.quit
 			response.stream.close
 	end
 
