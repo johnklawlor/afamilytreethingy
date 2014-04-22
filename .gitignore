@@ -26,3 +26,4 @@ doc/
 /public/uploads/
 /public/system/
 /config/aws.yml
+/config/secret_token.yml
