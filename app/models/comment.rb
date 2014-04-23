@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 	has_one :update, as: :updated_by
 
 	after_create :create_update
-	after_create :publish_comment
+#	after_create :publish_comment
 	before_destroy :delete_update
 	
 	def publish_comment
