@@ -9,4 +9,6 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Mypeeps::Application.config.secret_key_base = ENV['SECRET_TOKEN']
+SECRET_TOKEN = YAML.load_file("#{::Rails.root}/config/secret_token.yml")[::Rails.env] if Rails.env.development?
+
+Mypeeps::Application.config.secret_key_base = ENV['SECRET_TOKEN'] || SECRET_TOKEN["secret_token"]

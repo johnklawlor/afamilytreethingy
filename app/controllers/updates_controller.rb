@@ -30,7 +30,6 @@ class UpdatesController < ApplicationController
 	
 	def updates
 		@updates = current_member.updates.order('created_at DESC')
-		Rails.logger("Updating... ", @updates)
 
 		respond_to do |format|
 			format.js
