@@ -1,3 +1,4 @@
+
 AWS_CONFIG = YAML.load_file("#{::Rails.root}/config/aws.yml")[::Rails.env] if Rails.env.development?
 
 CarrierWave.configure do |config|
