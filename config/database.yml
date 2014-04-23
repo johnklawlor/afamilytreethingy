@@ -15,10 +15,3 @@ test:
   database: mypeeps_test
   pool: 5
   password:
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: mypeeps_production
-  pool: 5
-  password:
