@@ -19,7 +19,8 @@ class CommentsController < ApplicationController
 	
 	def events
 		response.headers["Content-Type"] = "text/event-stream"
-		$redis.subscribe('comments.create') do |on|
+		redis = Redis.new
+		redis.subscribe('comments.create') do |on|
 			on.message do |event, data|
 				response.stream.write("data: #{data} \n\n")
 			end
