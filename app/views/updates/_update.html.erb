@@ -21,6 +21,11 @@
 		<% else %>		
 			<% post = Post.find_by_id( distinct_group_of_updates.updated_by_id) %>
 		<% end %>
+####
+####		
+#	post might not belong to current member. have to fix this!
+####
+####
 		<% if distinct_group_of_updates.updated_by_type == 'comment' %>
 			<% if post.image? %>
 				<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
