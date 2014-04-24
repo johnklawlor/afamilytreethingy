@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
 	include ActionView::Helpers::DateHelper
 
-	has_one :update, as: :updated_by
+#	has_one :update, as: :updated_by
 
 	after_create :create_update
 	after_create :publish_comment
