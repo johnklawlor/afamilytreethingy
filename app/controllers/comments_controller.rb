@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 		rescue IOError
 			logger.info "Stream closed"
 		ensure
-			$redis.quit
+			redis.quit
 			response.stream.close
 	end
 
