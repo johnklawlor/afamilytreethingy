@@ -14,7 +14,12 @@
 			<% names << member.first_name.downcase %>
 		<% end %>
 		<%= names.to_sentence %>
-		<% post = Post.find_by_id( distinct_group_of_updates.updated_by_id) %>
+		<% if distinct_group_of_updates.updated_by_type == 'comment' %>
+			<% comment = Comment.find_by_id(updated_by_id) %>
+			<% post = Post.find_by_id( comment.post_id ) %>			
+		<% else %>		
+			<% post = Post.find_by_id( distinct_group_of_updates.updated_by_id) %>
+		<% end %>
 		<% if distinct_group_of_updates.updated_by_type == 'comment' %>
 			<% if post.image? %>
 				<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
