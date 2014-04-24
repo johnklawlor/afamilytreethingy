@@ -3,7 +3,7 @@ ActionMailer::Base.smtp_settings = {
 	post:									587,
 	domain:								'localhost:3000',
 	user_name:						'myfamilypeeps@gmail.com',
-	password:							'1234567agcgth',
+	password:							'verysecretpassword',
 	authentication:					'plain',
 	enable_starttls_auto:			true
 }
