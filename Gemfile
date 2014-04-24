@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 ruby "2.1.1"
 
+# have to add this due to sprockets 2.12.0 error
+gem 'sprockets', '2.11.0'
+
 gem 'pg', "0.17.1"
 gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate', "3.0.5"
