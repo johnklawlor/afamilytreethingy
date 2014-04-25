@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		member = Member.find_by_email(params[:session][:email].downcase)
 		if member && member.authenticate(params[:session][:password])
 			sign_in member
-			redirect_back_or member_path(current_member)
+			redirect_to member_path(current_member)
 		else
 			flash.now[ :error] = "The username and password combination do not match our records. Please try again."
 			render 'new'
