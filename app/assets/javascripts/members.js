@@ -17,18 +17,18 @@ ready = function() {
 		$(this).parents('form').insertAfter( $(this).parents('div.row') )
 		$(this).parent().next('input').fadeIn()
 	})
+	
+	$('.remove_fields').click( function () {
+		$(this).prev("input:hidden").val("1");
+		$(this).closest(".relationship_fields").hide('slow');
+		$(this).closest(".relationship_fields").nextAll("input:submit").hide('slow');
+		form=$(this).parents('form')
+		form.appendTo( form.prev());		
+	})
 }
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
-
-function remove_fields(link) {
-	$(link).prev("input:hidden").val("1");
-	$(link).closest(".relationship_fields").hide('slow');
-	$(link).closest(".relationship_fields").nextAll("input:submit").hide('slow');
-	form=$(link).parents('form')
-	form.appendTo( form.prev());
-}
 
 function showFullForm(checkbox) {
 	if( $(checkbox).prop( 'checked' ) ) {

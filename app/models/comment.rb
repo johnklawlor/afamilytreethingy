@@ -28,8 +28,8 @@ class Comment < ActiveRecord::Base
 				end
 			end
 		end
-		if post.member_id != self.member_id
-			member = Member.find_by_id( post.member_id)
+		unless post.from_member == self.member_id
+			member = Member.find_by_id( post.from_member)
 			Update.where(member_id: member.id, update_on_type: 'post', update_on_id: post.id, from_member: self.member_id).each do |u|
 				u.destroy
 			end

@@ -21,26 +21,22 @@
 		<% else %>		
 			<% post = Post.find_by_id( distinct_group_of_updates.updated_by_id) %>
 		<% end %>
-####
-####		
-#	post might not belong to current member. have to fix this!
-####
-####
+
 		<% if distinct_group_of_updates.updated_by_type == 'comment' %>
 			<% if post.image? %>
-				<%= link_to "commented", post_path( current_member.posts.find_by_id( link)) %> on one of your images
+				<%= link_to "commented", post_path( post) %> on an image
 			<% elsif post.video?%>
-				<%= link_to "comment", post_path( current_member.posts.find_by_id( link)) %> on one of your videos
+				<%= link_to "commented", post_path( post) %> on a video
 			<% else %>
-				<%= link_to "commented", member_path( current_member, anchor: link) %> on a written thing on your profile page
+				<%= link_to "commented", member_path( post.member_id, anchor: post) %> on a post
 			<% end %>
 		<% elsif distinct_group_of_updates.updated_by_type == 'post' %>
 			<% if post.image? %>
-				posted an <%= link_to "image", post_path( current_member.posts.find_by_id( link)) %> to your profile page
+				posted an <%= link_to "image", post_path( post) %> to your profile page
 			<% elsif post.video? %>
-				posted a <%= link_to "video", post_path( current_member.posts.find_by_id( link)) %> to your profile page
+				posted a <%= link_to "video", post_path( post) %> to your profile page
 			<% else %>
-				<%= link_to "wrote", member_path( current_member, anchor: link) %> something on your profile page
+				<%= link_to "wrote", member_path( post.member_id, anchor: link) %> something on your profile page
 			<% end %>
 		<% end %>
 		</div>
