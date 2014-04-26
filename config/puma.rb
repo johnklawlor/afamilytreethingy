@@ -14,7 +14,3 @@ on_worker_boot do
     ActiveRecord::Base.establish_connection
   end
 end
-
-on_restart do 
-  $redis.client.reconnect
-end
