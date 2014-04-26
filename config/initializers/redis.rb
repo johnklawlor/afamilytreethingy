@@ -8,6 +8,22 @@ heartbeat_thread = Thread.new do
     $redis.publish("heartbeat","thump")
     sleep 15.seconds
   end
+
+  while true
+    $redis.publish("heartbeat","thump")
+    sleep 15.seconds
+  end
+
+  while true
+    $redis.publish("heartbeat","thump")
+    sleep 15.seconds
+  end
+
+  while true
+    $redis.publish("heartbeat","thump")
+    sleep 15.seconds
+  end
+
 end
 
 at_exit do
