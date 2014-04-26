@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
   <% render 'layouts/shim' %>
 </head>
-<body>
+<body <%= "data-no-turbolink" if params[:controller]=="members" && params[:action]=="show" %> >
 	<%= render 'layouts/header' %>
     <div class="container">
     	<div class="content_container">
