@@ -10,34 +10,6 @@ heartbeat_thread = Thread.new do
   end
 end
 
-heartbeat_thread = Thread.new do
-  while true
-    $redis.publish("heartbeat","thump")
-    sleep 15.seconds
-  end
-end
-
-heartbeat_thread = Thread.new do
-  while true
-    $redis.publish("heartbeat","thump")
-    sleep 15.seconds
-  end
-end
-
-heartbeat_thread = Thread.new do
-  while true
-    $redis.publish("heartbeat","thump")
-    sleep 15.seconds
-  end
-end
-
-heartbeat_thread = Thread.new do
-  while true
-    $redis.publish("heartbeat","thump")
-    sleep 15.seconds
-  end
-end
-
 at_exit do
   # not sure this is needed, but just in case
   heartbeat_thread.kill

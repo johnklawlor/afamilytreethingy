@@ -20,10 +20,13 @@ class CommentsController < ApplicationController
 	def events
 		response.headers["Content-Type"] = "text/event-stream"
 		redis = Redis.new(:url => ENV['REDISTOGO_URL'])
-		redis.subscribe(['comments.create','heartbeat']) do |on|
+		redis.subscribe('comments.create') do |on|
 			on.message do |event, data|
+				logger.debug("redis message received on channel #{event}")
 				if event == 'comments.create'
-					response.stream.write("data: #{data} \n\n")
+					response.stream.write("event: comments.create\ndata: #{data} \n\n")
+				elsif event == 'heartbeat'
+					response.stream.write("event: heartbeat\ndata: heartbeat \n\n")
 				end
 			end
 		end
