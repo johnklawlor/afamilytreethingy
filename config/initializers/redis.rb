@@ -5,7 +5,7 @@ $redis = Redis.new(:url => ENV['REDISTOGO_URL'])
 
 heartbeat_thread = Thread.new do
   while true
-    $redis.publish("comments.create","thump")
+    $redis.publish("heartbeat","thump")
     sleep 15.seconds
   end
 end

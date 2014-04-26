@@ -20,9 +20,11 @@ class CommentsController < ApplicationController
 	def events
 		response.headers["Content-Type"] = "text/event-stream"
 		redis = Redis.new(:url => ENV['REDISTOGO_URL'])
-		redis.subscribe('comments.create') do |on|
+		redis.subscribe(['comments.create','heartbeat']) do |on|
 			on.message do |event, data|
-				response.stream.write("data: #{data} \n\n")
+				if event == 'comments.create'
+					response.stream.write("data: #{data} \n\n")
+				end
 			end
 		end
 		rescue IOError
