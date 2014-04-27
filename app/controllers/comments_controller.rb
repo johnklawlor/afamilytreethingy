@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 		redis = Redis.new(:url => ENV['REDISTOGO_URL'])
 		redis.subscribe(['comments.create','heartbeat']) do |on|
 			on.message do |event, data|
-				logger.debug("redis message received on channel #{event}")
+				logger.info("redis message received on channel #{event}")
 				if event == 'comments.create'
 					response.stream.write("event: comments.create\ndata: #{data} \n\n")
 				elsif event == 'heartbeat'
