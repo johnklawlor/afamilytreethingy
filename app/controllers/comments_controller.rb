@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
 
 		redis = Redis.new		
-		redis.subscribe(comments.create') do |on|
+		redis.subscribe('comments.create') do |on|
 			on.message do |event, data|
 				sse.write(data)
 				redis.quit
