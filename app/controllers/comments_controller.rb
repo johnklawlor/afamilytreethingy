@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 		response.headers["Content-Type"] = "text/event-stream"
 		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
 
-		redis = Redis.new		
+		redis = Redis.new(:url => ENV['REDISTOGO_URL'])		
 		redis.subscribe('comments.create') do |on|
 			on.message do |event, data|
 				sse.write(data)
