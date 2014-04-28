@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 	
 	before_filter :signed_in_filter
 	before_filter :can_delete?, only: :destroy
-
+	
 	def create
 		@comment = Comment.create( comment_params)
 	end
@@ -19,22 +19,28 @@ class CommentsController < ApplicationController
 	
 	def events
 		response.headers["Content-Type"] = "text/event-stream"
-		redis = Redis.new(:url => ENV['REDISTOGO_URL'])
+		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
+
+		redis = Redis.new		
 		redis.subscribe(['comments.create','heartbeat']) do |on|
 			on.message do |event, data|
 				logger.info("redis message received on channel #{event}")
 				if event == 'comments.create'
-					response.stream.write("event: comments.create\ndata: #{data} \n\n")
+					sse.write(data)
+					redis.quit
+					sse.close
 				elsif event == 'heartbeat'
-					response.stream.write("event: heartbeat\ndata: heartbeat \n\n")
+					sse.write({ heartbeat: 'thump'})
 				end
 			end
 		end
+		
 		rescue IOError
-			logger.info "Stream closed"
+			logger.info "IOError rescued, and stream closed"
 		ensure
-			redis.quit
-			response.stream.close
+			logger.info "Both redis connection and event-stream closed"
+#			redis.quit
+#			sse.close
 	end
 
 	
