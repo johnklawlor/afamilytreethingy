@@ -22,16 +22,11 @@ class CommentsController < ApplicationController
 		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
 
 		redis = Redis.new		
-		redis.subscribe(['comments.create','heartbeat']) do |on|
+		redis.subscribe(comments.create') do |on|
 			on.message do |event, data|
-				logger.info("redis message received on channel #{event}")
-				if event == 'comments.create'
-					sse.write(data)
-					redis.quit
-					sse.close
-				elsif event == 'heartbeat'
-					sse.write({ heartbeat: 'thump'})
-				end
+				sse.write(data)
+				redis.quit
+				sse.close
 			end
 		end
 		
