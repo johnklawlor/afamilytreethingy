@@ -23,6 +23,7 @@ function getComments(){
 
 ready = function() {
 
+	getComments();
 	var eventInterval = setInterval( getComments, 25000);
 
 }

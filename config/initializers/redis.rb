@@ -3,7 +3,6 @@
 uri = URI.parse(ENV["REDISTOGO_URL"])
 $redis = Redis.new(:url => ENV['REDISTOGO_URL'])
 
-=begin
 heartbeat_thread = Thread.new do
   while true
     $redis.publish("heartbeat","thump")
@@ -16,4 +15,3 @@ at_exit do
   heartbeat_thread.kill
   $redis.quit
 end
-=end

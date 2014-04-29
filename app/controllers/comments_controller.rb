@@ -25,16 +25,17 @@ class CommentsController < ApplicationController
 		redis.subscribe('comments.create') do |on|
 			on.message do |event, data|
 				sse.write(data)
+#				redis.quit
 				sse.close
-				logger.info "Server-sent event closed"
 			end
 		end
 		
 		rescue IOError
-			logger.info "IOError rescued"
+			logger.info "IOError rescued, and stream closed"
 		ensure
-			logger.info "Closing redis connection"
+			logger.info "Both redis connection and event-stream closed"
 			redis.quit
+#			sse.close
 	end
 
 	
