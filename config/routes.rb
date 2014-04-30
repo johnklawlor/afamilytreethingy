@@ -8,17 +8,16 @@ Mypeeps::Application.routes.draw do
 	resources :members do
 		get 'crop', on: :member
 		get 'new_post', on: :member
+		get 'events', on: :member
 	end
 	resources :sessions, only: [ :new, :create, :destroy]
 	resources :relationships, only: [ :create, :destroy]
 	resources :spouse_relationships, only: [ :create, :destroy]
 	resources :tree, only: [ :show, :edit, :update]
 	resources :password_resets, only: [ :new, :create, :edit, :update]
-	resources :comments, only: [ :create, :destroy] do
-		collection { get :events }
-	end
+	resources :comments, only: [ :create, :destroy]
 	resources :posts, only: [ :show, :create, :edit, :update, :destroy] do
-		member { get  :partial }
+		member { get :partial }
 	end
 	
 	get '/signup', to: 'members#new'

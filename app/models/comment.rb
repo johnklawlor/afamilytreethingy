@@ -4,13 +4,13 @@ class Comment < ActiveRecord::Base
 #	has_one :update, as: :updated_by
 
 	after_create :create_update
-	after_create :publish_comment
+	after_create :notify_members
 	before_destroy :delete_update
 	
-	def publish_comment
-		from_whom = Member.find_by_id(self.member_id)
+	def notify_members
+		from_whom = Member.find_by_id(member_id)
 		comment = { comment: self, name: from_whom.first_name.downcase, sent_when: time_ago_in_words(self.created_at).to_s + ' ago', url: from_whom.image_url( :micro) }.to_json
-		$redis.publish( 'comments.create', comment)
+		ActiveRecord::Base.connection.execute "NOTIFY #{channel}, #{ActiveRecord::Base.connection.quote comment}"
 	end
 	
 	def create_update
@@ -42,4 +42,9 @@ class Comment < ActiveRecord::Base
 			update.destroy
 		end
 	end
+	
+	private
+		def channel
+			"new_comment_#{member_id}"
+		end
 end

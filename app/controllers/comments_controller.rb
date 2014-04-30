@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-	include ActionController::Live
 	
 	before_filter :signed_in_filter
 	before_filter :can_delete?, only: :destroy
@@ -16,28 +15,6 @@ class CommentsController < ApplicationController
 			format.html { redirect_to image_path( @comment_to_delete.image_id) }
 		end
 	end
-	
-	def events
-		response.headers["Content-Type"] = "text/event-stream"
-		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
-
-		redis = Redis.new(:url => ENV['REDISTOGO_URL'])		
-		redis.subscribe('comments.create') do |on|
-			on.message do |event, data|
-				sse.write(data)
-#				redis.quit
-				sse.close
-			end
-		end
-		
-		rescue IOError
-			logger.info "IOError rescued, and stream closed"
-		ensure
-			logger.info "Both redis connection and event-stream closed"
-			redis.quit
-#			sse.close
-	end
-
 	
 	private
 	

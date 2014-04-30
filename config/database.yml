@@ -3,7 +3,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: mypeeps_development
-  pool: 5
+  pool: 50
   password:
   port: 5432
 

@@ -1,10 +1,37 @@
 class MembersController < ApplicationController
-
+	include ActionController::Live
+	
 	before_filter :admin_member, only: :destroy
 	before_filter :signed_in_filter, only: [ :index, :show, :edit, :update, :destroy, :crop ]
 	before_filter :correct_member, only: :edit
 	before_filter :correct_member_update, only: :update
 	before_filter :within_family, only: :show
+	
+	def events
+		id = params[:id]
+		ActiveRecord::Base.connection.execute "LISTEN #{channel(id)}"
+		
+		response.headers["Content-Type"] = "text/event-stream"
+		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
+
+		timeout = Timeout::timeout(30) do
+			loop do
+				ActiveRecord::Base.connection.raw_connection.wait_for_notify do |event, pid, comment|
+					logger.info "Received notification for event #{event} with pid #{pid}"
+					sse.write(comment)
+					sse.close
+				end
+			end
+		end
+		rescue Timeout::Error
+			logger.info "Caught Timeout Error, now unlistening"
+		rescue IOError
+			logger.info "IOError rescued, and stream closed"
+		ensure
+			ActiveRecord::Base.connection.execute "UNLISTEN #{channel(id)}"
+
+		render nothing: true
+	end	
 		
 	def index
 		@members = Member.all.order('last_name', 'first_name').paginate(page: params[ :page])
@@ -96,7 +123,7 @@ class MembersController < ApplicationController
 	def new_post
 		@member = Member.find_by_id( params[ :id])
 	end
-	
+		
 	private
 	
 		def member_params
@@ -140,5 +167,9 @@ class MembersController < ApplicationController
 				end
 			else redirect_to root_path, flash: { error: "We don't know what you're trying to do, so we've sent you here." }
 			end
+		end
+		
+		def channel(id)
+			"new_comment_#{id}"
 		end
 end
