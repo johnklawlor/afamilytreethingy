@@ -9,26 +9,28 @@ class MembersController < ApplicationController
 	
 	def events
 		id = params[:id]
-		ActiveRecord::Base.connection.execute "LISTEN #{channel(id)}"
+		ActiveRecord::Base.connection.execute "LISTEN #{channel(id)}; LISTEN heartbeat"
 		
 		response.headers["Content-Type"] = "text/event-stream"
-		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
+		sse = SSE.new(response.stream)
 
-		timeout = Timeout::timeout(30) do
-			loop do
-				ActiveRecord::Base.connection.raw_connection.wait_for_notify do |event, pid, comment|
-					logger.info "Received notification for event #{event} with pid #{pid}"
+		loop do
+			ActiveRecord::Base.connection.raw_connection.wait_for_notify do |event, pid, comment|
+				logger.info "Received notification for event #{event} with pid #{pid}"
+				if event == 'heartbeat'
+					sse = SSE.new(response.stream, retry: 0, event: "heartbeat")
 					sse.write(comment)
-					sse.close
+				else
+					sse = SSE.new(response.stream, retry: 0, event: "comments.create")
+					sse.write(comment)
 				end
 			end
 		end
-		rescue Timeout::Error
-			logger.info "Caught Timeout Error, now unlistening"
 		rescue IOError
 			logger.info "IOError rescued, and stream closed"
 		ensure
 			ActiveRecord::Base.connection.execute "UNLISTEN #{channel(id)}"
+			sse.close
 
 		render nothing: true
 	end	
