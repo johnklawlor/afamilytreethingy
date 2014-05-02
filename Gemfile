@@ -6,7 +6,7 @@ ruby "2.1.1"
 gem 'sprockets', '2.11.0'
 
 gem 'pg', "0.17.1"
-gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
+gem 'bcrypt', '~> 3.1.2', :require => 'bcrypt'
 gem 'will_paginate', "3.0.5"
 gem 'bootstrap-will_paginate', "0.0.10"
 gem 'state_machine', "1.2.0"
