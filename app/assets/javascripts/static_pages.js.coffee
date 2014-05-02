@@ -2,7 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+reveal = ->
+	setTimeout ->
+		$('#fb').fadeIn(1000)
+	, 1500
+	setTimeout ->
+		$('#signin').fadeIn(1000)
+	, 2500
+
 ready = ->
+	$('#signin').hide()
 	rotateInBoxes = ->
 		duration = 200
 		jBox = $('.box')
@@ -16,9 +25,7 @@ ready = ->
 			$(boxes[i++]).css( visibility: 'visible').addClass('expand')
 			if i < length
 				setTimeout expandAndShow, duration
-			else setTimeout ->
-				$('#fb').fadeIn(1000)
-			, 1500
+			else reveal()
 
 		expandAndShow()
 		setTimeout ->

@@ -41,10 +41,11 @@ ready = function() {
 			lastComment = $('body').attr('last-comment')
 			if(e.keyCode == 32 && lastComment && lastComment.length != 0){
 				$(".image_block#" + lastComment).find('.comment_link').click()
+				$('body').attr('last-comment','')
 			}
 		})
 	}
-	startStream();
+//	startStream();
 //	refreshInterval = setInterval('window.location.href=window.location.href;', 25000);
 	$(window).bind('beforeunload', function(e){
 //		clearInterval(refreshInterval);

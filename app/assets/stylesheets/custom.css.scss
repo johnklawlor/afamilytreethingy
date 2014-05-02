@@ -19,6 +19,18 @@ $member_image_height: 330px;
 }
 
 /* universal */ 
+@font-face {
+    font-family: 'geosanslightregular';
+    src: url('geosanslight-webfont.eot');
+    src: url('geosanslight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('geosanslight-webfont.woff') format('woff'),
+         url('geosanslight-webfont.ttf') format('truetype'),
+         url('geosanslight-webfont.svg#geosanslightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 .nav{
 	margin-right: 18px;
 }

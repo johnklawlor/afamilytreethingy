@@ -4,9 +4,7 @@
 	<div id="my_peeps_description">a place to share your photos and videos with the family.</div>
 
 	<br/>
-	<%= link_to "Sign in now!", signin_path, class: "btn btn-lg btn-primary" %>
-	<br/>
-	<br/>
+	
 	
 	<div class="boxes">
 		<% (1..4).each do |i| %>
@@ -16,6 +14,10 @@
 			<br/>
 		<% end %>
 	</div>
-	
+
+	<br/>	
 	<div id="fb">because what happens on facebook stays on facebook.</div>
+	<br/>
+	<%= link_to "Sign in now!", signin_path, class: "btn btn-lg btn-primary", id: "signin" %>
+	<br/>
 </div> 
