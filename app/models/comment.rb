@@ -45,6 +45,7 @@ class Comment < ActiveRecord::Base
 	
 	private
 		def channel
-			"new_comment_#{member_id}"
+			member = Post.find_by_id(self.post_id).member_id
+			"new_comment_#{member}"
 		end
 end

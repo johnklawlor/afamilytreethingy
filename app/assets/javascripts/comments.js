@@ -29,9 +29,9 @@ var ready;
 ready = function() {
 
 	startStream();
-//	commentsInterval = setInterval(startStream,30000);
+	refreshInterval = setInterval('window.location.href=window.location.href;', 25000);
 	$(window).bind('beforeunload', function(e){
-//		clearInterval(commentsInterval);
+		clearInterval(refreshInterval);
 	})
 }
 
