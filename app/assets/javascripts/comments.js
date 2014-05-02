@@ -2,6 +2,7 @@ function startStream(){
 // we grab the member id from the post form in the images div. we then create a new EventSource that listens on this route
 	member = $("#post_member_id")
 	if( member.length != 0 ){
+	
 		member_id = member.val()
 		console.log("Creating new EventSource stream...")
 		var source = new EventSource("/members/" + member_id + "/events")
@@ -28,6 +29,21 @@ var ready;
 
 ready = function() {
 
+	member = $("#post_member_id")
+	if( member.length != 0 ){
+		$(document).keydown(function(e){
+			lastComment = $('body').attr('last-comment')
+			if(lastComment && e.keyCode == 32){
+				e.preventDefault();
+			}
+		})
+		$(document).keyup(function(e){
+			lastComment = $('body').attr('last-comment')
+			if(e.keyCode == 32 && lastComment && lastComment.length != 0){
+				$(".image_block#" + lastComment).find('.comment_link').click()
+			}
+		})
+	}
 	startStream();
 //	refreshInterval = setInterval('window.location.href=window.location.href;', 25000);
 	$(window).bind('beforeunload', function(e){

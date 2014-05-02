@@ -6,5 +6,7 @@ post.on( 'mouseover', function(e) {
 	$(this).find( '.over_image').fadeOut( 1000, function() {
 		$(this).attr( 'class', 'hidden_over_image') })
 })
-$('.show_member_comment_form_holder').children( '.show_member_comment_form').prepend( "<span class='exit_button' >")
-$('.show_member_comment_form_holder').fadeIn(1000)
+form_holder = $('.show_member_comment_form_holder')
+form_holder.children( '.show_member_comment_form').prepend( "<span class='exit_button' >")
+form_holder.fadeIn(1000)
+form_holder.find('#comment_content').focus()

@@ -95,16 +95,29 @@ ready = ->
 	$('body').on 'click', '#post_submit', ->
 		new_post = $("<div class='image_block new_post'></div>")
 		$("#member_info").after( new_post)
-	
-	$('body').on 'click', '.exit_button, #comment_submit, #post_submit', ->
-		post = $(this).closest( '.image_block')
+
+	closeCommentForm = (textarea) ->
+		post = textarea.closest('.image_block')
 		post.off( 'mouseover')
-		form_holder = $(this).closest( '.show_member_comment_form_holder')
+		form_holder = textarea.closest( '.show_member_comment_form_holder')
 		post.find( '.hidden_over_image').attr( 'class', 'over_image tp')
 		post.find('p').fadeIn(1000)
 		form_holder.fadeOut 1000, ->
 			$(this).remove()
+
+	$('body').on 'click', '.comment_link', ->
+		$(document).keyup (e) ->
+			if e.keyCode == 27
+				closeCommentForm($(':focus'))
 	
+	$('body').on 'click', '.exit_button, #comment_submit, #post_submit', ->
+		closeCommentForm($(this))
+		
+	$('body').on 'click', '#comment_submit', ->
+		post_id = $(this).parents('.image_block').attr('id')
+		console.log(post_id)
+		$('body').attr('last-comment', post_id)
+
 	overImageVisible = true
 	$('body').on 'mouseover', '.image_block, .tree_image_block, .show_image', ->
 		if overImageVisible == true
