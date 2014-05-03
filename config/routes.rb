@@ -14,7 +14,12 @@ Mypeeps::Application.routes.draw do
 	resources :relationships, only: [ :create, :destroy]
 	resources :spouse_relationships, only: [ :create, :destroy]
 	resources :tree, only: [ :show, :edit, :update]
-	resources :password_resets, only: [ :new, :create, :edit, :update]
+	resources :password_resets, only: [ :new, :create, :edit, :update] do
+		member do
+			get :change_password
+			patch :update_password
+		end
+	end
 	resources :comments, only: [ :create, :destroy]
 	resources :posts, only: [ :show, :create, :edit, :update, :destroy] do
 		member { get :partial }

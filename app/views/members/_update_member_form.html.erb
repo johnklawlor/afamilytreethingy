@@ -17,11 +17,8 @@
 	<%= f.label :email %>
 	<%= f.text_field :email %>
 
-	<%= f.label :password %>
-	<%= f.password_field :password %>
-
-	<%= f.label :password_confirmation, "Confirm Password" %>
-	<%= f.password_field :password_confirmation %>
+	<br/>
+	<%= link_to "Change my password", change_password_password_reset_path(@member) %>
 </div>
 
 <div class="col-lg-4">	

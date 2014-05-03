@@ -31,6 +31,27 @@ class PasswordResetsController < ApplicationController
 		end
 	end
 	
+	def change_password
+		@member = Member.find_by_id(params[:id])
+	end
+	
+	def update_password
+		@member = current_member
+		if @member && @member.authenticate(params[:member][:current_password])
+			# must inactivate member to trigger password validations
+			@member.inactivate_member(false)
+			if @member.update_attributes(member_params)
+				@member.activate_member
+				redirect_to edit_member_path(@member), notice: "Your password has been updated! (Psst. You should probably write it down somewhere. If you do forgot it, follow the password reset link of the sign in page.)"
+			else
+				render :change_password
+			end
+		else
+			flash.now[:error] = "The current password you provided does not match our records. Please try again."
+			render :change_password
+		end	
+	end
+	
 	private
 		def member_params
 			params.require( :member).permit(  :password, :password_confirmation )
