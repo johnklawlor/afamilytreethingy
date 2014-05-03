@@ -3,16 +3,14 @@
 
 <div class="row">
 	<div class="col-lg-4 col-lg-offset-4">
-		<%= form_for(@member, url: password_reset_path(params[:id])) do |f| %>
+		<%= form_for(@member, url: password_reset_path(params[:id]), html: {class: 'f-vt'}) do |f| %>
 			<%= render 'shared/error_messages', object: f.object %>
 	
-			<%= f.label :password %>
-			<%= f.password_field :password %>
+			<%= f.password_field :password, placeholder: "password..." %>
+
+			<%= f.password_field :password_confirmation, placeholder: "enter password again to confirm" %>
 	
-			<%= f.label :password_confirmation %>
-			<%= f.password_field :password_confirmation %>
-	
-			<%= f.submit "Update Password", class: "btn btn-primary" %>
+			<%= f.submit "Update Password", class: "btn btn-primary btn-vt" %>
 		<% end %>
 	</div>
 </div>

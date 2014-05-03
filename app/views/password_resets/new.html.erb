@@ -3,11 +3,10 @@
 
 <div class="row">
 	<div class="col-lg-4 col-lg-offset-4">
-		<%= form_tag password_resets_path, method: :post do %>
-			<%= label_tag :email %>
-			<%= text_field_tag :email, params[:email] %>
-				
-			<%= submit_tag "Reset Password", class: "btn btn-primary" %>
+		<%= form_tag password_resets_path, method: :post, class: 'f-hz' do %>
+			<%= text_field_tag :email, params[:email], placeholder: "Email address..." %>
+			<br/><br/>
+			<%= submit_tag "Reset Password", class: "btn btn-primary btn-hz" %>
 		<% end %>
 	</div>
 </div>

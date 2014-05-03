@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(version: 20140325020621) do
     t.datetime "updated_at"
   end
 
-  create_table "images", force: true do |t|
-    t.integer  "member_id"
-    t.string   "image"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "members", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -64,13 +57,8 @@ ActiveRecord::Schema.define(version: 20140325020621) do
     t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "video_file_name"
-    t.string   "video_content_type"
-    t.integer  "video_file_size"
-    t.datetime "video_updated_at"
     t.string   "image_width"
     t.string   "image_height"
-    t.string   "s3_image_url"
     t.string   "tmp_image"
     t.string   "video"
     t.string   "tmp_video"
@@ -99,13 +87,6 @@ ActiveRecord::Schema.define(version: 20140325020621) do
   create_table "spouse_relationships", force: true do |t|
     t.integer  "member_id"
     t.integer  "spouse_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "update_relationships", force: true do |t|
-    t.integer  "update_id"
-    t.integer  "comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

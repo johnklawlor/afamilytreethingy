@@ -5,8 +5,8 @@ class PasswordResetsController < ApplicationController
 	
 	def create
 		member = Member.find_by_email( params[:email])
-		member.send_password_reset_email
-		redirect_to root_path, notice: "We've sent you an email with password reset instructions."
+		member.send_password_reset_email if member
+		redirect_to root_path, notice: "We've sent you an email with password reset instructions. If you do not receive an email, check your spam, or trying entering a different email address you may have signed up with."
 	end
 	
 	def edit
@@ -21,13 +21,13 @@ class PasswordResetsController < ApplicationController
 		@member = Member.find_by_password_reset_token!( params[ :id])
 		if @member.password_reset_sent_at < 2.hours.ago
 			redirect_to new_password_reset_path, notice: "Password reset has expired. Visit the forgot password link below."
-		elsif @member.update_attributes( member_params )
+		elsif @member.update_attributes(member_params)
 			@member.reset_token
 			@member.activate_member
 			sign_in @member
-			redirect_to tree_path(@member)
+			redirect_to member_path(@member)
 		else
-			render 'edit'
+			render :edit
 		end
 	end
 	

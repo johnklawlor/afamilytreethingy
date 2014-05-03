@@ -96,7 +96,7 @@ class MembersController < ApplicationController
 					redirect_to member_path(@member), status: 303
 				end
 			else
-				render :edit
+				render edit_member_path(@member)
 			end
 		end
 	end
