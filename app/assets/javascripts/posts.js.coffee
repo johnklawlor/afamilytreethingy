@@ -3,12 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-
-	expand_collapse = $('.expand_convo')
-	expand_collapse.addClass('rotate')
 	
 	expanding = ->
-		expand_collapse = $('.expand_convo')
+		expand_collapse = $(this)
 		expand_collapse.unbind 'click', expanding
 		expand_collapse.addClass('rotate')
 		written_post = $(this).parents('.image_block')
@@ -28,13 +25,16 @@ ready = ->
 		written_post.hide().css( { 'height': 'initial' })
 		setTimeout ->
 			height = written_post.outerHeight()
+			iheight = written_post.height()
 			written_post.animate { height: '330px'}, 0, ->
 				written_post
 				written_post.attr( 'data-height', height)
 				if height > 330
+					console.log("outerheight is", height)
+					console.log("innerheight is", iheight)
 					written_post.append("<div class='expand_convo'></div>")
 					$('.expand_convo').bind 'click', expanding
-		, 0
+		, 1
 	
 	rotateInPosts = ->
 		duration = 100
