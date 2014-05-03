@@ -1,11 +1,11 @@
 <footer class="footer"> 
   <small> 
-    <a href='#'>Remember to put link here</a> 
+    <%= link_to "Show me something random", 'http://www.theuselessweb.com/', target: '_blank' %>
   </small> 
   <nav> 
     <ul> 
-      <li> <%= link_to "About",   '#' %> </li> 
-      <li> <%= link_to "Contact", '#' %> </li>
+      <li> <%= link_to "Home", root_path %> </li> 
+      <li> <%= mail_to "john.k.lawlor@gmail.com", "Contact" %> </li>
     </ul> 
   </nav> 
 </footer>
