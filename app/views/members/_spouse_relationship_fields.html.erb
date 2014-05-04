@@ -21,10 +21,10 @@
 	<div class="col-lg-4">
 		<div id="full_member_field">
 		<%= f.label :email %>
-		<%= f.text_field :email, autocomplete: :off %>
+		<%= f.text_field :email, autocomplete: :off, value: "" %>
 
 		<%= f.label :password %>
-		<%= f.password_field :password, autocomplete: :off %>
+		<%= f.password_field :password, autocomplete: :off, value: "" %>
 
 		<%= f.label :password_confirmation, "Confirm Password" %>
 		<%= f.password_field :password_confirmation %>
