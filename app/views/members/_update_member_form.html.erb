@@ -23,7 +23,7 @@
 
 <div class="col-lg-4">	
 	<%= image_tag(@member.image_url(:thumb)) if @member.image? %>
-	<%= f.label :image, "Upload or change your profile picture" %>
+	<%= f.label :image, "Upload a new profile picture" %>
 	<%= f.file_field :image %>
 	<%= f.hidden_field :image_cache %>
 

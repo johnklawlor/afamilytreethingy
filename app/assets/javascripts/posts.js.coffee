@@ -99,13 +99,13 @@ ready = ->
 	closeCommentForm = (textarea) ->
 		post = textarea.closest('.image_block')
 		post.off( 'mouseover')
-		form_holder = textarea.closest( '.show_member_comment_form_holder')
+		form_holder = textarea.closest( '.show_member_comment_form_holder') || textarea.closest( '.show_member_post_form_holder')
 		post.find( '.hidden_over_image').attr( 'class', 'over_image tp')
 		post.find('p').fadeIn(1000)
 		form_holder.fadeOut 1000, ->
 			$(this).remove()
 
-	$('body').on 'click', '.comment_link', ->
+	$('body').on 'click', '.comment_link, #post_content', ->
 		$(document).keyup (e) ->
 			if e.keyCode == 27
 				closeCommentForm($(':focus'))
