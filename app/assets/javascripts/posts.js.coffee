@@ -140,7 +140,7 @@ ready = ->
 			$('body').find('.over_image').fadeOut 1000, ->
 				overImageVisible = false
 		, delay
-	fadeOutOverImage()
+#	fadeOutOverImage()
 		
 	$('#image_comments').perfectScrollbar({
 		wheelSpeed: 10
