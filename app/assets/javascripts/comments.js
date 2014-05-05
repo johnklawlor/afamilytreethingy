@@ -22,6 +22,10 @@ function startStream(){
 				$(div).find('.post_comments').prepend(" <li id='" + comment.id + "', class='comment_block'> <a href='/members/" + comment.member_id + "'> <img class='comment_member_image img-rounded' src='" + url + "' > </a> <a href='/members/" + comment.member_id + "'>" + name + "</a>: " + comment.content + "<br/> -" + sent_when + " | <a data-method='delete' data-remote='true' href='/comments/" + comment.id + "' rel='nofollow'>delete</a><br/> </li> ")
 			}
 		})
+		$(window).bind('beforeunload', function(e){
+			console.log("About to close... ",source);
+			source.close();
+		})
 	}
 }
 
@@ -48,11 +52,9 @@ ready = function() {
 			$('body').attr('last-comment','')
 		})
 	}
+
 	startStream();
-//	refreshInterval = setInterval('window.location.href=window.location.href;', 25000);
-	$(window).bind('beforeunload', function(e){
-//		clearInterval(refreshInterval);
-	})
+
 }
 
 $(document).ready(ready);
