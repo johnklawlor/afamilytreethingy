@@ -9,28 +9,33 @@ class MembersController < ApplicationController
 	
 	def events
 		id = params[:id]
-		ActiveRecord::Base.connection.execute "LISTEN #{channel(id)}; LISTEN heartbeat"
-		
+
 		response.headers["Content-Type"] = "text/event-stream"
 		sse = SSE.new(response.stream)
 
-		loop do
-			ActiveRecord::Base.connection.raw_connection.wait_for_notify do |event, pid, comment|
-				logger.info "Received notification for event #{event} with pid #{pid}"
-				if event == 'heartbeat'
-					sse = SSE.new(response.stream, retry: 0, event: "heartbeat")
-					sse.write(comment)
-				else
-					sse = SSE.new(response.stream, retry: 0, event: "comments.create")
-					sse.write(comment)
+		ActiveRecord::Base.connection_pool.with_connection do |connection|
+			conn = connection.instance_variable_get(:@connection)
+			conn.async_exec "LISTEN #{channel(id)}; LISTEN heartbeat;"
+			begin
+			loop do
+				conn.wait_for_notify do |channel, pid, comment|
+					logger.info "Received notification on channel #{channel} with pid #{pid}"
+					if channel == 'heartbeat'
+						sse = SSE.new(response.stream, retry: 0, event: "heartbeat")
+						sse.write(comment)
+					else
+						sse = SSE.new(response.stream, retry: 0, event: "comments.create")
+						sse.write(comment)
+					end
 				end
 			end
+			rescue IOError
+				logger.info "IOError rescued, and stream closed"
+			ensure
+				sse.close
+				conn.async_exec "UNLISTEN #{channel(id)}; UNLISTEN heartbeat;"
+			end
 		end
-		rescue IOError
-			logger.info "IOError rescued, and stream closed"
-		ensure
-			ActiveRecord::Base.connection.execute "UNLISTEN #{channel(id)}"
-			sse.close
 
 		render nothing: true
 	end	
