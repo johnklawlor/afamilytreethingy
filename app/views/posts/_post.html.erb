@@ -1,16 +1,17 @@
-<div class="image_block " id="<%= post.id %>">
-
-	<% if post.tmp_image? || post.image? %>
+<% if post.tmp_image? || post.image? %>
+	<div class="image_block " id="<%= post.id %>" data-type="image">
 		<% image_url = ((post.tmp_image? && post.tmp_image_url(:medium)) || (post.image? && post.image_url(:medium))) %>
-		
 		<%= link_to image_tag( image_url, class: "member_image img-rounded", href: partial_post_path(post)), post_path(post) %>
 		<%= render partial: 'posts/over_image', object: post, as: :post	 %>
 
-	<% elsif post.tmp_video? || post.video? %>
+<% elsif post.tmp_video? || post.video? %>
+	<div class="image_block " id="<%= post.id %>" data-type="video">
 		<%= render partial: 'posts/video_thumb', object: post, as: :post %>
 		<%= render partial: 'posts/over_image', object: post, as: :post	 %>
 
-	<% else %>
+<% else %>
+	<div class="image_block " id="<%= post.id %>" data-type="written">
 		<%= render partial: 'posts/written', object: post, as: :post %>
-	<% end %>
+<% end %>
+
 </div>

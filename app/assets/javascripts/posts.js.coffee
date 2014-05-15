@@ -24,16 +24,15 @@ ready = ->
 		written_post = $(this).parents('.image_block')
 		written_post.hide().css( { 'height': 'initial' })
 		setTimeout ->
-			height = written_post.outerHeight()
-			iheight = written_post.height()
-			written_post.animate { height: '330px'}, 0, ->
-				written_post
-				written_post.attr( 'data-height', height)
-				if height > 330
-					console.log("outerheight is", height)
-					console.log("innerheight is", iheight)
-					written_post.append("<div class='expand_convo'></div>")
-					$('.expand_convo').bind 'click', expanding
+			height = written_post.height()
+			setTimeout ->
+				written_post.animate { height: '330px'}, 0, ->
+					written_post.attr( 'data-height', height)
+					if height > 330
+						console.log("height is", height)
+						written_post.append("<div class='expand_convo'></div>")
+						$('.expand_convo').bind 'click', expanding
+			, 2
 		, 1
 	
 	rotateInPosts = ->
@@ -62,16 +61,20 @@ ready = ->
 	if $('.show_post_video').length != 0
 		videojs( $('.show_post_video')[0], {}, -> )
 			
-	loadVJS = ->	
+	loadVJSandScrollbar = ->	
 		if $('body').find('.show_post_video').length != 0
 			videojs( $('.show_post_video')[0], {}, -> )
 		$('body').find('video#actual_image_html5_api').bind 'ended', ->
 			$('.over_image_marker').addClass('over_image tp')
-		
-	$('body').on 'click', ->
+		$('#image_comments').perfectScrollbar({
+			wheelSpeed: 10
+		})
+
+	$('div#images').on 'click', ->
+		console.log("about to bind colorbox...")
 		$('.member_image').colorbox
 			rel: 'member_image'
-			onComplete: loadVJS
+			onComplete: loadVJSandScrollbar
 
 	$('body').on 'click', '.vjs-big-play-button, .vjs-play-control', ->
 		over_image = $(this).parents('#actual_image').siblings('.over_image_marker')
@@ -117,6 +120,47 @@ ready = ->
 		post_id = $(this).parents('.image_block').attr('id')
 		console.log(post_id)
 		$('body').attr('last-comment', post_id)
+			
+	profile_block = $('#member_info')
+	if $('#post_member_id').val() == $('#post_from_member').val() && profile_block.find('#profile_image').attr('src') == '/assets/medium_default.png'
+		profile_block.qtip
+			content:{
+				text: 'Drag and drop an image over this square to change your profile picture...'
+			}
+			style:{
+				classes: 'qtip-blue qtip-info'
+			}
+			position:{
+				my: 'top left'
+				at: 'top right'
+				adjust:{
+					x: -10
+					y: 30
+				}
+			}
+			show:{
+				event: 'mouseover'
+			}
+			hide:{
+				event: 'mouseleave'
+			}
+	
+	if $('.image_block').length == 2
+		$('#images').qtip
+			content:{
+				text: "Drag and drop an image or a video any where on this member's page to send them something..."
+			}
+			style:{
+				classes: 'qtip-blue qtip-info'
+			}
+			position:{
+				my: 'top left'
+				at: 'top center'
+				adjust:{
+					x: 0
+					y: 120
+				}
+			}
 
 	overImageVisible = true
 	$('body').on 'mouseover', '.image_block, .tree_image_block, .show_image', ->
@@ -142,10 +186,6 @@ ready = ->
 		, delay
 #	fadeOutOverImage()
 		
-	$('#image_comments').perfectScrollbar({
-		wheelSpeed: 10
-	})
-
 	if ( $('.show_image').length != 0)
 		$('body').css('background-color', '#111')
 
@@ -206,6 +246,7 @@ ready = ->
 						$('#progress_bar_section').append("<span id='upload_complete'>Upload complete!</span>")
 						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
 							$('#upload_complete').remove())
+						$('#member_info').qtip('destroy')
 		else if this.id == 'hidden_new_post'
 			filesSent = 0
 			$(this).fileupload
@@ -220,11 +261,12 @@ ready = ->
 							filesSent = 0
 							return false
 						else
-							$('#progress_bar_section').fadeTo(200, 0.8)
-							console.log(file.name)
-							new_post = $("<div class='image_block new_post'></div>")
-							$("#member_info").after( new_post)
-							data.submit()
+							if $('#member_info').is(':hover') == false
+								$('#progress_bar_section').fadeTo(200, 0.8)
+								console.log(file.name)
+								new_post = $("<div class='image_block new_post'></div>")
+								$("#member_info").after( new_post)
+								data.submit()
 					else
 						alert("#{file.name} is not a gif, jpeg, or png image file nor an mv4 video file")
 				send: (e, data) ->
@@ -238,6 +280,7 @@ ready = ->
 						$('#progress_bar_section').append("<span id='upload_complete'>Upload complete!</span>")
 						$('#progress_bar_section').delay(5000).fadeOut('slow', ->
 							$('#upload_complete').remove())
+						$('#images').qtip('destroy')
 		
 	$(document).bind 'drop dragover', (e) ->
 		e.preventDefault()

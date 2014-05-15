@@ -1,10 +1,33 @@
-<% if false %>
-	<% if @comment.new_record? %>
-		alert("Failed to post comment: <%= j @comment.errors.full_messages.join(', ').html_safe %>");
-	<% else %>
-		$('#image_comments').prepend("<%= j render @comment %>")
-		console.log( 		$('div#<%= @comment.post_id %>').find('.post_comments') )
-		$('div#<%= @comment.post_id %>').find('.post_comments').append("<%= j render @comment %>")
-		$('#comment_content').val('')
+<% if @comment.new_record? %>
+	alert("Failed to post comment: <%= j @comment.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+	$('#image_comments').prepend("<%= j render @comment %>")
+	$('#comment_content').val('')
+	image_block = $('div.image_block#<%= j @post_id%>')
+	console.log(image_block)
+	<% if @show_spacebar_hint %>
+		console.log('here i am')
+		if(image_block.attr('data-type') == 'written'){
+			comment_link = image_block.find('.comment_link')
+			comment_link.qtip({
+				content:{
+					text: 'Press the spacebar key to continue this conversation. This will work anytime just after you have submitted a comment on a post.'
+				},
+				show:{
+					ready: true
+				},
+				style:{
+					classes: 'qtip-blue qtip-info'
+				}
+			})
+			path = '/members/<%= j @to_member %>'
+			id = '<%= j @to_member %>'
+			$.ajax({
+				type: "PATCH",
+				url: path,
+				data: { id: id, member: { 'show_spacebar_hint' : 'false' } }
+			})
+		}
 	<% end %>
+
 <% end %>

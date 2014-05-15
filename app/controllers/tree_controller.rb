@@ -9,6 +9,8 @@ class TreeController < ApplicationController
 		oldest_ancestor = Member.find_by_id(member.oldest_ancestor)
 
 		@family = build_tree(oldest_ancestor, oldest_ancestor.id)
+		
+		render layout: "tree"
 	end
 
 	def edit

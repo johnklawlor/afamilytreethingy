@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/head_tag' %>
+<body "data-no-turbolink">
+	<%= render 'layouts/header' %>
+
+	<%= render 'layouts/outside_containers' %>
+	
+	<%= render 'layouts/footer' %>
+
+	<%= debug(params) if Rails.env.development? %>
+	<%= debug(flash[ :error]) if Rails.env.development? %>
+</body>
+</html>

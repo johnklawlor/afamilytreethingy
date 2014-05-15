@@ -96,6 +96,8 @@ class MembersController < ApplicationController
 				elsif params[ :member][ :last_checked_updates].present?
 					@member.update_attribute( :last_checked_updates, Time.at(params[ :member][ :last_checked_updates].to_i/1000))
 					render nothing: true
+				elsif params[ :member][ :show_spacebar_hint].present?
+					render nothing: true
 				else
 					flash[ :success] = "Your profile was updated successfully."
 					redirect_to member_path(@member), status: 303
@@ -134,7 +136,7 @@ class MembersController < ApplicationController
 	private
 	
 		def member_params
-			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, :crop_x, :crop_y, :crop_w, :crop_h, :allows_editing, :last_checked_updates, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
+			params.require(:member).permit(:first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image, :relationship_type, :relationship_id, :crop_x, :crop_y, :crop_w, :crop_h, :allows_editing, :last_checked_updates, :show_spacebar_hint, children_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], parents_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image], spouses_attributes: [ :first_name, :last_name, :birthdate, :email, :password, :password_confirmation, :full_account, :spouse_id, :image, :image_cache, :remove_image])
 		end
 		
 		def add_member_params

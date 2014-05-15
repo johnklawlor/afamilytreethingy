@@ -440,7 +440,7 @@ img#profile_image {
 	position: relative;
 	display: inline-block;
 	width: 100%;
-	min-height: 400px;
+	min-height: 600px;
 }
 
 .image_block{
@@ -731,6 +731,12 @@ input.add_member{
 	}
 }
 
+.qtip-info .qtip-content{
+	font-size: 28px;
+	font-family: 'geosanslightregular';
+	line-height: 20px;
+}
+
 div.update_block {
 	display: inline-block;
 	margin-bottom: 3px;
@@ -749,6 +755,7 @@ div#updates_count{
 	border-radius: 7px;
 	font-family: geosanslight;
 	font-size: 22px;
+	line-height: 0;
 }
 
 div.some_updates{
@@ -870,3 +877,29 @@ to {
 	0% { color: #f70; }
 	50% { color: #333; }
 	100% { color: #fff; }}
+	
+@media (max-width:750px){
+	#my_profile{
+		display: none;
+	}
+
+	.nav > li > a {
+		padding: 0px 4px;
+		font-size: 28px;
+		margin-top: 19px;
+		height: 10px;
+	}
+	
+	.nav > li {
+		width: 18%;
+		line-height: 19px;
+	}
+	
+	.nav, .pull-right{
+		width: 100%;
+	}
+	div#updates_count{
+		right: 5px;
+		bottom: 0px;
+	}
+}

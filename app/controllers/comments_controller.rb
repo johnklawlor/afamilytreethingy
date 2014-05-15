@@ -5,6 +5,9 @@ class CommentsController < ApplicationController
 	
 	def create
 		@comment = Comment.create( comment_params)
+		@post_id = @comment.post_id.to_s
+		@to_member = current_member.id.to_s
+		@show_spacebar_hint = current_member.show_spacebar_hint
 	end
 
 	def destroy

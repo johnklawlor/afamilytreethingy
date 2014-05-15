@@ -57,7 +57,7 @@ ready = function() {
 			},
 			
 			orientation: 'top',
-			siblingOffset: 20,
+			siblingOffset: 12,
 			
 				//set node and edge styles
 				//set overridable=true for styling individual

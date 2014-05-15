@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 		@post = Post.new( post_params)
 		if @post.member_id == @post.from_member &&
 			@post.member_id != current_member.id
-			logger.debug("Member posting to his own profile")
+			logger.debug("Member posting to another member's page...")
 			respond_to do |format|
 				format.js { render file: "posts/illegal_post.js.coffee" }
 				format.html { redirect_to member_path( current_member) }
