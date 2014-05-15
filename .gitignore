@@ -13,8 +13,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp/cache
-/tmp/pids
+/tmp
 
 # Ignore other unneeded files.
 doc/
