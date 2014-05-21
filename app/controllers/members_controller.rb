@@ -58,7 +58,7 @@ class MembersController < ApplicationController
 
 		if @member.save
 			if @member.full_account?
-				sign_in @member
+				sign_in(@member, :remember_token)
 				if params[ :member][ :image].present?
 					render :crop
 				else

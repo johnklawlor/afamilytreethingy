@@ -1,8 +1,12 @@
 module SessionsHelper
-	def sign_in(member)
-		remember_token = Member.new_token
-		cookies.permanent[:remember_token] = remember_token
-		member.update_attribute(:remember_token, Member.encrypt(remember_token))
+	def sign_in(member, token_type)
+		token = Member.new_token
+		if token_type == :remember_token
+			cookies.permanent[:remember_token] = token
+			member.update_attribute(:remember_token, Member.encrypt(token))
+		elsif token_type == :api_token
+			member.update_attribute(:api_token, token)
+		end
 		self.current_member = member
 	end
 	
@@ -15,8 +19,15 @@ module SessionsHelper
 	end
 	
 	def current_member
-		remember_token = Member.encrypt(cookies[:remember_token])
-		@current_member ||= Member.find_by(remember_token: remember_token)
+		if cookies[:remember_token].present?
+			remember_token = Member.encrypt(cookies[:remember_token])
+			@current_member ||= Member.find_by(remember_token: remember_token)
+		elsif request.headers["passport"].present?
+			api_token = request.headers["passport"]
+			@current_member ||= Member.find_by_api_token(api_token)
+		else
+			nil
+		end
 	end
 	
 	def current_member?(member)

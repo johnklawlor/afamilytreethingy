@@ -24,7 +24,7 @@ class PasswordResetsController < ApplicationController
 		elsif @member.update_attributes(member_params)
 			@member.reset_token
 			@member.activate_member
-			sign_in @member
+			sign_in(@member, :remember_token)
 			redirect_to member_path(@member)
 		else
 			render :edit

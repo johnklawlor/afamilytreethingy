@@ -1,0 +1,1 @@
+json.member @member, :first_name, :last_name, :birthdate, :email

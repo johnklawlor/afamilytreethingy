@@ -11,6 +11,7 @@ Mypeeps::Application.routes.draw do
 		get 'events', on: :member
 	end
 	resources :sessions, only: [ :new, :create, :destroy]
+	resources :auth_api, only: [ :create, :destroy]
 	resources :relationships, only: [ :create, :destroy]
 	resources :spouse_relationships, only: [ :create, :destroy]
 	resources :tree, only: [ :show, :edit, :update]

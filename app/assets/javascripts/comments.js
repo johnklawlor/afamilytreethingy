@@ -69,7 +69,7 @@ ready = function() {
 		})
 	}
 
-	startStream();
+//	startStream();
 
 }
 

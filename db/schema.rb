@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514230836) do
+ActiveRecord::Schema.define(version: 20140518184027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,10 @@ ActiveRecord::Schema.define(version: 20140514230836) do
     t.string   "password_hash"
     t.string   "password_salt"
     t.boolean  "show_spacebar_hint",     default: true
+    t.string   "api_token"
   end
 
+  add_index "members", ["api_token"], name: "index_members_on_api_token", unique: true, using: :btree
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
   add_index "members", ["remember_token"], name: "index_members_on_remember_token", using: :btree
   add_index "members", ["state"], name: "index_members_on_state", using: :btree
