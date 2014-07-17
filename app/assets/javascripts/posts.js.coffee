@@ -261,7 +261,8 @@ ready = ->
 							filesSent = 0
 							return false
 						else
-							if $('#member_info').is(':hover') == false
+							console.log("i'm hovering over #member_info", $('#member_info').attr('isCurrentlyHoveredOver'))
+							if $('#member_info').attr('isCurrentlyHoveredOver') == 'false'
 								$('#progress_bar_section').fadeTo(200, 0.8)
 								console.log(file.name)
 								new_post = $("<div class='image_block new_post'></div>")
@@ -284,6 +285,11 @@ ready = ->
 		
 	$(document).bind 'drop dragover', (e) ->
 		e.preventDefault()
+		
+	$("#member_info").mouseenter ->
+		$(this).attr('isCurrentlyHoveredOver','true');
+		$(this).mouseleave ->
+			$(this).attr('isCurrentlyHoveredOver','false')
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

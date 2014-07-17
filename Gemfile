@@ -13,7 +13,6 @@ gem 'state_machine', "1.2.0"
 gem 'jquery-fileupload-rails', "0.4.1"
 gem 'dotenv-rails', "0.10.0"
 gem 'puma', "2.8.1"
-gem 'redis', "3.0.7"
 gem 'carrierwave', '0.9.0'
 gem 'rmagick', '2.13.2'
 gem "jquery-colorbox-rails", "~> 0.1.5"
@@ -23,6 +22,8 @@ gem "fog", "1.20.0"
 gem "queue_classic", "2.2.3"
 gem "carrierwave-video", "~> 0.5.5"
 gem "carrierwave-video-thumbnailer", "~> 0.1.4"
+gem 'redis', "3.0.7"
+gem "therubyracer", "0.12.1"
 
 group :production do
 	gem 'rails_12factor'
@@ -64,7 +65,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '3.1.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

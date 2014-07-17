@@ -5,10 +5,12 @@ Mypeeps::Application.routes.draw do
 	get "updates/posts"
 	get "updates/comments"
 	
+	resources :stream, only: :comments do
+		get 'comments', on: :member
+	end
 	resources :members do
 		get 'crop', on: :member
 		get 'new_post', on: :member
-		get 'events', on: :member
 	end
 	resources :sessions, only: [ :new, :create, :destroy]
 	resources :auth_api, only: [ :create, :destroy]

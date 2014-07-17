@@ -5,11 +5,12 @@ function startStream(){
 	
 		member_id = member.val()
 		console.log("Creating new EventSource stream...")
-		var source = new EventSource("/members/" + member_id + "/events")
+		var source = new EventSource("/stream/" + member_id + "/comments")
 		console.log( source);
 		source.addEventListener('comments.create', function (e) {
 			console.log('e is ', e)
-			if( e.data.length > 4) {
+			console.log('e.data.length is ', e.data.length)
+			if( e.data.length > 6) {
 				console.log('e.data ', e.data)
 				data = $.parseJSON(e.data)
 				comment = data.comment
@@ -37,6 +38,7 @@ ready = function() {
 	if( member.length != 0 ){
 		$(document).keydown(function(e){
 			lastComment = $('body').attr('last-comment')
+			console.log(lastComment.length)
 			if(lastComment && e.keyCode == 32){
 				e.preventDefault();
 			}
@@ -50,6 +52,7 @@ ready = function() {
 		})
 		$(document).keyup(function(e){
 			lastComment = $('body').attr('last-comment')
+			console.log(lastComment.length)
 			if(e.keyCode == 32 && lastComment && lastComment.length != 0){
 				$('body').attr('last-comment','')
 				$('.comment_link').qtip('destroy')
@@ -69,7 +72,7 @@ ready = function() {
 		})
 	}
 
-//	startStream();
+	startStream();
 
 }
 

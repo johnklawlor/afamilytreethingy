@@ -10,3 +10,5 @@ member_info.on( 'mouseover', function(e) {
 $('.show_member_comment_form_holder').children( '.show_member_post_form').prepend( "<span class='exit_button' >")
 $('.show_member_comment_form_holder').fadeIn(1000)
 $("#post_content").focus()
+$('body').attr('last-comment','')
+$('#images').qtip('destroy')

@@ -20,7 +20,7 @@ class Member < ActiveRecord::Base
 	before_create :encrypt_password, :nil_or_downcase
 	before_create { create_token(:remember_token) }
 	before_save :encrypt_password, :nil_or_downcase
-	after_create :set_oldest_ancestor, :activate_member
+	after_create :set_oldest_ancestor, :activate_member, :set_last_checked_updates
 	after_update :crop_profile_image
 
 	before_destroy :set_ancestor_for_children, :destroy_spouse_id_of_spouse, :delete_posts_from_member, :delete_comments_from_member
@@ -60,6 +60,11 @@ class Member < ActiveRecord::Base
 	validates :password_confirmation, presence: true, if: [ :account?, :inactive?]
 	validates_confirmation_of :password, if: [ :account?, :inactive? ]
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, if: :account?
+	
+	def set_last_checked_updates
+		self.last_checked_updates = Time.now.to_i/1000
+		save
+	end
 	
 	def delete_comments_from_member
 		Comment.where( member_id: self.id).each do |comment|

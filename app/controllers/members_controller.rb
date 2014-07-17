@@ -1,44 +1,10 @@
 class MembersController < ApplicationController
-	include ActionController::Live
 	
 	before_filter :admin_member, only: :destroy
 	before_filter :signed_in_filter, only: [ :index, :show, :edit, :update, :destroy, :crop ]
 	before_filter :correct_member, only: :edit
 	before_filter :correct_member_update, only: :update
-	before_filter :within_family, only: :show
-	
-	def events
-		id = params[:id]
-
-		response.headers["Content-Type"] = "text/event-stream"
-		sse = SSE.new(response.stream)
-
-		ActiveRecord::Base.connection_pool.with_connection do |connection|
-			conn = connection.instance_variable_get(:@connection)
-			conn.async_exec "LISTEN #{channel(id)}; LISTEN heartbeat;"
-			begin
-			loop do
-				conn.wait_for_notify do |channel, pid, comment|
-					logger.info "Received notification on channel #{channel} with pid #{pid}"
-					if channel == 'heartbeat'
-						sse = SSE.new(response.stream, retry: 0, event: "heartbeat")
-						sse.write(comment)
-					else
-						sse = SSE.new(response.stream, retry: 0, event: "comments.create")
-						sse.write(comment)
-					end
-				end
-			end
-			rescue IOError
-				logger.info "IOError rescued, and stream closed"
-			ensure
-				sse.close
-				conn.async_exec "UNLISTEN #{channel(id)}; UNLISTEN heartbeat;"
-			end
-		end
-
-		render nothing: true
-	end	
+	before_filter :within_family, only: :show	
 		
 	def index
 		@members = Member.all.order('last_name', 'first_name').paginate(page: params[ :page])
@@ -131,6 +97,10 @@ class MembersController < ApplicationController
 	
 	def new_post
 		@member = Member.find_by_id( params[ :id])
+
+		respond_to do |format|
+			format.js
+		end
 	end
 		
 	private
@@ -178,7 +148,4 @@ class MembersController < ApplicationController
 			end
 		end
 		
-		def channel(id)
-			"new_comment_#{id}"
-		end
 end

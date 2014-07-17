@@ -19,6 +19,14 @@ module SessionsHelper
 	end
 	
 	def current_member
+=begin
+		logger.warn "*** BEGIN RAW REQUEST HEADERS ***"
+		self.request.env.each do |header|
+			logger.warn "HEADER KEY: #{header[0]}"
+			logger.warn "HEADER VAL: #{header[1]}"
+		end
+		logger.warn "*** END RAW REQUEST HEADERS ***"
+=end
 		if cookies[:remember_token].present?
 			remember_token = Member.encrypt(cookies[:remember_token])
 			@current_member ||= Member.find_by(remember_token: remember_token)

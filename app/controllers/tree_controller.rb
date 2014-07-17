@@ -15,6 +15,8 @@ class TreeController < ApplicationController
 
 	def edit
 		@member = Member.find_by_id(params[ :id])
+		
+		render layout: "application"
 	end
 
 	private
