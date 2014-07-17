@@ -7,12 +7,14 @@ class StreamController < ApplicationController
 		id = params[:id]
 
 		response.headers["Content-Type"] = "text/event-stream"
-		sse = SSE.new(response.stream, retry: 0, event: "comments.create")
+		sse = SSE.new(response.stream, retry: 0, event: "comments.create.#{id}")
 
+		logger.info "subscribing to comments.create.#{id}"
 		redis = Redis.new
-		redis.subscribe('comments.create') do |on|
-			on.message do |event, data|
-				sse.write(data)
+		redis.psubscribe("comments.create.*") do |on|
+			on.pmessage do |pattern, event, data|
+				logger.info "BLAH!! event is #{event}" if event =~ /comments.create.(#{id}{1}|0{1})/
+				sse.write(data) if event =~ /comments.create.(#{id}{1}|0{1})/
 			end
 		end
 

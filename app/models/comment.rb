@@ -8,7 +8,8 @@ class Comment < ActiveRecord::Base
 	def notify_members
 		from_whom = Member.find_by_id(member_id)
 		comment = { comment: self, name: from_whom.first_name.downcase, sent_when: time_ago_in_words(self.created_at).to_s + ' ago', url: from_whom.image_url( :micro) }.to_json
-		$redis.publish( 'comments.create', comment)
+		$redis.publish( "comments.create.#{to_member}", comment)
+		logger.info "published to comments.create.#{to_member}"
 	end
 	
 	def create_update
@@ -58,8 +59,7 @@ class Comment < ActiveRecord::Base
 	end
 	
 	private
-		def channel
-			member = Post.find_by_id(self.post_id).member_id
-			"new_comment_#{member}"
+		def to_member
+			Post.find_by_id(self.post_id).member_id
 		end
 end
