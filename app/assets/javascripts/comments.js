@@ -7,7 +7,7 @@ function startStream(){
 		console.log("Creating new EventSource stream...")
 		var source = new EventSource("/stream/" + member_id + "/comments")
 		console.log( source);
-		source.addEventListener('comments.create'+member_id, function (e) {
+		source.addEventListener('comments.create.' + member_id, function (e) {
 			console.log('e is ', e)
 			console.log('e.data.length is ', e.data.length)
 			if( e.data.length > 6) {
